@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The two-Mac agent architecture, hardened</title>
+<style>
+  :root {
+    --ivory:   #FAF9F5;
+    --slate:   #141413;
+    --clay:    #D97757;
+    --oat:     #E3DACC;
+    --olive:   #788C5D;
+    --sky:     #6A8CAF;
+    --amber:   #C2A83E;
+    --red:     #B04A3F;
+    --gray-150:#F0EEE6;
+    --gray-300:#D1CFC5;
+    --gray-500:#87867F;
+    --gray-700:#3D3D3A;
+    --serif: ui-serif, Georgia, "Times New Roman", serif;
+    --sans:  system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono:  ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--ivory);
+    color: var(--gray-700);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    padding: 56px 24px 120px;
+  }
+  .page {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 256px;
+    gap: 48px;
+  }
+  @media (max-width: 980px) { .page { grid-template-columns: 1fr; } aside { order: 2; position: static; } }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 34px;
+    color: var(--slate);
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .lead { max-width: 660px; margin-bottom: 8px; font-size: 16px; }
+  .lead strong { color: var(--slate); }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 23px;
+    color: var(--slate);
+    margin: 52px 0 6px;
+    letter-spacing: -0.01em;
+  }
+  h2 .num {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--clay);
+    margin-right: 10px;
+    letter-spacing: 0;
+  }
+  .sub { color: var(--gray-500); font-size: 13.5px; margin-bottom: 18px; max-width: 660px; }
+  h3 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--slate);
+    margin: 22px 0 8px;
+  }
+  p { margin-bottom: 12px; max-width: 700px; }
+  ul { margin: 0 0 14px 20px; max-width: 700px; }
+  li { margin-bottom: 5px; }
+  code { font-family: var(--mono); font-size: 12.5px; background: var(--gray-150); padding: 1px 5px; border-radius: 4px; color: var(--gray-700); }
+  .term {
+    border-bottom: 1.5px dotted var(--clay);
+    cursor: help;
+    color: var(--slate);
+    font-weight: 500;
+  }
+
+  .callout {
+    border: 1.5px solid var(--gray-300);
+    border-left: 4px solid var(--clay);
+    border-radius: 10px;
+    background: #fff;
+    padding: 18px 22px;
+    margin: 18px 0;
+    max-width: 720px;
+  }
+  .callout.danger { border-left-color: var(--red); }
+  .callout.win { border-left-color: var(--olive); }
+  .callout .k {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .diagram-wrap {
+    border: 1.5px solid var(--gray-300);
+    border-radius: 14px;
+    background: #fff;
+    padding: 22px;
+    margin: 16px 0 8px;
+  }
+  svg.arch { display: block; width: 100%; height: auto; }
+  .cap { font-size: 12.5px; color: var(--gray-500); max-width: 700px; margin-top: 4px; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 13px;
+    margin: 14px 0;
+  }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--gray-300); vertical-align: top; }
+  th { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-500); font-weight: 500; }
+  td.bad, .conf-low { color: var(--red); }
+  td.good { color: var(--olive); }
+  .pill {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 999px;
+    line-height: 1.5;
+  }
+  .pill.high { background: rgba(120,140,93,0.18); color: #54683f; }
+  .pill.med  { background: rgba(194,168,62,0.20); color: #8a7619; }
+  .pill.low  { background: rgba(135,134,127,0.18); color: var(--gray-500); }
+
+  details {
+    border-top: 1px solid var(--gray-300);
+    padding: 10px 0 2px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--slate);
+    font-size: 14px;
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::before { content: "+"; font-family: var(--mono); color: var(--clay); font-weight: 700; }
+  details[open] summary::before { content: "\2013"; }
+  details .body { padding: 10px 0 8px 22px; font-size: 13.5px; }
+
+  .tabs { display: flex; gap: 6px; margin: 14px 0 0; flex-wrap: wrap; }
+  .tabs button {
+    appearance: none;
+    border: 1.5px solid var(--gray-300);
+    background: var(--gray-150);
+    border-radius: 7px 7px 0 0;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    padding: 8px 14px;
+    cursor: pointer;
+    color: var(--gray-700);
+  }
+  .tabs button[aria-selected="true"] { background: #fff; color: var(--slate); border-bottom-color: #fff; font-weight: 600; }
+  .tabpanel {
+    border: 1.5px solid var(--gray-300);
+    border-radius: 0 10px 10px 10px;
+    background: #fff;
+    padding: 18px 20px;
+    font-size: 13.5px;
+    max-width: 720px;
+  }
+  .tabpanel[hidden] { display: none; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 720px; margin: 14px 0; }
+  @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+  .col-card { border: 1.5px solid var(--gray-300); border-radius: 10px; background: #fff; padding: 16px 18px; }
+  .col-card.do  { border-top: 4px solid var(--olive); }
+  .col-card.dont{ border-top: 4px solid var(--red); }
+  .col-card h4 { font-size: 12px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .col-card.do h4 { color: #54683f; }
+  .col-card.dont h4 { color: var(--red); }
+  .col-card ul { margin-left: 18px; font-size: 13px; }
+
+  pre {
+    background: var(--slate);
+    color: #E8E6DE;
+    border-radius: 10px;
+    padding: 18px 20px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.6;
+    margin: 12px 0;
+    max-width: 720px;
+  }
+  pre .c { color: var(--gray-500); }
+  pre .d { color: var(--clay); }
+
+  .copybtn {
+    appearance: none;
+    border: 1.5px solid var(--gray-300);
+    background: var(--gray-150);
+    border-radius: 7px;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 7px 13px;
+    cursor: pointer;
+    color: var(--gray-700);
+    transition: background 150ms;
+  }
+  .copybtn:hover { background: var(--oat); }
+  .copybtn.ok { background: rgba(120,140,93,0.20); color: #54683f; border-color: var(--olive); }
+
+  .checklist { max-width: 720px; }
+  .checkgroup { border: 1.5px solid var(--gray-300); border-radius: 10px; background: #fff; margin: 12px 0; overflow: hidden; }
+  .checkgroup > .gh { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-500); padding: 12px 16px; background: var(--gray-150); border-bottom: 1px solid var(--gray-300); }
+  .checkgroup label { display: flex; gap: 11px; padding: 10px 16px; font-size: 13.5px; border-bottom: 1px solid var(--gray-150); cursor: pointer; align-items: flex-start; }
+  .checkgroup label:last-child { border-bottom: none; }
+  .checkgroup input { margin-top: 4px; accent-color: var(--olive); width: 15px; height: 15px; flex-shrink: 0; }
+  .checkgroup input:checked + span { color: var(--gray-500); text-decoration: line-through; text-decoration-color: var(--gray-300); }
+  .check-actions { display: flex; gap: 10px; align-items: center; margin: 14px 0 4px; flex-wrap: wrap; }
+  .progress { font-family: var(--mono); font-size: 12px; color: var(--gray-500); }
+  .progress b { color: var(--olive); }
+
+  aside {
+    position: sticky;
+    top: 32px;
+    align-self: start;
+    border: 1.5px solid var(--gray-300);
+    border-radius: 12px;
+    background: #fff;
+    padding: 18px 18px 8px;
+  }
+  aside .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin-bottom: 14px;
+  }
+  aside dl dt { font-family: var(--serif); font-size: 15px; color: var(--slate); margin-top: 0; }
+  aside dl dd { font-size: 12px; line-height: 1.5; color: var(--gray-700); margin: 2px 0 14px; }
+  aside dl dt.hl, aside dl dt.hl + dd { background: rgba(217,119,87,0.10); margin-left: -8px; margin-right: -8px; padding-left: 8px; padding-right: 8px; border-radius: 4px; }
+  .toc { margin-top: 22px; }
+  .toc a { display: block; font-size: 12.5px; color: var(--gray-700); text-decoration: none; padding: 4px 0; border-bottom: 1px solid var(--gray-150); }
+  .toc a:hover { color: var(--clay); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <main>
+    <div class="eyebrow">Operator reference · always-on agent architecture</div>
+    <h1>The two-Mac agent architecture, hardened</h1>
+    <p class="lead">
+      An always-on agent on a dedicated Mac Mini, with focused coding on a MacBook, is the
+      default pattern for serious operators. The separation keeps the interactive coding
+      environment fast and safe while the agent gets a stable home for long-horizon tasks,
+      cross-project memory, and event reactions while the laptop sleeps. <strong>The piece almost
+      everyone is missing is deterministic, read-only context sync.</strong> Install one skill
+      first, harden three boundaries this week, and the topology becomes a force multiplier
+      instead of a delayed-reaction robot.
+    </p>
+
+    <div class="callout">
+      <span class="k">The thesis in one line</span>
+      The Mini is your asynchronous operating-system layer. The MacBook is your precision
+      instrument. The private GitHub mirror is not a point of fragility: it is the deliberate
+      interface that enforces clean boundaries between them.
+    </div>
+
+    <h2 id="core"><span class="num">01</span>The core idea: separate the async layer from the instrument</h2>
+    <p class="sub">
+      Two machines, one one-way data spine. Code flows MacBook to mirror to Mini. Memory and
+      logs flow Mini back to a different repo under a different token. The control path is
+      human-initiated only.
+    </p>
+
+    <div class="diagram-wrap">
+      <svg class="arch" viewBox="0 0 960 500" role="img" aria-label="Two-Mac architecture map">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#3D3D3A"/>
+          </marker>
+          <marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#D97757"/>
+          </marker>
+        </defs>
+
+        <!-- MacBook -->
+        <rect x="32" y="96" width="244" height="176" rx="12" fill="#fff" stroke="#D1CFC5" stroke-width="1.5"/>
+        <text x="50" y="124" font-family="ui-monospace,Menlo,monospace" font-size="11" letter-spacing="1" fill="#87867F">MACBOOK</text>
+        <text x="50" y="148" font-family="ui-serif,Georgia,serif" font-size="17" fill="#141413">Interactive instrument</text>
+        <rect x="50" y="166" width="208" height="34" rx="7" fill="#F0EEE6"/>
+        <text x="64" y="188" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#3D3D3A">Claude Code (ephemeral)</text>
+        <text x="50" y="224" font-family="system-ui,sans-serif" font-size="11.5" fill="#87867F">Write, test, commit.</text>
+        <text x="50" y="242" font-family="system-ui,sans-serif" font-size="11.5" fill="#87867F">No long-lived agents.</text>
+        <text x="50" y="260" font-family="system-ui,sans-serif" font-size="11.5" fill="#87867F">No daemon state.</text>
+
+        <!-- Mirror -->
+        <rect x="358" y="70" width="244" height="232" rx="12" fill="#fff" stroke="#D97757" stroke-width="2"/>
+        <text x="376" y="98" font-family="ui-monospace,Menlo,monospace" font-size="11" letter-spacing="1" fill="#87867F">PRIVATE GITHUB MIRROR</text>
+        <text x="376" y="122" font-family="ui-serif,Georgia,serif" font-size="17" fill="#141413">Source of truth</text>
+        <rect x="376" y="140" width="208" height="30" rx="6" fill="#F0EEE6"/>
+        <text x="389" y="160" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#3D3D3A">skills / launchd / mcp-config</text>
+        <rect x="376" y="178" width="208" height="30" rx="6" fill="#F0EEE6"/>
+        <text x="389" y="198" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#3D3D3A">memory exports / runbook</text>
+        <text x="376" y="232" font-family="system-ui,sans-serif" font-size="11.5" fill="#87867F">No secrets, ever.</text>
+        <text x="376" y="250" font-family="system-ui,sans-serif" font-size="11.5" fill="#87867F">Clone plus secrets equals</text>
+        <text x="376" y="268" font-family="system-ui,sans-serif" font-size="11.5" fill="#87867F">a working copy in under 2 min.</text>
+        <text x="376" y="290" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#D97757">RECOVERY ARTIFACT</text>
+
+        <!-- Mac Mini -->
+        <rect x="684" y="96" width="244" height="176" rx="12" fill="#fff" stroke="#D1CFC5" stroke-width="1.5"/>
+        <text x="702" y="124" font-family="ui-monospace,Menlo,monospace" font-size="11" letter-spacing="1" fill="#87867F">MAC MINI</text>
+        <text x="702" y="148" font-family="ui-serif,Georgia,serif" font-size="17" fill="#141413">Async OS layer</text>
+        <rect x="702" y="166" width="208" height="34" rx="7" fill="#F0EEE6"/>
+        <text x="716" y="188" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#3D3D3A">Agent daemon (launchd)</text>
+        <text x="702" y="224" font-family="system-ui,sans-serif" font-size="11.5" fill="#87867F">Dedicated user. Never sleeps.</text>
+        <text x="702" y="242" font-family="system-ui,sans-serif" font-size="11.5" fill="#87867F">Scheduler, MCP, memory store.</text>
+        <text x="702" y="260" font-family="system-ui,sans-serif" font-size="11.5" fill="#87867F">Never pushes to code repos.</text>
+
+        <!-- Arrows top: MacBook -> Mirror -> Mini -->
+        <line x1="276" y1="150" x2="352" y2="150" stroke="#3D3D3A" stroke-width="1.5" marker-end="url(#ah)"/>
+        <text x="314" y="140" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#3D3D3A">git push code</text>
+
+        <line x1="608" y1="150" x2="678" y2="150" stroke="#3D3D3A" stroke-width="1.5" marker-end="url(#ah)"/>
+        <text x="643" y="140" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#3D3D3A">read-only</text>
+        <text x="643" y="172" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#87867F">clone or GitHub MCP</text>
+
+        <!-- Return arrow Mini -> Mirror (lower) -->
+        <path d="M 684 232 C 640 232, 645 232, 608 232" fill="none" stroke="#3D3D3A" stroke-width="1.5" marker-end="url(#ah)"/>
+        <text x="646" y="252" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#87867F">writes notes (mirror token)</text>
+
+        <!-- Control plane -->
+        <rect x="358" y="378" width="244" height="92" rx="12" fill="#fff" stroke="#6A8CAF" stroke-width="1.5"/>
+        <text x="376" y="406" font-family="ui-monospace,Menlo,monospace" font-size="11" letter-spacing="1" fill="#87867F">CONTROL PLANE</text>
+        <text x="376" y="430" font-family="ui-serif,Georgia,serif" font-size="16" fill="#141413">Telegram bot / ssh alias</text>
+        <text x="376" y="452" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#6A8CAF">/status&#160;&#160;/run&#160;&#160;/approve</text>
+
+        <!-- Control plane links -->
+        <path d="M 806 272 C 806 340, 700 360, 604 410" fill="none" stroke="#D97757" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ahc)"/>
+        <path d="M 356 410 C 250 360, 154 340, 154 272" fill="none" stroke="#D97757" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ahc)"/>
+        <text x="480" y="496" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10" fill="#87867F">human-initiated only · agent stays silent unless a threshold breaks</text>
+      </svg>
+    </div>
+    <p class="cap">
+      Three boxes, one spine. The Mini holds a read-only view of code and writes only to a
+      separate notes repo under a write-scoped mirror token. The dashed control path is the
+      only way the agent acts on demand, and it is never the agent reaching out first.
+    </p>
+
+    <h2 id="first-skill"><span class="num">02</span>Install this skill first: Repo Watcher and Diff Summariser</h2>
+    <p class="sub">
+      It removes the stale-context root cause that silently degrades every other skill. Without
+      it, every downstream capability works from a fading photograph of your codebase.
+    </p>
+    <p>
+      The skill watches the repositories you actively work on, detects new commits on tracked
+      branches, fetches the diff, and produces a structured summary of what changed and why.
+      The summary lands in the agent project-memory store keyed by <code>repo:branch:date</code>,
+      so every other skill (code review, stand-up notes, backlog grooming, cost attribution)
+      can query a current world model instead of re-learning the codebase each morning.
+    </p>
+
+    <h3>Why it compounds fastest</h3>
+    <ul>
+      <li>Removes the stale-context root cause that quietly degrades everything downstream.</li>
+      <li>Turns a passive tool into an active participant that updates its own model as you ship.</li>
+      <li>Low risk by design: read-only, no writes on the coding repo.</li>
+      <li>Generates clean cost-attribution data you can feed straight into the dashboard.</li>
+    </ul>
+
+    <details open>
+      <summary>Setup notes (high confidence, current community patterns)</summary>
+      <div class="body">
+        <ol style="margin-left:18px;">
+          <li>Create a fine-grained personal access token scoped <code>contents: read</code> on the target repos. Store it in the macOS Keychain, not a dotfile.</li>
+          <li>Install the official GitHub MCP server in the agent MCP config. A <code>gh</code> CLI shell skill works, but MCP is preferred for structured data.</li>
+          <li>Skill definition includes: poll interval (start at 120 s), model preference (cheap-fast tier for summaries, reasoning tier only for complex architectural diffs), deduplication by commit SHA, max summary length.</li>
+          <li>Output to a memory document keyed by <code>repo:branch:date</code>.</li>
+          <li>Add a heartbeat: if no new commits for 12 h, log a note so you know the watcher is not frozen.</li>
+        </ol>
+      </div>
+    </details>
+    <details>
+      <summary>Success criteria and required logging</summary>
+      <div class="body">
+        <p style="margin-bottom:8px;"><strong>Success:</strong> every push appears in memory within 2 to 5 minutes; dashboard shows one summarisation call per push at a few cents on the cheap tier; a manual query "what did I change in repo X today" returns a coherent summary.</p>
+        <p><strong>Must log:</strong> repo, branch, commit range, timestamp; model used, tokens in and out, cost; the summary text; status (success, rate-limited, empty diff, error).</p>
+      </div>
+    </details>
+
+    <h3>Pick the right first skill for your profile</h3>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="solo">Solo dev</button>
+      <button role="tab" aria-selected="false" data-tab="agency">Agency / multi-project</button>
+      <button role="tab" aria-selected="false" data-tab="tinker">Automation tinkerer</button>
+    </div>
+    <div class="tabpanel" data-panel="solo">
+      <strong>Stick with the Repo Watcher.</strong> It keeps your personal context continuous and
+      stops you re-explaining the codebase to the agent every morning. Highest leverage, lowest risk.
+    </div>
+    <div class="tabpanel" data-panel="agency" hidden>
+      <strong>Start with an Environment Audit and "doctor" wrapper.</strong> It checks every repo,
+      SSH key, MCP server health, API key expiry, and disk space across the fleet. You cannot
+      afford to discover breakage during a client deadline.
+    </div>
+    <div class="tabpanel" data-panel="tinker" hidden>
+      <strong>Start with an inbox / Telegram command-router skill.</strong> Send commands from
+      your phone, receive structured reports. The agent becomes a remote-control panel for the
+      homelab and code pipelines.
+    </div>
+
+    <h2 id="gotchas"><span class="num">03</span>The eight gotchas to fix this week</h2>
+    <p class="sub">
+      Ordered by how often they bite and how quietly they fail. Expand any row for the fix.
+    </p>
+    <table>
+      <thead><tr><th>Gotcha</th><th>Early warning sign</th><th>Confidence</th></tr></thead>
+      <tbody>
+        <tr><td><strong>launchd PATH / env mismatch</strong></td><td>"command not found" for basic tools; skills fail silently</td><td><span class="pill high">High</span></td></tr>
+        <tr><td><strong>Stale code context</strong></td><td>Summaries cite code that no longer exists; repeated zero-diff calls</td><td><span class="pill high">High</span></td></tr>
+        <tr><td><strong>API key leakage via env files</strong></td><td>Surprise push from GitHub; provider usage from unexpected IPs</td><td><span class="pill high">High</span></td></tr>
+        <tr><td><strong>Accidental write to wrong repo</strong></td><td>Agent push lands in a production repo; automated merge conflicts</td><td><span class="pill high">High</span></td></tr>
+        <tr><td><strong>SSH agent forwarding exposure</strong></td><td>Unexpected onward SSH sessions; key visible in <code>ssh-agent -l</code></td><td><span class="pill med">Medium</span></td></tr>
+        <tr><td><strong>Model cost runaway</strong></td><td>Hundreds of calls in two hours; provider rate alerts</td><td><span class="pill high">High</span></td></tr>
+        <tr><td><strong>MCP server duplication / port conflict</strong></td><td>"Address already in use"; one MCP server unreachable</td><td><span class="pill med">Medium</span></td></tr>
+        <tr><td><strong>macOS sleep / network instability</strong></td><td>Skills time out after 02:00; launchd shows unexpected stops</td><td><span class="pill high">High</span></td></tr>
+      </tbody>
+    </table>
+
+    <details>
+      <summary>launchd PATH / env mismatch</summary>
+      <div class="body">launchd does not source <code>.zshrc</code>, so <code>git</code>, <code>gh</code>, <code>node</code>, and Python are often absent. Fix: set <code>EnvironmentVariables</code> in the plist, or run the agent through a wrapper script that exports an explicit PATH before launch.</div>
+    </details>
+    <details>
+      <summary>Stale code context</summary>
+      <div class="body">The local clone is not updated often, or a fetch fails silently. Fix: the Repo Watcher with commit-SHA dedup, plus a health check that verifies last fetch time is under one hour.</div>
+    </details>
+    <details>
+      <summary>API key leakage via env files</summary>
+      <div class="body"><code>.env</code> files get copied between machines via Git, AirDrop, or unencrypted backups, and one commit exposes them. Fix: store every secret in the macOS Keychain (read via <code>/usr/bin/security</code>) or a secrets manager. <code>.env</code> is for local dev only and is never committed.</div>
+    </details>
+    <details>
+      <summary>Accidental write to wrong repo</summary>
+      <div class="body">A write-scoped token plus an incorrect remote URL in a skill lets the agent push where it should not. Fix: give the agent a read-only token for code repos, a separate dedicated token for the config mirror, and set <code>git remote</code> explicitly in every skill.</div>
+    </details>
+    <details>
+      <summary>SSH agent forwarding exposure</summary>
+      <div class="body">When the Mini SSHes to the MacBook to trigger a coding task, agent forwarding can expose your keys onward. Fix: never forward the agent for automated connections. Create a dedicated key pair with no passphrase, restricted by a forced <code>command=</code> in <code>authorized_keys</code>.</div>
+    </details>
+    <details>
+      <summary>Model cost runaway</summary>
+      <div class="body">A skill retries on error without backoff, or a poll interval is set too low. Fix: exponential backoff with jitter in every polling skill, a global daily spend cap, and a watchdog that hard-kills the launchd job if the cap is exceeded.</div>
+    </details>
+    <details>
+      <summary>MCP server duplication / port conflict</summary>
+      <div class="body">Both machines try to run the same MCP server on the same port across an SSH tunnel. Fix: assign distinct MCP responsibilities per machine, prefer Unix sockets or localhost-only ports, and document port assignments in the config mirror.</div>
+    </details>
+    <details>
+      <summary>macOS sleep / network instability</summary>
+      <div class="body">The Mini still sleeps if Energy Saver is wrong, or Wi-Fi drops. Fix: <code>sudo pmset -a sleep 0</code>, wired Ethernet, and a health-check skill that pings outbound and restarts networking if it fails.</div>
+    </details>
+
+    <h2 id="day"><span class="num">04</span>A day on the two-Mac system</h2>
+    <p class="sub">
+      The agent works the gaps. You work the focus. The handoffs are explicit and human-paced.
+    </p>
+    <div class="diagram-wrap">
+      <svg class="arch" viewBox="0 0 960 250" role="img" aria-label="Daily timeline">
+        <line x1="60" y1="150" x2="900" y2="150" stroke="#D1CFC5" stroke-width="2"/>
+        <!-- ticks -->
+        <g font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#87867F" text-anchor="middle">
+          <circle cx="110" cy="150" r="6" fill="#D97757"/><text x="110" y="180">08:00</text>
+          <circle cx="290" cy="150" r="6" fill="#788C5D"/><text x="290" y="180">session</text>
+          <circle cx="470" cy="150" r="6" fill="#6A8CAF"/><text x="470" y="180">12:00</text>
+          <circle cx="650" cy="150" r="6" fill="#C2A83E"/><text x="650" y="180">14:00</text>
+          <circle cx="830" cy="150" r="6" fill="#3D3D3A"/><text x="830" y="180">18:00</text>
+        </g>
+        <!-- labels above -->
+        <g font-family="system-ui,sans-serif" font-size="11.5" fill="#3D3D3A" text-anchor="middle">
+          <text x="110" y="118">Morning sync</text>
+          <text x="110" y="134" font-size="10" fill="#87867F">health check to Telegram</text>
+          <text x="290" y="92">Coding session</text>
+          <text x="290" y="108" font-size="10" fill="#87867F">push often; watcher</text>
+          <text x="290" y="122" font-size="10" fill="#87867F">summarises each push</text>
+          <text x="470" y="118">Handoff at lunch</text>
+          <text x="470" y="134" font-size="10" fill="#87867F">/review repo branch</text>
+          <text x="650" y="92">Cost review</text>
+          <text x="650" y="108" font-size="10" fill="#87867F">spend, anomalies,</text>
+          <text x="650" y="122" font-size="10" fill="#87867F">model routing tune</text>
+          <text x="830" y="118">End-of-day audit</text>
+          <text x="830" y="134" font-size="10" fill="#87867F">report committed to mirror</text>
+        </g>
+      </svg>
+    </div>
+    <details>
+      <summary>Recovery process (target: working again in under 10 minutes)</summary>
+      <div class="body">
+        <ol style="margin-left:18px;">
+          <li>SSH in, check <code>launchctl list | grep &lt;agent&gt;</code>.</li>
+          <li>Run the recovery script from the mirror: <code>git clone &lt;mirror&gt; /tmp/recovery &amp;&amp; ./install.sh</code>.</li>
+          <li>Restore secrets from Keychain or the secrets manager into the fresh environment.</li>
+          <li>Re-enable the launchd job. The Repo Watcher rebuilds memory from the last 24 h of commits.</li>
+          <li>If the database is corrupt, delete it and let the agent rebuild from the mirror. Memory loss is limited to unsynchronised local notes.</li>
+        </ol>
+      </div>
+    </details>
+
+    <h2 id="security"><span class="num">05</span>Security baseline</h2>
+    <p class="sub">
+      Do the left column first. The right column is the list of things that buy you future pain.
+    </p>
+    <div class="two-col">
+      <div class="col-card do">
+        <h4>Do this first</h4>
+        <ul>
+          <li>Dedicated non-admin <code>agent</code> macOS user account.</li>
+          <li>All keys in Keychain, read into env at launch. Zero plaintext.</li>
+          <li>Two tokens: read-only on all code repos; write-only on the config mirror.</li>
+          <li>Dedicated SSH key, no passphrase, locked to one forced command.</li>
+          <li>App firewall on; dashboards bound to <code>127.0.0.1</code>; private networking only.</li>
+          <li>Approval gate on any write outside the agent data directory.</li>
+          <li>Separate profiles or tokens per client / work / personal context.</li>
+        </ul>
+      </div>
+      <div class="col-card dont">
+        <h4>Do not, unless you enjoy pain</h4>
+        <ul>
+          <li>Commit <code>.env</code> or any secret to Git, even a private repo.</li>
+          <li>Run the agent as your own user account.</li>
+          <li>Grant a full <code>repo</code> or <code>admin</code> scope token.</li>
+          <li>Reuse your personal SSH key for the agent.</li>
+          <li>Install community skills without code review (a skill can <code>curl | bash</code>).</li>
+          <li>Disable the cost cap because nothing bad has happened yet.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 id="cost"><span class="num">06</span>Cost-control system</h2>
+    <p class="sub">
+      A polling loop or retry storm can burn a night of credits. The dashboard exists to make
+      that visible. The watchdog exists to make it impossible.
+    </p>
+
+    <div class="diagram-wrap">
+      <svg class="arch" viewBox="0 0 960 220" role="img" aria-label="Cost circuit breaker">
+        <defs>
+          <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#3D3D3A"/>
+          </marker>
+        </defs>
+        <g font-family="system-ui,sans-serif" font-size="12">
+          <rect x="30" y="80" width="150" height="60" rx="9" fill="#fff" stroke="#D1CFC5" stroke-width="1.5"/>
+          <text x="105" y="106" text-anchor="middle" fill="#141413">Per-call meter</text>
+          <text x="105" y="124" text-anchor="middle" font-size="10" fill="#87867F">tokens, model, cost</text>
+
+          <rect x="250" y="80" width="150" height="60" rx="9" fill="#fff" stroke="#788C5D" stroke-width="1.5"/>
+          <text x="325" y="106" text-anchor="middle" fill="#141413">Soft warning</text>
+          <text x="325" y="124" text-anchor="middle" font-size="10" fill="#87867F">70% of daily budget</text>
+
+          <rect x="470" y="80" width="150" height="60" rx="9" fill="#fff" stroke="#C2A83E" stroke-width="1.5"/>
+          <text x="545" y="106" text-anchor="middle" fill="#141413">Threshold alert</text>
+          <text x="545" y="124" text-anchor="middle" font-size="10" fill="#87867F">to Telegram</text>
+
+          <rect x="690" y="80" width="240" height="60" rx="9" fill="#fff" stroke="#B04A3F" stroke-width="2"/>
+          <text x="810" y="106" text-anchor="middle" fill="#141413">Hard stop: watchdog</text>
+          <text x="810" y="124" text-anchor="middle" font-size="10" fill="#87867F">unloads launchd job at cap</text>
+
+          <line x1="180" y1="110" x2="248" y2="110" stroke="#3D3D3A" stroke-width="1.5" marker-end="url(#ah2)"/>
+          <line x1="400" y1="110" x2="468" y2="110" stroke="#3D3D3A" stroke-width="1.5" marker-end="url(#ah2)"/>
+          <line x1="620" y1="110" x2="688" y2="110" stroke="#3D3D3A" stroke-width="1.5" marker-end="url(#ah2)"/>
+          <text x="480" y="40" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#87867F">a buggy skill cannot drain the account overnight</text>
+        </g>
+      </svg>
+    </div>
+
+    <table>
+      <thead><tr><th>Trigger</th><th>Threshold</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Soft warning</td><td>70% of daily budget</td><td class="good">Notify</td></tr>
+        <tr><td>Daily spend</td><td>over your daily figure (example: a few dollars)</td><td>Notify, route cheaper</td></tr>
+        <tr><td>Weekly spend</td><td>over your weekly figure</td><td>Notify, review skills</td></tr>
+        <tr><td>Single call</td><td>over your per-call ceiling</td><td>Flag for inspection</td></tr>
+        <tr><td>Retry rate</td><td>over 10% in an hour</td><td>Flag runaway loop</td></tr>
+        <tr><td>Hard cap</td><td>daily cap exceeded</td><td class="bad">Watchdog unloads launchd job</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Model routing heuristics</h3>
+    <ul>
+      <li><strong>Diff summaries, commit classification, log parsing:</strong> the cheap-fast tier (current Haiku). Volume work, no reasoning needed.</li>
+      <li><strong>Complex code review, architectural analysis, deep memory writes:</strong> the reasoning tier (current Sonnet).</li>
+      <li><strong>Non-critical, high-volume triage (which notifications to ignore):</strong> a local model. Free, always available, latency acceptable.</li>
+      <li><strong>The frontier tier (current Opus):</strong> not for automated background tasks without an unlimited budget and a strong justification.</li>
+      <li><strong>Spend optimisations:</strong> only call the model when commits actually change; batch all commits from a 30-minute window into a single summary; lean on the built-in spend cap.</li>
+    </ul>
+
+    <h2 id="mirror"><span class="num">07</span>The config mirror as a recovery artifact</h2>
+    <p class="sub">
+      The mirror is not a backup folder. It is the single place a fresh agent instance can be
+      fully reconstructed from. Version templates and declarations, never transient state.
+    </p>
+    <div style="display:flex;gap:10px;align-items:center;margin:6px 0 2px;">
+      <button class="copybtn" data-copy="tree">Copy tree</button>
+      <span class="cap" style="margin:0;">Commit declarations and templates. Keep secrets, logs, and the database out.</span>
+    </div>
+<pre id="tree"><span class="d">agent-mirror/</span>
+├── skills/            <span class="c"># declarative YAML, no secrets inline</span>
+│   ├── repo-watcher.yaml
+│   ├── code-review.yaml
+│   └── cost-summary.yaml
+├── memory/
+│   └── templates/     <span class="c"># exports as Markdown, not raw DB</span>
+├── launchd/
+│   └── com.agent.daemon.plist   <span class="c"># templated with $HOME</span>
+├── dotfiles/          <span class="c"># .gitconfig-agent, ssh/config-agent</span>
+├── mcp-configs/       <span class="c"># secrets as env-var references</span>
+├── scripts/
+│   ├── install.sh
+│   ├── restore-secrets.sh
+│   └── health-check.sh
+├── docs/              <span class="c"># runbook.md, architecture.md</span>
+└── .gitignore         <span class="c"># .env *.key *.pem logs/ *.db node_modules/</span></pre>
+
+    <h2 id="topology"><span class="num">08</span>Which topology, and when</h2>
+    <p class="sub">Same-machine is for prototyping a skill. Two-Mac is the target. Everything else is a special case.</p>
+    <table>
+      <thead><tr><th>Setup</th><th>Best for</th><th>Main risk</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Same machine</strong></td><td>Quick start, no network deps</td><td>Competes for resources, stops on sleep</td><td>Prototype only</td></tr>
+        <tr><td><strong>Two-Mac</strong></td><td>Always-on, clean separation, low coding latency</td><td>Sync staleness, cross-machine writes</td><td class="good">Recommended target</td></tr>
+        <tr><td><strong>Agent on VPS</strong></td><td>Max uptime, no home power worries</td><td>Data sovereignty, creeping cloud cost</td><td>Only with five-nines need and legal clearance</td></tr>
+        <tr><td><strong>Git-first backbone</strong></td><td>Any machine topology</td><td>May act on incomplete push sequences</td><td class="good">Almost always the right spine</td></tr>
+        <tr><td><strong>SSH-first execution</strong></td><td>Triggering heavy coding tasks on demand</td><td>Broken pipes, key exposure, sleep breakage</td><td>On-demand approved tasks only</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="checklist"><span class="num">09</span>Missing-pieces checklist</h2>
+    <p class="sub">
+      Tick what is already true. The button below turns everything still unchecked into a
+      ready-to-paste prompt for your agent.
+    </p>
+    <div class="check-actions">
+      <button class="copybtn" id="copyGaps">Copy unchecked items as a prompt</button>
+      <span class="progress" id="prog"></span>
+    </div>
+    <div class="checklist" id="checklist">
+      <div class="checkgroup" data-g="Reliability">
+        <div class="gh">Reliability</div>
+        <label><input type="checkbox"><span>Mac Mini set to never sleep (<code>pmset -a sleep 0</code>).</span></label>
+        <label><input type="checkbox"><span>Agent runs as a launchd daemon with <code>KeepAlive</code> true.</span></label>
+        <label><input type="checkbox"><span>Health-check skill runs every 15 min and alerts on failure.</span></label>
+        <label><input type="checkbox"><span>Log rotation configured to prevent disk fill.</span></label>
+      </div>
+      <div class="checkgroup" data-g="Synchronisation">
+        <div class="gh">Synchronisation</div>
+        <label><input type="checkbox"><span>Repo Watcher installed, poll interval 5 min or less.</span></label>
+        <label><input type="checkbox"><span>Memory updates visible within 2 min of a push.</span></label>
+        <label><input type="checkbox"><span>"What changed today" query returns correct, fresh information.</span></label>
+      </div>
+      <div class="checkgroup" data-g="Security">
+        <div class="gh">Security</div>
+        <label><input type="checkbox"><span>Dedicated non-admin <code>agent</code> user account.</span></label>
+        <label><input type="checkbox"><span>All secrets in Keychain, zero plaintext <code>.env</code> on disk.</span></label>
+        <label><input type="checkbox"><span>Separate read-code and write-mirror tokens.</span></label>
+        <label><input type="checkbox"><span>SSH key restricted to a single forced command.</span></label>
+        <label><input type="checkbox"><span>No public internet exposure of any agent endpoint.</span></label>
+        <label><input type="checkbox"><span>File-writing skills require approval.</span></label>
+      </div>
+      <div class="checkgroup" data-g="Observability and cost">
+        <div class="gh">Observability and cost</div>
+        <label><input type="checkbox"><span>Dashboard tracks per-skill spend, model, and outcome.</span></label>
+        <label><input type="checkbox"><span>Spend alerts active (daily and per-call).</span></label>
+        <label><input type="checkbox"><span>Global daily cap enforced; watchdog tested.</span></label>
+        <label><input type="checkbox"><span>Model routing rules defined per task tier.</span></label>
+      </div>
+      <div class="checkgroup" data-g="Boundaries and rollback">
+        <div class="gh">Boundaries and rollback</div>
+        <label><input type="checkbox"><span>MacBook runs no long-lived agent instances.</span></label>
+        <label><input type="checkbox"><span>Mini never pushes to working repositories.</span></label>
+        <label><input type="checkbox"><span>MCP servers assigned per machine, no port collisions.</span></label>
+        <label><input type="checkbox"><span>Mirror clone plus restore script tested on a clean machine.</span></label>
+        <label><input type="checkbox"><span>Recovery-from-scratch time under 10 minutes.</span></label>
+      </div>
+    </div>
+
+    <div class="callout win" style="margin-top:34px;">
+      <span class="k">Field note to share if someone asks</span>
+      <p style="margin-bottom:8px;">
+        A week into the two-Mac setup it is already worth it, with teeth in the first few days.
+        The skill to install first is a repo watcher and diff summariser: point it at your main
+        work repos, let it write a short plain-language summary into memory on every push, and
+        you never have to explain "what I did this morning" again. Without it, every other skill
+        is half-blind.
+      </p>
+      <p style="margin-bottom:8px;">
+        Real bites: launchd does not share your terminal PATH, so half the skills failed silently
+        until they ran through a wrapper that set PATH explicitly. A write-scoped main token let
+        the agent try to push a "fix" to a repo it had no business touching (no harm, it was a
+        test repo, then immediately split to read-only code and a separate mirror token). The
+        cost dashboard caught a retry loop that chewed real money in an hour: set hard caps,
+        do not skip that.
+      </p>
+      <p style="margin:0;">
+        Treat the config mirror as a recovery artifact from day one, keep secrets in the
+        Keychain, and never let the Mini SSH into your coding machine without a restricted key
+        and an approval step. Sensible setup once the sync and security boundaries are right.
+      </p>
+      <div style="margin-top:14px;"><button class="copybtn" data-copy="fieldnote">Copy field note</button></div>
+    </div>
+
+  </main>
+
+  <aside>
+    <div class="label">Glossary</div>
+    <dl id="gloss">
+      <dt data-g="watcher">Repo Watcher</dt>
+      <dd>The read-only skill that turns each push into a memory entry, keeping every other skill context-aware.</dd>
+      <dt data-g="mirror">Config mirror</dt>
+      <dd>A private repo of declarative config and templates. The single place a fresh agent can be rebuilt from.</dd>
+      <dt data-g="launchd">launchd</dt>
+      <dd>macOS service manager. Runs the agent as a daemon, but does not inherit your shell PATH.</dd>
+      <dt data-g="mcp">MCP server</dt>
+      <dd>A structured tool endpoint (GitHub, filesystem, memory) the agent calls. Assign one owner machine per server.</dd>
+      <dt data-g="cap">Spend cap</dt>
+      <dd>A hard daily ceiling. A watchdog unloads the launchd job if it is breached.</dd>
+      <dt data-g="gate">Approval gate</dt>
+      <dd>A human checkpoint before any write outside the agent data directory.</dd>
+      <dt data-g="recovery">Recovery artifact</dt>
+      <dd>A clone-plus-secrets path back to a working copy in under two minutes.</dd>
+    </dl>
+
+    <div class="toc">
+      <div class="label" style="margin-bottom:8px;">On this page</div>
+      <a href="#core">01 Core idea</a>
+      <a href="#first-skill">02 First skill</a>
+      <a href="#gotchas">03 Eight gotchas</a>
+      <a href="#day">04 A day on it</a>
+      <a href="#security">05 Security baseline</a>
+      <a href="#cost">06 Cost control</a>
+      <a href="#mirror">07 Config mirror</a>
+      <a href="#topology">08 Which topology</a>
+      <a href="#checklist">09 Checklist</a>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+/* tabs */
+document.querySelectorAll('[role="tab"]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var key = btn.dataset.tab;
+    document.querySelectorAll('[role="tab"]').forEach(function(b){ b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
+    document.querySelectorAll('[data-panel]').forEach(function(p){ p.hidden = (p.dataset.panel !== key); });
+  });
+});
+
+/* copy buttons (raw text blocks) */
+document.querySelectorAll('.copybtn[data-copy]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var el = document.getElementById(btn.dataset.copy) ||
+             document.querySelector('[data-copysrc="' + btn.dataset.copy + '"]');
+    var text;
+    if (btn.dataset.copy === 'fieldnote') {
+      text = btn.closest('.callout').querySelectorAll('p');
+      text = Array.prototype.map.call(text, function(p){ return p.innerText.trim(); }).join('\n\n');
+    } else {
+      text = el.innerText;
+    }
+    navigator.clipboard.writeText(text).then(function(){
+      var old = btn.textContent; btn.textContent = 'Copied'; btn.classList.add('ok');
+      setTimeout(function(){ btn.textContent = old; btn.classList.remove('ok'); }, 1600);
+    });
+  });
+});
+
+/* checklist progress + copy-as-prompt */
+var boxes = document.querySelectorAll('#checklist input[type=checkbox]');
+var prog = document.getElementById('prog');
+function refresh(){
+  var done = 0; boxes.forEach(function(b){ if (b.checked) done++; });
+  prog.innerHTML = '<b>' + done + '</b> / ' + boxes.length + ' in place';
+}
+boxes.forEach(function(b){ b.addEventListener('change', refresh); });
+refresh();
+
+document.getElementById('copyGaps').addEventListener('click', function(){
+  var btn = this;
+  var groups = {};
+  document.querySelectorAll('#checklist .checkgroup').forEach(function(g){
+    var name = g.dataset.g;
+    g.querySelectorAll('label').forEach(function(l){
+      var cb = l.querySelector('input');
+      if (!cb.checked) { (groups[name] = groups[name] || []).push(l.querySelector('span').innerText.trim()); }
+    });
+  });
+  var lines = ['Help me close these open gaps in my two-Mac always-on agent setup.',
+               'For each item give the exact command, config, or skill change, ordered by risk.', ''];
+  Object.keys(groups).forEach(function(k){
+    lines.push('## ' + k);
+    groups[k].forEach(function(item){ lines.push('- ' + item); });
+    lines.push('');
+  });
+  var out = lines.join('\n').trim();
+  if (out.split('\n').length <= 3) { out = 'Every checklist item is already in place. Suggest the next hardening step beyond the baseline.'; }
+  navigator.clipboard.writeText(out).then(function(){
+    var old = btn.textContent; btn.textContent = 'Copied to clipboard'; btn.classList.add('ok');
+    setTimeout(function(){ btn.textContent = old; btn.classList.remove('ok'); }, 1800);
+  });
+});
+
+/* glossary cross-highlight */
+document.querySelectorAll('.term').forEach(function(el){
+  var g = el.dataset.term;
+  el.addEventListener('mouseenter', function(){ var t = document.querySelector('dt[data-g="'+g+'"]'); if (t) t.classList.add('hl'); });
+  el.addEventListener('mouseleave', function(){ var t = document.querySelector('dt[data-g="'+g+'"]'); if (t) t.classList.remove('hl'); });
+});
+</script>
+</body>
+</html>
