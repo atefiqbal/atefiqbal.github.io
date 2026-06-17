@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Atralia — Amazon US Opportunity Report</title>
+<title>Atralia - Amazon US Opportunity Report</title>
 <style>
   :root{
     --ink:#16201b;
@@ -264,6 +264,30 @@
   .gapbar{animation:leakpulse 2.9s ease-in-out infinite}
   @keyframes leakpulse{0%,100%{opacity:.62}50%{opacity:.92}}
 
+  /* ── creative gallery ── */
+  .creative-why{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
+  .creative-masonry{column-count:3;column-gap:16px;margin-top:6px}
+  .creative{break-inside:avoid;margin:0 0 16px;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow-soft);position:relative;cursor:zoom-in;transition:transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s}
+  .creative:hover{transform:translateY(-5px);box-shadow:0 24px 50px rgba(20,33,28,.2)}
+  .creative .imgwrap{overflow:hidden;position:relative;line-height:0}
+  .creative img{width:100%;display:block;transition:transform 1s cubic-bezier(.16,.84,.44,1)}
+  .creative:hover img{transform:scale(1.055)}
+  .creative .role{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#143324;background:rgba(255,255,255,.92);backdrop-filter:blur(4px);padding:5px 10px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+  .creative .zoom{position:absolute;bottom:64px;right:12px;z-index:2;width:32px;height:32px;border-radius:50%;background:rgba(20,51,36,.85);display:grid;place-items:center;opacity:0;transform:scale(.8);transition:opacity .3s,transform .3s}
+  .creative:hover .zoom{opacity:1;transform:scale(1)}
+  .creative .cc{padding:13px 15px;border-top:1px solid var(--line-soft)}
+  .creative .cc b{font-family:var(--serif);font-weight:500;font-size:15px;color:var(--ink);display:block;line-height:1.2}
+  .creative .cc span{font-size:12px;color:var(--muted)}
+  /* lightbox */
+  #lightbox{position:fixed;inset:0;z-index:80;background:rgba(16,24,20,.93);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:34px;cursor:zoom-out}
+  #lightbox.open{display:flex;animation:lbfade .3s ease}
+  @keyframes lbfade{from{opacity:0}to{opacity:1}}
+  #lightbox img{max-width:92vw;max-height:86vh;border-radius:12px;box-shadow:0 30px 90px rgba(0,0,0,.55)}
+  #lightbox .lbcap{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:#e9efe9;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-align:center;max-width:80vw}
+  #lightbox .lbclose{position:absolute;top:18px;right:26px;color:#fff;font-size:32px;line-height:1;opacity:.85;cursor:pointer}
+  @media(max-width:980px){.creative-masonry{column-count:2}.creative-why{grid-template-columns:1fr}}
+  @media(max-width:560px){.creative-masonry{column-count:1}}
+
   footer{margin:64px 0 10px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px;align-items:center;color:var(--muted);font-size:12px}
   footer .sig{font-family:var(--serif);font-size:20px;color:var(--forest)}
   footer .mono{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
@@ -308,8 +332,9 @@
       <a href="#keywords"><span class="dot"></span><span class="n">05</span>Keyword territory map</a>
       <a href="#seo"><span class="dot"></span><span class="n">06</span>AI discovery &amp; SEO</a>
       <a href="#listing"><span class="dot"></span><span class="n">07</span>Listing &amp; storefront</a>
-      <a href="#ppc"><span class="dot"></span><span class="n">08</span>Advertising architecture</a>
-      <a href="#growth"><span class="dot"></span><span class="n">09</span>30/60/90 plan</a>
+      <a href="#creative"><span class="dot"></span><span class="n">08</span>Creative direction</a>
+      <a href="#ppc"><span class="dot"></span><span class="n">09</span>Advertising architecture</a>
+      <a href="#growth"><span class="dot"></span><span class="n">10</span>30/60/90 plan</a>
     </div>
   </nav>
 
@@ -348,8 +373,8 @@
             <span class="hl"><span>Amazon is leaking</span></span>
             <span class="hl"><span>the <span class="accent">control</span>.</span></span>
           </h1>
-          <p class="lede">The public marketplace tells a clear story: a fragrance brand with real traction — a live Store, hero ASINs doing 1,000+ units a month, thousands of reviews, and visibility across scent-family search lanes. The commercial problem is downstream of demand: the buy path is fragmented by lower-priced offers, non-Atralia Buy Box holders, and uneven listing optimization that quietly bleeds margin and rank.</p>
-          <div class="notice"><strong>Read this honestly:</strong> public pages cannot prove whether the sellers undercutting these ASINs are unauthorized, approved distributors, old-stock arbitrage, or accounts tied to the brand. What is observable is offer fragmentation and price compression. Authorization is the lever that converts that observation into an operating plan — one owner over Buy Box, price, content, fulfillment, and ads.</div>
+          <p class="lede">The public marketplace tells a clear story: a fragrance brand with real traction - a live Store, hero ASINs doing 1,000+ units a month, thousands of reviews, and visibility across scent-family search lanes. The commercial problem is downstream of demand: the buy path is fragmented by lower-priced offers, non-Atralia Buy Box holders, and uneven listing optimization that quietly bleeds margin and rank.</p>
+          <div class="notice"><strong>Read this honestly:</strong> public pages cannot prove whether the sellers undercutting these ASINs are unauthorized, approved distributors, old-stock arbitrage, or accounts tied to the brand. What is observable is offer fragmentation and price compression. Authorization is the lever that converts that observation into an operating plan - one owner over Buy Box, price, content, fulfillment, and ads.</div>
           <div class="hero-badges stagger">
             <div class="badge"><strong data-count="11" data-suffix="">0</strong><span>active Atralia results on the seller catalog page</span></div>
             <div class="badge"><strong data-count="6" data-suffix="">0</strong><span>sampled hero ASINs show a price gap vs. the Atralia anchor</span></div>
@@ -361,16 +386,16 @@
             <div class="glass-cap">LIVE AMAZON EVIDENCE · captured 2026-06-17</div>
             <div class="main-proof">
               <img src="screenshots/presentation/brand-store-home.png" alt="Atralia Perfumes Amazon Store homepage">
-              <div class="proof-label">Atralia Perfumes Store — live, with collection navigation</div>
+              <div class="proof-label">Atralia Perfumes Store - live, with collection navigation</div>
             </div>
             <div class="proof-row">
               <div class="mini-proof">
                 <img src="screenshots/presentation/pdp-absolute-chill-buybox.png" alt="Absolute Chill product detail page">
-                <div class="proof-label">Hero ASIN — Absolute Chill PDP</div>
+                <div class="proof-label">Hero ASIN - Absolute Chill PDP</div>
               </div>
               <div class="mini-proof">
                 <img src="screenshots/presentation/offer-panel-absolute-chill.png" alt="Absolute Chill offer panel">
-                <div class="proof-label">Offer stack — lower seller offers</div>
+                <div class="proof-label">Offer stack - lower seller offers</div>
               </div>
             </div>
           </div>
@@ -384,11 +409,11 @@
         <div class="card dark">
           <div class="label">The asset</div>
           <div class="metric" data-count="4900" data-prefix="" data-suffix="+">0</div>
-          <p class="small">combined monthly units visible across the four hero ASINs — demand already exists and is repeatable.</p>
+          <p class="small">combined monthly units visible across the four hero ASINs - demand already exists and is repeatable.</p>
         </div>
         <div class="card">
           <div class="label">The leak</div>
-          <div class="metric"><span class="money" style="font-family:var(--serif);font-size:38px">$13–$18</span></div>
+          <div class="metric"><span class="money" style="font-size:30px">$13 to $18</span></div>
           <p class="small">per-unit gap between the Atralia seller-page anchor and the street price shoppers actually pay.</p>
         </div>
         <div class="card">
@@ -415,13 +440,13 @@
         <div class="card">
           <div class="label">Seller identity</div>
           <h3>Atralia US is a real, visible seller</h3>
-          <p>Seller profile resolves to <strong>Atralia US</strong>, seller ID <code>ALYG3949FQZA9</code>, business name <strong>ATRALIA PERFUMES LLC</strong>. Public evidence supports a genuine seller identity — it does not, by itself, prove brand ownership or the authorization structure.</p>
+          <p>Seller profile resolves to <strong>Atralia US</strong>, seller ID <code>ALYG3949FQZA9</code>, business name <strong>ATRALIA PERFUMES LLC</strong>. Public evidence supports a genuine seller identity - it does not, by itself, prove brand ownership or the authorization structure.</p>
           <div class="conf"><div class="row"><span>Identity confidence</span><span>High</span></div><div class="track"><div class="fill" data-w="90"></div></div></div>
         </div>
         <div class="card">
           <div class="label">Brand infrastructure</div>
           <h3>The Atralia Store is live</h3>
-          <p>The Store presents <strong>Atralia Perfumes</strong> with collection navigation — Matcha Latte, Sugar Mallow, Absolute Chill, Elixir, Absolute Noir, Tonka Gold, and the Amora / Einstein lines. The brand shell already exists; it is under-merchandised, not absent.</p>
+          <p>The Store presents <strong>Atralia Perfumes</strong> with collection navigation - Matcha Latte, Sugar Mallow, Absolute Chill, Elixir, Absolute Noir, Tonka Gold, and the Amora / Einstein lines. The brand shell already exists; it is under-merchandised, not absent.</p>
           <div class="conf gold"><div class="row"><span>Infrastructure present</span><span>Confirmed</span></div><div class="track"><div class="fill" data-w="82"></div></div></div>
         </div>
         <div class="card warning">
@@ -435,11 +460,11 @@
       <div class="grid two reveal">
         <div class="figure">
           <div class="shot-wrap"><img src="screenshots/presentation/seller-profile-business-feedback.png" alt="Atralia US seller profile, business and feedback"></div>
-          <div class="cap"><span>Seller profile — Atralia US, business name, feedback, anchor price.</span><span>seller-profile-business-feedback.png</span></div>
+          <div class="cap"><span>Seller profile - Atralia US, business name, feedback, anchor price.</span><span>seller-profile-business-feedback.png</span></div>
         </div>
         <div class="figure">
           <div class="shot-wrap"><img src="screenshots/presentation/brand-store-home.png" alt="Atralia Perfumes Amazon Store homepage"></div>
-          <div class="cap"><span>Brand Store — live, with collection navigation.</span><span>brand-store-home.png</span></div>
+          <div class="cap"><span>Brand Store - live, with collection navigation.</span><span>brand-store-home.png</span></div>
         </div>
       </div>
     </section>
@@ -451,21 +476,21 @@
         <div class="stx"><h2>Demand proof</h2></div>
         <div class="sk">This is not a cold start</div>
       </div>
-      <p class="lede reveal">Atralia should never be pitched as a launch-stage brand. Multiple ASINs already carry credible monthly demand, real review depth, and category-rank signal. The job is to <strong>protect and compound what already converts</strong> — not to manufacture demand from zero.</p>
+      <p class="lede reveal">Atralia should never be pitched as a launch-stage brand. Multiple ASINs already carry credible monthly demand, real review depth, and category-rank signal. The job is to <strong>protect and compound what already converts</strong> - not to manufacture demand from zero.</p>
 
       <div class="grid three stagger reveal">
-        <div class="card tinted"><div class="metric" data-count="900" data-suffix="+">0</div><div class="label">Absolute Chill bought / month</div><p class="small">4.4★, 417 ratings, #121 in Men's Eau de Parfum on the captured PDP — and the clearest Buy Box leak in the set.</p></div>
+        <div class="card tinted"><div class="metric" data-count="900" data-suffix="+">0</div><div class="label">Absolute Chill bought / month</div><p class="small">4.4★, 417 ratings, #121 in Men's Eau de Parfum on the captured PDP - and the clearest Buy Box leak in the set.</p></div>
         <div class="card tinted"><div class="metric" data-count="1000" data-prefix="" data-suffix="+" data-display="1K+">0</div><div class="label">Sugar Mallow &amp; Absolute Noir / month</div><p class="small">Two hero candidates clearing four-figure monthly demand in the gourmand and dark-masculine lanes.</p></div>
-        <div class="card tinted"><div class="metric" data-count="1220">0</div><div class="label">Elixir review count</div><p class="small">4.6★ and the deepest sampled review base — a rank-acceleration candidate the moment seller control is verified.</p></div>
+        <div class="card tinted"><div class="metric" data-count="1220">0</div><div class="label">Elixir review count</div><p class="small">4.6★ and the deepest sampled review base - a rank-acceleration candidate the moment seller control is verified.</p></div>
       </div>
 
       <!-- demand x trust portfolio MAP -->
       <div class="figcard reveal" style="margin-top:20px">
-        <div class="ftitle"><h3>Portfolio map — demand × trust × leak</h3><span class="label">bubble size = price gap</span></div>
+        <div class="ftitle"><h3>Portfolio map - demand × trust × leak</h3><span class="label">bubble size = price gap</span></div>
         <div class="legend">
-          <span><i style="background:var(--forest)"></i>Hero — scale once controlled</span>
-          <span><i style="background:var(--gold)"></i>Growth — build into a winner</span>
-          <span><i style="background:var(--danger)"></i>Recover — fix before scaling</span>
+          <span><i style="background:var(--forest)"></i>Hero - scale once controlled</span>
+          <span><i style="background:var(--gold)"></i>Growth - build into a winner</span>
+          <span><i style="background:var(--danger)"></i>Recover - fix before scaling</span>
         </div>
         <svg class="svgcard" viewBox="0 0 920 440" role="img" aria-label="Scatter map of Atralia ASINs by monthly demand and trust">
           <!-- axes -->
@@ -533,7 +558,7 @@
             <text x="150" y="332" text-anchor="middle" font-size="11" font-weight="700" fill="#16201b">Rouge Orchard</text>
           </g>
         </svg>
-        <div class="cap" style="border-top:1px solid var(--line);margin:0 -22px;padding:12px 22px;color:var(--muted);font-size:11.5px;font-family:var(--mono)"><span>Four ASINs sit in or near the scale zone — high demand, real trust. Each one is being undercut hardest (largest bubbles).</span></div>
+        <div class="cap" style="border-top:1px solid var(--line);margin:0 -22px;padding:12px 22px;color:var(--muted);font-size:11.5px;font-family:var(--mono)"><span>Four ASINs sit in or near the scale zone - high demand, real trust. Each one is being undercut hardest (largest bubbles).</span></div>
       </div>
 
       <div class="tablewrap reveal" style="margin-top:18px">
@@ -555,14 +580,14 @@
     <section id="control">
       <div class="shead reveal">
         <div class="sn">03</div>
-        <div class="stx"><h2>The price leak — Buy Box &amp; arbitrage</h2></div>
+        <div class="stx"><h2>The price leak - Buy Box &amp; arbitrage</h2></div>
         <div class="sk">The core commercial problem</div>
       </div>
-      <div class="quote reveal">Authorization is not just permission to sell. It is the single lever that pulls Buy Box, pricing, content, fulfillment, ads, and inventory under one commercial plan — instead of leaving them to whoever lists cheapest today.</div>
+      <div class="quote reveal">Authorization is not just permission to sell. It is the single lever that pulls Buy Box, pricing, content, fulfillment, ads, and inventory under one commercial plan - instead of leaving them to whoever lists cheapest today.</div>
 
       <!-- price gap bar chart SVG -->
       <div class="figcard reveal" style="margin-top:20px">
-        <div class="ftitle"><h3>Where the money leaks — anchor vs. street price</h3><span class="label">per ASIN, USD</span></div>
+        <div class="ftitle"><h3>Where the money leaks - anchor vs. street price</h3><span class="label">per ASIN, USD</span></div>
         <div class="legend">
           <span><i style="background:var(--forest)"></i>Atralia seller-page anchor</span>
           <span><i style="background:#d98a7f"></i>Lowest visible street offer</span>
@@ -648,7 +673,7 @@
             <div class="callout" style="left:32%;top:55%;width:35%;height:22%"></div>
             <div class="tag" style="left:33%;top:48%">PDP shows $27.99 with a lower-price notice</div>
           </div>
-          <div class="cap"><span>Seed ASIN PDP — customer-facing price diverges from the Atralia anchor.</span><span>B0FLM7YRD6</span></div>
+          <div class="cap"><span>Seed ASIN PDP - customer-facing price diverges from the Atralia anchor.</span><span>B0FLM7YRD6</span></div>
         </div>
         <div class="figure">
           <div class="shot-wrap">
@@ -657,7 +682,7 @@
             <div class="tag" style="left:54%;top:31%">Lowest visible offer: $26.99</div>
             <div class="callout" style="left:54%;top:72%;width:24%;height:18%"></div>
           </div>
-          <div class="cap"><span>Offer panel — multiple seller offers below the $39.99 Atralia anchor.</span><span>offer-panel-absolute-chill.png</span></div>
+          <div class="cap"><span>Offer panel - multiple seller offers below the $39.99 Atralia anchor.</span><span>offer-panel-absolute-chill.png</span></div>
         </div>
       </div>
 
@@ -685,7 +710,7 @@
         <div class="stx"><h2>Portfolio tiers &amp; the right play per SKU</h2></div>
         <div class="sk">Not every SKU gets the same treatment</div>
       </div>
-      <p class="lede reveal">Treating the whole catalog with one strategy is the most common way to waste budget. Each SKU sits in a different operating state — and the state, not the ambition, dictates the lever. Scale the proven, optimize the leaky, recover the broken. Never run scale-speed on a recovery SKU, or recovery-caution on a hero.</p>
+      <p class="lede reveal">Treating the whole catalog with one strategy is the most common way to waste budget. Each SKU sits in a different operating state - and the state, not the ambition, dictates the lever. Scale the proven, optimize the leaky, recover the broken. Never run scale-speed on a recovery SKU, or recovery-caution on a hero.</p>
 
       <div class="grid three stagger reveal">
         <div class="card">
@@ -703,7 +728,7 @@
         <div class="card">
           <div class="tier low">
             <div class="rank">FIX<span class="state">STATE · RECOVER</span></div>
-            <div><h3>Recover before scaling</h3><p class="small">Rouge Orchard · Amora Serenity · Equest Gallop.</p><p class="small">Do not push spend into a leaky funnel. Repair trust, main image, reviews, price, and targeting first — conversion before traffic.</p></div>
+            <div><h3>Recover before scaling</h3><p class="small">Rouge Orchard · Amora Serenity · Equest Gallop.</p><p class="small">Do not push spend into a leaky funnel. Repair trust, main image, reviews, price, and targeting first - conversion before traffic.</p></div>
           </div>
         </div>
       </div>
@@ -711,11 +736,11 @@
       <div class="grid two reveal">
         <div class="figure">
           <div class="shot-wrap"><img src="screenshots/presentation/seller-catalog-top.png" alt="Atralia seller catalog top results"></div>
-          <div class="cap"><span>Seller catalog — visible active listings and anchor prices.</span><span>seller-catalog-top.png</span></div>
+          <div class="cap"><span>Seller catalog - visible active listings and anchor prices.</span><span>seller-catalog-top.png</span></div>
         </div>
         <div class="figure">
           <div class="shot-wrap"><img src="screenshots/presentation/seller-catalog-lower.png" alt="Atralia seller catalog lower results"></div>
-          <div class="cap"><span>Lower catalog — emerging and weaker ASINs.</span><span>seller-catalog-lower.png</span></div>
+          <div class="cap"><span>Lower catalog - emerging and weaker ASINs.</span><span>seller-catalog-lower.png</span></div>
         </div>
       </div>
     </section>
@@ -731,7 +756,7 @@
 
       <!-- scent family constellation MAP -->
       <div class="figcard reveal">
-        <div class="ftitle"><h3>Scent-family constellation — who owns what</h3><span class="label">positioning by olfactive family</span></div>
+        <div class="ftitle"><h3>Scent-family constellation - who owns what</h3><span class="label">positioning by olfactive family</span></div>
         <svg class="svgcard" viewBox="0 0 920 460" role="img" aria-label="Scent family territory map">
           <defs>
             <radialGradient id="terr" cx="50%" cy="50%" r="50%">
@@ -792,16 +817,16 @@
         <div class="card"><span class="pill"><span class="pd"></span>Fresh Citrus</span><h3>Absolute Chill · Noir · Elixir</h3><p class="small">Citrus, mint, green lemon, bergamot, grapefruit, fresh, summer, long-lasting.</p></div>
         <div class="card"><span class="pill gold"><span class="pd"></span>Gourmand Sweet</span><h3>Sugar Mallow · Matcha Latte</h3><p class="small">Marshmallow, strawberry, vanilla, candy sugar, matcha, toffee, tonka.</p></div>
         <div class="card"><span class="pill blue"><span class="pd"></span>Woody Amber</span><h3>Elixir · Absolute Noir</h3><p class="small">Amber, woody, lavender, vanilla, pink pepper, men's EDP.</p></div>
-        <div class="card"><span class="pill red"><span class="pd"></span>Fruity Floral</span><h3>Rouge Orchard</h3><p class="small">Raspberry, rose, cherry, vanilla, patchouli — needs trust repair.</p></div>
+        <div class="card"><span class="pill red"><span class="pd"></span>Fruity Floral</span><h3>Rouge Orchard</h3><p class="small">Raspberry, rose, cherry, vanilla, patchouli - needs trust repair.</p></div>
         <div class="card"><span class="pill"><span class="pd"></span>100ml Value</span><h3>Most of the catalog</h3><p class="small">Eau de parfum, 100ml, 3.4oz, long-lasting, giftable, daily wear.</p></div>
         <div class="card"><span class="pill gold"><span class="pd"></span>Brand Defense</span><h3>Atralia terms</h3><p class="small">Atralia perfume, Atralia Absolute Chill, Atralia Sugar Mallow, Atralia Elixir.</p></div>
       </div>
 
       <div class="grid two reveal">
-        <div class="figure"><div class="shot-wrap"><img src="screenshots/presentation/search-citrus-mint-edp.png" alt="Search: citrus mint eau de parfum"></div><div class="cap"><span>Lane — men's EDP citrus mint 100ml.</span><span>Atralia sits beside authority competitors.</span></div></div>
-        <div class="figure"><div class="shot-wrap"><img src="screenshots/presentation/search-marshmallow-perfume.png" alt="Search: marshmallow vanilla perfume"></div><div class="cap"><span>Lane — marshmallow vanilla perfume 100ml.</span><span>Gourmand opening for Sugar Mallow.</span></div></div>
-        <div class="figure"><div class="shot-wrap"><img src="screenshots/presentation/search-matcha-perfume.png" alt="Search: matcha latte perfume"></div><div class="cap"><span>Lane — matcha latte perfume.</span><span>Distinctive, low-competition discovery lane.</span></div></div>
-        <div class="figure"><div class="shot-wrap"><img src="screenshots/presentation/search-woody-amber-edp.png" alt="Search: fresh amber woody EDP men"></div><div class="cap"><span>Lane — fresh amber woody men's EDP 100ml.</span><span>Men's expansion territory.</span></div></div>
+        <div class="figure"><div class="shot-wrap"><img src="screenshots/presentation/search-citrus-mint-edp.png" alt="Search: citrus mint eau de parfum"></div><div class="cap"><span>Lane - men's EDP citrus mint 100ml.</span><span>Atralia sits beside authority competitors.</span></div></div>
+        <div class="figure"><div class="shot-wrap"><img src="screenshots/presentation/search-marshmallow-perfume.png" alt="Search: marshmallow vanilla perfume"></div><div class="cap"><span>Lane - marshmallow vanilla perfume 100ml.</span><span>Gourmand opening for Sugar Mallow.</span></div></div>
+        <div class="figure"><div class="shot-wrap"><img src="screenshots/presentation/search-matcha-perfume.png" alt="Search: matcha latte perfume"></div><div class="cap"><span>Lane - matcha latte perfume.</span><span>Distinctive, low-competition discovery lane.</span></div></div>
+        <div class="figure"><div class="shot-wrap"><img src="screenshots/presentation/search-woody-amber-edp.png" alt="Search: fresh amber woody EDP men"></div><div class="cap"><span>Lane - fresh amber woody men's EDP 100ml.</span><span>Men's expansion territory.</span></div></div>
       </div>
 
       <div class="tablewrap reveal">
@@ -810,7 +835,7 @@
           <tbody>
             <tr><td><strong>Rayhaan Pacific Aura</strong></td><td>$49.75 · 4.4★ · 669 reviews · 1K+/mo · "Overall Pick" in captured search.</td><td>Closest threat in the citrus/mint/fresh lane. Atralia has the demand; Rayhaan currently holds the higher price anchor and authority badge.</td></tr>
             <tr><td><strong>Jean Rish Citrus Intense</strong></td><td>$27.99 less a 28% coupon · 3.1★ · 3 reviews.</td><td>Price/coupon pressure but almost no proof. Atralia beats it on reviews and content the moment channel control is restored.</td></tr>
-            <tr><td><strong>H HABIBI premium fragrances</strong></td><td>Price points above $100 in adjacent sponsored/search surfaces.</td><td>Proof that Amazon shoppers accept higher fragrance prices when authority and story justify them — the ceiling is not $27.</td></tr>
+            <tr><td><strong>H HABIBI premium fragrances</strong></td><td>Price points above $100 in adjacent sponsored/search surfaces.</td><td>Proof that Amazon shoppers accept higher fragrance prices when authority and story justify them - the ceiling is not $27.</td></tr>
           </tbody>
         </table>
       </div>
@@ -823,14 +848,14 @@
         <div class="stx"><h2>AI discovery &amp; intent-led SEO</h2></div>
         <div class="sk">Built for how Amazon search works now</div>
       </div>
-      <p class="lede reveal">The next growth layer is not stuffing more keywords into titles. Amazon's search has shifted toward understanding shopper <em>intent</em> — who a product is for, when it's used, what problem it solves — and its AI shopping assistant now answers buyers' questions directly before they ever reach a listing. Listings that can't answer those questions lose the recommendation to ones that can.</p>
+      <p class="lede reveal">The next growth layer is not stuffing more keywords into titles. Amazon's search has shifted toward understanding shopper <em>intent</em> - who a product is for, when it's used, what problem it solves - and its AI shopping assistant now answers buyers' questions directly before they ever reach a listing. Listings that can't answer those questions lose the recommendation to ones that can.</p>
 
-      <div class="notice reveal" style="border-radius:14px"><strong>Why this matters now:</strong> Amazon's published COSMO research describes a large-scale commonsense knowledge system deployed inside Amazon search. The practical implication: keyword matching has to be paired with intent clarity — use cases, audiences, occasions, scent families, benefits, and comparison-ready context. <a href="https://www.amazon.science/publications/cosmo-a-large-scale-e-commerce-common-sense-knowledge-generation-and-serving-system-at-amazon">Amazon Science · COSMO</a></div>
+      <div class="notice reveal" style="border-radius:14px"><strong>Why this matters now:</strong> Amazon's published COSMO research describes a large-scale commonsense knowledge system deployed inside Amazon search. The practical implication: keyword matching has to be paired with intent clarity - use cases, audiences, occasions, scent families, benefits, and comparison-ready context. <a href="https://www.amazon.science/publications/cosmo-a-large-scale-e-commerce-common-sense-knowledge-generation-and-serving-system-at-amazon">Amazon Science · COSMO</a></div>
 
       <!-- AI readiness radar -->
       <div class="grid two reveal" style="align-items:stretch">
         <div class="figcard" style="margin:18px 0">
-          <div class="ftitle"><h3>AI-discovery readiness — hero listings</h3><span class="label">directional, from public PDP review</span></div>
+          <div class="ftitle"><h3>AI-discovery readiness - hero listings</h3><span class="label">directional, from public PDP review</span></div>
           <svg class="svgcard" viewBox="0 0 420 380" role="img" aria-label="Radar of AI discovery readiness across five question types">
             <!-- pentagon grid -->
             <g transform="translate(210,200)">
@@ -878,7 +903,7 @@
               </g>
             </g>
           </svg>
-          <div class="cap" style="border-top:1px solid var(--line);margin:0 -22px;padding:12px 22px;color:var(--muted);font-size:11px;font-family:var(--mono)"><span>Strong on identity &amp; trust; thinnest on "how does it compare?" and "who is it for?" — the exact questions high-consideration fragrance buyers ask.</span></div>
+          <div class="cap" style="border-top:1px solid var(--line);margin:0 -22px;padding:12px 22px;color:var(--muted);font-size:11px;font-family:var(--mono)"><span>Strong on identity &amp; trust; thinnest on "how does it compare?" and "who is it for?" - the exact questions high-consideration fragrance buyers ask.</span></div>
         </div>
 
         <div class="card" style="margin:18px 0;display:flex;flex-direction:column;gap:14px">
@@ -891,7 +916,7 @@
             <div><div class="conf red"><div class="row"><span>4 · Who is it for</span><span>Gap</span></div><div class="track"><div class="fill" data-w="46"></div></div></div></div>
             <div><div class="conf"><div class="row"><span>5 · Why should I trust it</span><span>Strong</span></div><div class="track"><div class="fill" data-w="78"></div></div></div></div>
           </div>
-          <p class="small" style="margin-top:auto"><strong>Closing the gap is cheap:</strong> backend attributes, comparison-ready bullets, audience and occasion language, and seeded Q&amp;A — none of which touch price and most of which are invisible to the human shopper above the fold.</p>
+          <p class="small" style="margin-top:auto"><strong>Closing the gap is cheap:</strong> backend attributes, comparison-ready bullets, audience and occasion language, and seeded Q&amp;A - none of which touch price and most of which are invisible to the human shopper above the fold.</p>
         </div>
       </div>
 
@@ -899,7 +924,7 @@
         <div class="card">
           <div class="label">Intent layer</div>
           <h3>Map each ASIN to a buying job</h3>
-          <p class="small">Absolute Chill shouldn't only rank for "citrus mint perfume." It should map to jobs — summer fragrance, fresh office scent, unisex clean scent, a fresh-Pacific alternative, giftable 100ml EDP, long-lasting fresh cologne.</p>
+          <p class="small">Absolute Chill shouldn't only rank for "citrus mint perfume." It should map to jobs - summer fragrance, fresh office scent, unisex clean scent, a fresh-Pacific alternative, giftable 100ml EDP, long-lasting fresh cologne.</p>
         </div>
         <div class="card">
           <div class="label">Semantic layer</div>
@@ -909,7 +934,7 @@
         <div class="card">
           <div class="label">Conversational layer</div>
           <h3>Write for natural-language queries</h3>
-          <p class="small">Shoppers ask "fresh summer cologne for men," "sweet marshmallow perfume," "long-lasting vanilla perfume gift." Listings should answer those phrases in full sentences — not only in keyword fragments.</p>
+          <p class="small">Shoppers ask "fresh summer cologne for men," "sweet marshmallow perfume," "long-lasting vanilla perfume gift." Listings should answer those phrases in full sentences - not only in keyword fragments.</p>
         </div>
       </div>
 
@@ -919,9 +944,9 @@
           <tbody>
             <tr><td><strong>Absolute Chill</strong></td><td>Fresh citrus-mint summer fragrance; unisex clean scent; value alternative to premium fresh scents.</td><td>Cleaner title hierarchy, scent-pyramid graphic, summer/use-case image, comparison-safe A+ section, FAQ-style bullets.</td><td>Fresh / citrus / mint, summer, unisex, long-lasting, 100ml EDP.</td></tr>
             <tr><td><strong>Absolute Noir / Elixir</strong></td><td>Men's amber-woody EDP; office &amp; date-night fragrance; giftable masculine scent.</td><td>Separate the woody/amber/lavender intent, occasion-based imagery, clarify strength and projection.</td><td>Men's EDP category, gift intent, woody-amber relevance.</td></tr>
-            <tr><td><strong>Sugar Mallow</strong></td><td>Sweet marshmallow-vanilla gourmand; feminine gift scent.</td><td>Build the gourmand story — marshmallow, strawberry, vanilla, musk; add taste/scent cues without cheapening the brand.</td><td>Gourmand, vanilla, sweet perfume, giftable women's EDP.</td></tr>
+            <tr><td><strong>Sugar Mallow</strong></td><td>Sweet marshmallow-vanilla gourmand; feminine gift scent.</td><td>Build the gourmand story - marshmallow, strawberry, vanilla, musk; add taste/scent cues without cheapening the brand.</td><td>Gourmand, vanilla, sweet perfume, giftable women's EDP.</td></tr>
             <tr><td>Matcha Latte</td><td>Unique matcha-vanilla/toffee gourmand; niche discovery scent; everyday unisex.</td><td>Explain the matcha profile clearly; add "who it's for" and "when to wear" modules.</td><td>Novelty discovery, matcha perfume, gourmand unisex.</td></tr>
-            <tr><td>Rouge Orchard / lower SKUs</td><td>Cherry-rose fruity-floral for women; elegant feminine fragrance.</td><td>Repair trust first — title clarity, review strategy, stronger main image &amp; A+ proof, tighter keyword scope.</td><td>Fruity-floral relevance &amp; conversion recovery before any ad scale.</td></tr>
+            <tr><td>Rouge Orchard / lower SKUs</td><td>Cherry-rose fruity-floral for women; elegant feminine fragrance.</td><td>Repair trust first - title clarity, review strategy, stronger main image &amp; A+ proof, tighter keyword scope.</td><td>Fruity-floral relevance &amp; conversion recovery before any ad scale.</td></tr>
           </tbody>
         </table>
       </div>
@@ -931,7 +956,7 @@
           <h3>Add to every priority listing</h3>
           <ul class="small" style="margin:10px 0 0 18px">
             <li>Intent bullet: who it's for and when to wear it.</li>
-            <li>Scent pyramid in plain language — top, heart, base.</li>
+            <li>Scent pyramid in plain language - top, heart, base.</li>
             <li>Occasion modules: summer, office, date night, daily, gifting.</li>
             <li>Attribute cleanup: scent, item form, volume, target audience, special feature, concentration.</li>
             <li>Seeded Q&amp;A on longevity, projection, gender fit, seasonality, similarity, bottle size.</li>
@@ -941,9 +966,9 @@
           <h3>What to avoid</h3>
           <ul class="small" style="margin:10px 0 0 18px">
             <li>Don't over-optimize titles until they read spammy and low-trust.</li>
-            <li>Don't lean on "dupe" language — it pulls traffic but erodes authority.</li>
+            <li>Don't lean on "dupe" language - it pulls traffic but erodes authority.</li>
             <li>Don't scale ads into ASINs where the Buy Box is unstable.</li>
-            <li>Don't give every SKU the same keyword map — hero, growth, and recovery need different intent.</li>
+            <li>Don't give every SKU the same keyword map - hero, growth, and recovery need different intent.</li>
           </ul>
         </div>
       </div>
@@ -971,31 +996,112 @@
           <ul class="small" style="margin:10px 0 0 18px">
             <li>Buy Box isn't consistently held by the intended operator.</li>
             <li>Price gaps train shoppers to expect low-to-high $20s.</li>
-            <li>Uneven proof — strong heroes, thin-review tail SKUs.</li>
+            <li>Uneven proof - strong heroes, thin-review tail SKUs.</li>
             <li>Storefront assets aren't organized into a clear collection-level buy path.</li>
           </ul>
         </div>
       </div>
 
       <div class="grid three stagger reveal">
-        <div class="card"><h3>Hero SKU optimization</h3><p class="small">Upgrade the image stack — scent pyramid, occasion, longevity, premium bottle/box cues, and comparison-safe value positioning. Keep every claim supportable.</p></div>
+        <div class="card"><h3>Hero SKU optimization</h3><p class="small">Upgrade the image stack - scent pyramid, occasion, longevity, premium bottle/box cues, and comparison-safe value positioning. Keep every claim supportable.</p></div>
         <div class="card"><h3>Store merchandising</h3><p class="small">Use Store tabs as collection landing pages, not just navigation. Route ads to the right collection while shoppers are still comparing scent families.</p></div>
         <div class="card"><h3>Tail recovery</h3><p class="small">For Rouge Orchard, Amora Serenity, and thin-review SKUs: clearer title, stronger main image, policy-safe review building, and minimal ads until conversion lifts.</p></div>
       </div>
     </section>
 
-    <!-- ════ 8 · ADVERTISING ARCHITECTURE ════ -->
-    <section id="ppc">
+    <!-- ════ 8 · CREATIVE DIRECTION ════ -->
+    <section id="creative">
       <div class="shead reveal">
         <div class="sn">08</div>
+        <div class="stx"><h2>Creative direction</h2></div>
+        <div class="sk">Proof of concept · why this converts</div>
+      </div>
+      <p class="lede reveal">The current Amazon images describe the product. They do not make anyone <em>feel</em> anything, and feeling is what earns the click and the cart. Below is a proof-of-concept creative system for Sugar Mallow: art-directed imagery built for emotional connection, scent storytelling, and gifting desire. This is the template the rest of the catalog should follow.</p>
+
+      <div class="creative-why reveal stagger">
+        <div class="card tinted"><div class="label">Click-through</div><h3>Stop the scroll</h3><p class="small">A four-word emotional hook over a hero bottle shot is built to win the thumbnail war in search and on social, lifting click-through before the listing even loads.</p></div>
+        <div class="card tinted"><div class="label">Consideration</div><h3>Tell the scent story</h3><p class="small">Note-pyramid and wear-journey creatives answer the one question fragrance shoppers always ask, "how does it actually smell?", which keeps them on the page and deepens sessions.</p></div>
+        <div class="card tinted"><div class="label">Conversion</div><h3>Make it personal</h3><p class="small">Gifting, in-hand lifestyle, and memory-led storytelling move the product from a commodity into something worth paying full price for.</p></div>
+      </div>
+
+      <div class="notice reveal" style="border-radius:14px"><strong>Read as proof of concept:</strong> these are designed for Sugar Mallow as the template. Rolled across the hero catalog, this caliber of creative is the lever most likely to lift click-through, session depth, and conversion at the same time, the compounding effect that price-cutting can never buy. Tap any image to view full size.</div>
+
+      <div class="creative-masonry reveal">
+        <figure class="creative" data-full="creatives/sm-too-soft-to-resist.png" data-cap="Too Soft To Resist · scroll-stopper hero">
+          <span class="role">Scroll-stopper hero</span>
+          <div class="imgwrap"><img src="creatives/sm-too-soft-to-resist.png" alt="Sugar Mallow, Too Soft To Resist" loading="lazy" decoding="async"></div>
+          <span class="zoom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/><line x1="10.5" y1="7.8" x2="10.5" y2="13.2"/><line x1="7.8" y1="10.5" x2="13.2" y2="10.5"/></svg></span>
+          <div class="cc"><b>Too Soft To Resist</b><span>The hook: a gourmand promise in four words.</span></div>
+        </figure>
+        <figure class="creative" data-full="creatives/sm-crafted-edible-softness.png" data-cap="Crafted From Edible Softness · scent education">
+          <span class="role">Scent education</span>
+          <div class="imgwrap"><img src="creatives/sm-crafted-edible-softness.png" alt="Sugar Mallow note pyramid mood board" loading="lazy" decoding="async"></div>
+          <span class="zoom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/><line x1="10.5" y1="7.8" x2="10.5" y2="13.2"/><line x1="7.8" y1="10.5" x2="13.2" y2="10.5"/></svg></span>
+          <div class="cc"><b>Crafted From Edible Softness</b><span>The note pyramid as a mood board: top, heart, base.</span></div>
+        </figure>
+        <figure class="creative" data-full="creatives/sm-juicy-sparkle-creamy-warmth.png" data-cap="From Juicy Sparkle To Creamy Warmth · scent journey">
+          <span class="role">Scent journey</span>
+          <div class="imgwrap"><img src="creatives/sm-juicy-sparkle-creamy-warmth.png" alt="Sugar Mallow scent pyramid display" loading="lazy" decoding="async"></div>
+          <span class="zoom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/><line x1="10.5" y1="7.8" x2="10.5" y2="13.2"/><line x1="7.8" y1="10.5" x2="13.2" y2="10.5"/></svg></span>
+          <div class="cc"><b>Juicy Sparkle To Creamy Warmth</b><span>How the scent wears over time, answered visually.</span></div>
+        </figure>
+        <figure class="creative" data-full="creatives/sm-sweet-is-not-shy.png" data-cap="Sweet Is Not Shy · in-hand lifestyle">
+          <span class="role">In-hand lifestyle</span>
+          <div class="imgwrap"><img src="creatives/sm-sweet-is-not-shy.png" alt="Hands holding Sugar Mallow bottle" loading="lazy" decoding="async"></div>
+          <span class="zoom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/><line x1="10.5" y1="7.8" x2="10.5" y2="13.2"/><line x1="7.8" y1="10.5" x2="13.2" y2="10.5"/></svg></span>
+          <div class="cc"><b>Sweet Is Not Shy</b><span>Real hands, real scale, real life.</span></div>
+        </figure>
+        <figure class="creative" data-full="creatives/sm-unbox-the-craving.png" data-cap="Unbox The Craving · gifting angle">
+          <span class="role">Gifting angle</span>
+          <div class="imgwrap"><img src="creatives/sm-unbox-the-craving.png" alt="Sugar Mallow gift box creative" loading="lazy" decoding="async"></div>
+          <span class="zoom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/><line x1="10.5" y1="7.8" x2="10.5" y2="13.2"/><line x1="7.8" y1="10.5" x2="13.2" y2="10.5"/></svg></span>
+          <div class="cc"><b>Unbox The Craving</b><span>A sweet gift she will never forget, built for Q4.</span></div>
+        </figure>
+        <figure class="creative" data-full="creatives/sm-first-spray-last-memory.png" data-cap="First Spray, Last Memory · longevity benefit">
+          <span class="role">Longevity benefit</span>
+          <div class="imgwrap"><img src="creatives/sm-first-spray-last-memory.png" alt="Sugar Mallow long-lasting fragrance creative" loading="lazy" decoding="async"></div>
+          <span class="zoom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/><line x1="10.5" y1="7.8" x2="10.5" y2="13.2"/><line x1="7.8" y1="10.5" x2="13.2" y2="10.5"/></svg></span>
+          <div class="cc"><b>First Spray, Last Memory</b><span>Turns "long-lasting" into a feeling.</span></div>
+        </figure>
+        <figure class="creative" data-full="creatives/sm-moments-you-replay.png" data-cap="For The Moments You Replay · emotional story">
+          <span class="role">Emotional story</span>
+          <div class="imgwrap"><img src="creatives/sm-moments-you-replay.png" alt="Sugar Mallow romantic love-note creative" loading="lazy" decoding="async"></div>
+          <span class="zoom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/><line x1="10.5" y1="7.8" x2="10.5" y2="13.2"/><line x1="7.8" y1="10.5" x2="13.2" y2="10.5"/></svg></span>
+          <div class="cc"><b>For The Moments You Replay</b><span>Sweet, cozy, romantic: the memory it sells against.</span></div>
+        </figure>
+        <figure class="creative" data-full="creatives/sm-radiate-sweetness.png" data-cap="Radiate Sweetness · signature identity">
+          <span class="role">Signature identity</span>
+          <div class="imgwrap"><img src="creatives/sm-radiate-sweetness.png" alt="Sugar Mallow signature scent creative" loading="lazy" decoding="async"></div>
+          <span class="zoom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/><line x1="10.5" y1="7.8" x2="10.5" y2="13.2"/><line x1="7.8" y1="10.5" x2="13.2" y2="10.5"/></svg></span>
+          <div class="cc"><b>Radiate Sweetness</b><span>A signature scent that glows: aspiration over ingredients.</span></div>
+        </figure>
+        <figure class="creative" data-full="creatives/sm-step-into.png" data-cap="Step Into Sugar Mallow · world-building">
+          <span class="role">World-building</span>
+          <div class="imgwrap"><img src="creatives/sm-step-into.png" alt="Sugar Mallow surreal world creative" loading="lazy" decoding="async"></div>
+          <span class="zoom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/><line x1="10.5" y1="7.8" x2="10.5" y2="13.2"/><line x1="7.8" y1="10.5" x2="13.2" y2="10.5"/></svg></span>
+          <div class="cc"><b>Step Into Sugar Mallow</b><span>An invitation into the brand world, not just a bottle.</span></div>
+        </figure>
+        <figure class="creative" data-full="creatives/sm-where-sweetness-lives.png" data-cap="Where Sweetness Lives · atmosphere">
+          <span class="role">Atmosphere</span>
+          <div class="imgwrap"><img src="creatives/sm-where-sweetness-lives.png" alt="Sugar Mallow dreamscape creative" loading="lazy" decoding="async"></div>
+          <span class="zoom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/><line x1="10.5" y1="7.8" x2="10.5" y2="13.2"/><line x1="7.8" y1="10.5" x2="13.2" y2="10.5"/></svg></span>
+          <div class="cc"><b>Where Sweetness Lives</b><span>Mood and dreamscape that signal premium.</span></div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ════ 9 · ADVERTISING ARCHITECTURE ════ -->
+    <section id="ppc">
+      <div class="shead reveal">
+        <div class="sn">09</div>
         <div class="stx"><h2>Advertising architecture</h2></div>
         <div class="sk">Feed the algorithm · harvest the winners</div>
       </div>
-      <p class="lede reveal">Modern Amazon advertising rewards giving the algorithm signal, not fighting it with narrow targeting and long negative lists. The plan runs in three layers — discover, dominate, defend — and only opens spend where the Buy Box is stable enough to keep the click.</p>
+      <p class="lede reveal">Modern Amazon advertising rewards giving the algorithm signal, not fighting it with narrow targeting and long negative lists. The plan runs in three layers - discover, dominate, defend - and only opens spend where the Buy Box is stable enough to keep the click.</p>
 
       <!-- 3-phase funnel SVG -->
       <div class="figcard reveal">
-        <div class="ftitle"><h3>Three-layer build — each layer runs on top of the last</h3><span class="label">discover → dominate → defend</span></div>
+        <div class="ftitle"><h3>Three-layer build - each layer runs on top of the last</h3><span class="label">discover → dominate → defend</span></div>
         <svg class="svgcard" viewBox="0 0 920 300" role="img" aria-label="Three phase advertising architecture funnel">
           <!-- Phase 1 -->
           <g class="pop">
@@ -1056,31 +1162,31 @@
       <div class="grid three stagger reveal" style="margin-top:18px">
         <div class="card">
           <div class="label">Sequencing rule</div>
-          <h3>Earn each layer — never jump</h3>
+          <h3>Earn each layer - never jump</h3>
           <p class="small">A keyword family advances only once it has real conversion data and improving organic rank. Pushing dominance campaigns onto an unproven foundation burns spend with no signal to show for it.</p>
         </div>
         <div class="card">
           <div class="label">Negatives, kept lean</div>
-          <h3>Two reasons to negate — that's all</h3>
+          <h3>Two reasons to negate - that's all</h3>
           <p class="small">Obvious mismatches (wrong gender, format, use case) at build time; performance negatives only after enough clicks with zero orders. Long pre-emptive negative lists starve the algorithm of the placements it needs to find buyers.</p>
         </div>
         <div class="card">
           <div class="label">Spend discipline</div>
           <h3>Stability gates the spend</h3>
-          <p class="small">Ads launch only where the Buy Box is reliably held — otherwise the click lands on a competing seller's offer and the budget subsidizes the leak. Control first, scale second.</p>
+          <p class="small">Ads launch only where the Buy Box is reliably held - otherwise the click lands on a competing seller's offer and the budget subsidizes the leak. Control first, scale second.</p>
         </div>
       </div>
 
       <div class="card dark reveal" style="margin-top:18px">
         <div class="label">The compounding move</div>
-        <p style="font-size:16px;margin:8px 0 0">The same proven keyword running across <strong>exact, phrase, and video placements simultaneously</strong> — each converting at a different cost — is the goal, not the redundancy. More qualified touchpoints on a winning term is how effective cost-per-click falls over time while share rises. Harvest search terms weekly; route winners into rank campaigns; prune the weeds.</p>
+        <p style="font-size:16px;margin:8px 0 0">The same proven keyword running across <strong>exact, phrase, and video placements simultaneously</strong> - each converting at a different cost - is the goal, not the redundancy. More qualified touchpoints on a winning term is how effective cost-per-click falls over time while share rises. Harvest search terms weekly; route winners into rank campaigns; prune the weeds.</p>
       </div>
     </section>
 
-    <!-- ════ 9 · GROWTH PLAN ════ -->
+    <!-- ════ 10 · GROWTH PLAN ════ -->
     <section id="growth">
       <div class="shead reveal">
-        <div class="sn">09</div>
+        <div class="sn">10</div>
         <div class="stx"><h2>The 30 / 60 / 90-day plan</h2></div>
         <div class="sk">Control → convert → scale</div>
       </div>
@@ -1110,7 +1216,7 @@
           <h3 style="margin-top:6px">Control the marketplace</h3>
           <ul class="small" style="margin:10px 0 0 18px">
             <li>Use authorization to define the approved selling path.</li>
-            <li>Build the seller map — approved, distributor, old-stock, unknown.</li>
+            <li>Build the seller map - approved, distributor, old-stock, unknown.</li>
             <li>Track Buy Box holder, lowest offer, offer count, Prime/FBA, price by ASIN.</li>
             <li>Align FBA/Prime fulfillment for hero SKUs under the operator path.</li>
           </ul>
@@ -1138,7 +1244,7 @@
       </div>
 
       <div class="divider"></div>
-      <div class="quote reveal">Atralia already has products customers buy on repeat. The opportunity is to stop Amazon from expressing the brand as a fragmented, low-price marketplace — and rebuild it as a controlled, optimized, authorized channel that earns its real price.</div>
+      <div class="quote reveal">Atralia already has products customers buy on repeat. The opportunity is to stop Amazon from expressing the brand as a fragmented, low-price marketplace - and rebuild it as a controlled, optimized, authorized channel that earns its real price.</div>
     </section>
 
     <footer>
@@ -1147,6 +1253,31 @@
     </footer>
   </main>
 </div>
+
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Creative preview">
+  <span class="lbclose" aria-hidden="true">&times;</span>
+  <img src="" alt="Sugar Mallow creative, full size">
+  <div class="lbcap"></div>
+</div>
+
+<script>
+(function(){
+  var lb=document.getElementById('lightbox');
+  if(lb){
+    var img=lb.querySelector('img'), cap=lb.querySelector('.lbcap');
+    function close(){ lb.classList.remove('open'); img.src=''; }
+    document.querySelectorAll('.creative').forEach(function(c){
+      c.addEventListener('click',function(){
+        img.src=c.getAttribute('data-full');
+        cap.textContent=c.getAttribute('data-cap')||'';
+        lb.classList.add('open');
+      });
+    });
+    lb.addEventListener('click',close);
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+  }
+})();
+</script>
 
 <script>
 (function(){
