@@ -68,6 +68,10 @@
   .hz{height:1px;background:var(--line);margin:26px 0;border:0}
   .num{font-variant-numeric:tabular-nums}
   code{background:var(--chip);padding:2px 7px;border-radius:6px;font-size:13px;color:#c9f4e6}
+  pre{background:var(--chip);padding:12px 14px;border-radius:8px;overflow-x:auto;font-size:12.5px;line-height:1.55;color:#c9f4e6;white-space:pre-wrap;word-break:break-word;margin:8px 0;border:1px solid var(--line)}
+  ol.check{list-style:none;padding-left:0;counter-reset:c;margin:10px 0}
+  ol.check li{position:relative;padding:9px 0 9px 34px;border-bottom:1px solid var(--line);counter-increment:c}
+  ol.check li:before{content:counter(c);position:absolute;left:0;top:9px;width:22px;height:22px;border-radius:6px;background:var(--chip);border:1px solid var(--accent);color:var(--accent);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
   /* timeline */
   .tl{position:relative;margin:18px 0;padding-left:26px}
   .tl:before{content:"";position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--accent),var(--accent2))}
@@ -110,6 +114,7 @@
     <button data-t="machine">3 · The Machine</button>
     <button data-t="brand">4 · Brand &amp; LLC</button>
     <button data-t="plan">5 · 90-Day Plan</button>
+    <button data-t="setup">6 · Setup &amp; Registration</button>
   </div>
 </nav>
 
@@ -459,7 +464,183 @@
     <div class="hero-variant"><div class="hl">C · A 6-Person Team That Runs Growth Like a 25-Person Agency.</div><div class="shl">Our Agentic Growth Loop does the analysis; our operators make the calls. 7 years, $[X]M in managed spend. See it live in a 14-day teardown.</div></div>
 
     <div class="callout" style="margin-top:24px">
-      <b>The one decision left is yours:</b> the name. My recommendation is <b>Apticove</b>, but the whole <code>-vane</code> family (Aptivane, Apexvane, Meridvane) or Northkade are all clean and available. The moment you confirm a name, the next builds unlock: buy the domains → <code>landing-page-architect</code> + <code>direct-response-copy</code> for the site → file the WY LLC → fax the EIN.
+      <b>Name locked: Apticove.</b> <code>apticove.com</code> confirmed available; the entity will be <b>Apticove LLC</b> (Wyoming). The full execution path - domains, LLC filing, EIN, email, tax - now lives in <b>tab 6 · Setup &amp; Registration</b>. Next milestone: the website PRD.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 SETUP & REGISTRATION ============ -->
+<section class="tab" id="setup">
+  <div class="wrap">
+    <h2>Setup &amp; registration - the execution appendix</h2>
+    <p class="lead">From "Apticove" the idea to Apticove LLC: registered, banked, domained, and emailing. Every step, cost, and DNS record - verified 2026-07-02.</p>
+
+    <div class="kpi">
+      <div class="k"><b>~$240</b><span>one-time (LLC + domains + EIN)</span></div>
+      <div class="k"><b>~$115/mo</b><span>email + cold-outreach stack</span></div>
+      <div class="k"><b>6-18 days</b><span>to EIN in hand</span></div>
+      <div class="k"><b>&lt;2 hrs</b><span>your actual hands-on work</span></div>
+    </div>
+
+    <!-- A. DOMAINS -->
+    <h3>A · Domain buy-list (all RDAP-confirmed available)</h3>
+    <p>Register everything at <b>Cloudflare Registrar</b> - at-cost (~$10/yr, zero markup) and the cleanest DNS for email hygiene. Total footprint ~$100/yr.</p>
+    <table>
+      <thead><tr><th>Domain</th><th>Purpose</th><th>Tier</th><th>~$/yr</th></tr></thead>
+      <tbody>
+        <tr class="rec"><td><b>apticove.com</b></td><td>Brand + marketing site + email hub (the protected asset)</td><td>1</td><td class="num">$10</td></tr>
+        <tr><td>getapticove.com</td><td>Cold-email sending (301 to primary)</td><td>1</td><td class="num">$10</td></tr>
+        <tr><td>tryapticove.com</td><td>Cold-email sending</td><td>1</td><td class="num">$10</td></tr>
+        <tr><td>joinapticove.com</td><td>Cold-email sending</td><td>1</td><td class="num">$10</td></tr>
+        <tr><td>apticovehq.com</td><td>Cold-email sending</td><td>1</td><td class="num">$10</td></tr>
+        <tr><td>apticove.net</td><td>Brand defense (common mistype TLD)</td><td>2</td><td class="num">$12</td></tr>
+        <tr><td>apticove.co</td><td>Brand defense + spare cold domain</td><td>2</td><td class="num">$26</td></tr>
+        <tr><td>appticove.com</td><td>Top fat-finger typo defense</td><td>2</td><td class="num">$10</td></tr>
+      </tbody>
+    </table>
+    <p style="color:var(--muted);font-size:13.5px">Cold domains carry no site of their own - each 301-redirects to apticove.com (legitimacy + avoids a "parked domain" spam signal). Skip the long tail (.org/.io/.agency) unless budget is trivial - that's cost creep, not protection.</p>
+
+    <!-- B. LLC -->
+    <h3>B · Register "Apticove LLC" in Wyoming</h3>
+    <div class="grid g2">
+      <div class="card">
+        <span class="tag t-blue">Key facts</span>
+        <ul class="clean" style="font-size:14px">
+          <li><b>Name:</b> "Apticove LLC" - a coined word with zero business/trademark footprint found, so near-certainly free. <b>Confirm live in 2 min</b> at <code>wyobiz.wyo.gov</code> (search root "Apticove") before filing.</li>
+          <li><b>State fee:</b> $100 filing + $60/yr annual report.</li>
+          <li><b>Form via Northwest (~$139):</b> they act as registered agent + organizer + address, so <b>both your names AND your Pakistan address stay OFF the public record</b>. Wyoming doesn't require member names on the Articles.</li>
+          <li><b>Fallbacks</b> (if taken): Apticove Growth / Digital / Media LLC. Brand stays "Apticove" via DBA regardless.</li>
+          <li><b>Trademark:</b> quick check at <code>tmsearch.uspto.gov</code> (Class 35). Optional attorney knockout (~$300-600) before heavy brand spend.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag t-good">SS-4 (EIN) - the lines that matter</span>
+        <ul class="clean" style="font-size:14px">
+          <li><b>Line 7b</b> (responsible party TIN): write <code>Foreign</code></li>
+          <li><b>Line 7a:</b> one named brother (Muhammad Atif)</li>
+          <li><b>Line 9a:</b> check <b>Partnership</b> (NOT corporation)</li>
+          <li><b>Line 8b:</b> 2 members · <b>Line 10:</b> Started new business</li>
+          <li><b>Fax</b> to <code>304-707-9471</code> (from Pakistan) via an online send/receive fax service; include a return fax number on the cover sheet</li>
+          <li><b>EIN back in ~4-14 business days</b>; CP-575 letter follows by mail to the Northwest address (scanned to you)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout bad">
+      <b>⚠️ The 50/50 landmine:</b> two equal partners with no tiebreaker is a lawsuit waiting to happen. Your <b>operating agreement MUST include</b> a deadlock clause (shotgun buy-sell or arbitration), a right of first refusal on each 50% stake, a spend threshold above which both must approve, and a buyout/valuation method. Use the free Northwest template to get banking unblocked this week; queue a one-time attorney review (~$300-700) for month one.
+    </div>
+
+    <h4 style="margin:18px 0 4px">The LLC checklist (your active work: under 2 hours)</h4>
+    <ol class="check">
+      <li>Confirm "Apticove" is free at <code>wyobiz.wyo.gov/Business/FilingSearch.aspx</code> (2 min)</li>
+      <li>Quick trademark check at <code>tmsearch.uspto.gov</code> - flag any live Class 35 mark (2 min)</li>
+      <li>Order at <code>northwestregisteredagent.com/llc/wyoming</code> (~$139): NW as agent + organizer + address, both brothers as private 50/50 members, add mail scanning (20 min)</li>
+      <li>Wyoming approves the Articles in 1-3 business days (stamped copy lands in your NW dashboard)</li>
+      <li>Fill the Northwest operating-agreement template with all the 50/50 clauses above; both sign (1-2 hrs)</li>
+      <li>Complete SS-4 per the box above; fax it to the IRS (30 min)</li>
+      <li>EIN returns by fax in ~4-14 business days</li>
+      <li>With EIN + Articles + Operating Agreement in hand → open <b>Wise Business + Payoneer</b>, then <b>Stripe</b> on top (Mercury/Relay ban Pakistan - don't waste time there)</li>
+    </ol>
+
+    <!-- C. EMAIL -->
+    <h3>C · Email - two firewalled systems</h3>
+    <div class="callout bad">
+      <b>The firewall is the single most important decision.</b> Never send cold outreach from apticove.com. Cold volume collects spam complaints that torch a domain's reputation - and if that domain is apticove.com, your <i>client emails, contracts, and invoices</i> start landing in spam. Cold domains are consumable; if one burns, you replace it. apticove.com is the reputation asset you protect at all costs. They meet only at the 301 redirect and in the brand name, never in the mail stream.
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <span class="tag t-good">System A · apticove.com (Google Workspace)</span>
+        <p style="font-size:14px;margin:6px 0">Business Starter, annual, <b>2 paid seats</b> (~$14/mo). Everything else is free aliases/groups:</p>
+        <table style="font-size:13.5px;margin:4px 0">
+          <tbody>
+            <tr><td><code>atif@</code> / <code>basit@</code></td><td>Paid seats (logins)</td></tr>
+            <tr><td><code>founders@</code></td><td>Free group → both</td></tr>
+            <tr><td><code>hello@ · sales@ · billing@</code></td><td>Free aliases</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:13px;color:var(--muted);margin:6px 0 0">6+ working addresses for the price of 2 seats. Add them as "Send mail as" identities in Gmail.</p>
+      </div>
+      <div class="card">
+        <span class="tag t-warn">System B · cold domains (outreach infra)</span>
+        <ul class="clean" style="font-size:14px">
+          <li><b>16 inboxes across 4 domains</b> (4 each) at 20-25 sends/day = ~1,900/week</li>
+          <li><b>Zapmail</b> pre-warmed Google inboxes (~$3/inbox/mo) - best inbox placement for an offshore sender</li>
+          <li><b>Smartlead Basic</b> ($39/mo, unlimited inboxes + warmup) as the sending engine</li>
+          <li><b>Warm 3-4 weeks</b> before any real send; keep warmup running permanently</li>
+          <li>Human-name inboxes only (<code>atif@</code>, <code>a.basit@</code>) - never <code>info@</code>/<code>sales@</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <h4 style="margin:18px 0 4px">DNS records for apticove.com (copy-ready)</h4>
+    <p style="font-size:13.5px;color:var(--muted);margin:4px 0">Add at Cloudflare. Delete any legacy/parked MX first. Google now uses a single MX record.</p>
+    <pre>MX     @            Priority 1      smtp.google.com.
+
+TXT    @            v=spf1 include:_spf.google.com ~all
+
+TXT    google._domainkey    v=DKIM1; k=rsa; p=&lt;2048-bit key you generate in
+                            Admin → Gmail → Authenticate email, then click
+                            "Start authentication"&gt;
+
+TXT    _dmarc       v=DMARC1; p=quarantine; rua=mailto:dmarc@apticove.com;
+                    pct=100; adkim=s; aspf=s; fo=1</pre>
+    <p style="font-size:13px;color:var(--muted)">Sequencing: launch DMARC at <code>p=none</code> for ~1 week to confirm all legit mail passes, then flip to <code>p=quarantine</code>. Never jump straight to <code>p=reject</code>. Cold domains get their own SPF/DKIM/DMARC (kept at <code>p=none</code> through warmup) + a custom tracking subdomain. <b>All-in email + cold stack: ~$115/mo lean.</b></p>
+
+    <!-- D. TAX -->
+    <h3>D · Tax - what "Wyoming tax-free" really means</h3>
+    <p style="color:var(--muted);font-size:14px">"No state income tax" is real. "No taxes at all" is a myth that gets founders penalized. Here's the precise line:</p>
+    <div class="grid g2">
+      <div class="card">
+        <span class="tag t-warn">What you PAY &amp; FILE</span>
+        <ul class="clean" style="font-size:14px">
+          <li>WY annual report: <b>$60/yr</b> + registered agent (~$125/yr)</li>
+          <li>Federal <b>Form 1065</b> partnership return + <b>two K-1s</b> + <b>K-2/K-3</b> (mandatory with foreign partners), due <b>March 16</b> (extendable to Sep 15)</li>
+          <li><b>EIN</b> (free) + an <b>ITIN for each brother</b> (Form W-7, via a Certifying Acceptance Agent)</li>
+          <li>Cross-border <b>CPA: ~$800-2,000/yr</b> (higher year one for EIN/ITIN + written ECI opinion)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag t-good">What you likely DON'T owe (CPA confirms)</span>
+        <ul class="clean" style="font-size:14px">
+          <li>✅ <b>No WY state income tax, no franchise tax</b></li>
+          <li>✅ <b>Likely no US federal income tax</b> - you both work physically in Pakistan, so the income is foreign-sourced and not "effectively connected." US clients + Stripe don't change that.</li>
+          <li>✅ Likely no Section 1446 withholding (no 8804/8805)</li>
+          <li>✅ No WY sales tax (B2B services exempt) · ✅ No BOI/FinCEN filing (US-formed LLCs exempt since Mar 2025)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout warn">
+      <b>The trap that bites:</b> "Wyoming = no taxes" makes founders skip the Form 1065 filing. The late penalties are <b>per-partner, per-month, even when zero tax is due</b>. You file the 1065 + K-2/K-3 regardless. Engage the CPA <b>before year-end</b>, not at filing crunch - get the "no US income tax" (ECI) position <b>in writing</b>, and avoid ever creating US nexus (no US employee, office, agent, or in-US work days). <span style="color:var(--muted)">(Pakistani-side tax on your income is a separate regime - a local advisor handles that.)</span>
+    </div>
+
+    <!-- E. THIS WEEK -->
+    <h3>E · Your "this week" master sequence</h3>
+    <div class="tl">
+      <div class="step"><div class="wk">Day 1 · Lock the foundation</div>
+        <ul class="clean">
+          <li>Confirm "Apticove" at wyobiz + tmsearch (4 min total)</li>
+          <li>Buy the 8 domains at Cloudflare (~$100/yr); set 301 redirects on the cold domains</li>
+          <li>Order Apticove LLC via Northwest (~$139)</li>
+        </ul>
+      </div>
+      <div class="step"><div class="wk">Days 2-4 · Email + EIN</div>
+        <ul class="clean">
+          <li>Stand up Google Workspace on apticove.com; publish the 4 DNS records; test SPF/DKIM/DMARC = PASS</li>
+          <li>WY approves the LLC → complete + fax the SS-4</li>
+          <li>Register the cold inboxes (Zapmail + Smartlead); <b>start warmup day one</b></li>
+        </ul>
+      </div>
+      <div class="step"><div class="wk">Week 2-3 · Bank + build</div>
+        <ul class="clean">
+          <li>EIN arrives → open Wise + Payoneer (have the live site + a draft invoice ready for KYC) → Stripe on top</li>
+          <li>Sign the operating agreement (with the deadlock clause); engage the cross-border CPA</li>
+          <li>Cold domains finish warmup → ready for first sends</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <b>Next milestone: the website PRD.</b> Once you say go, I'll spec Apticove's site end-to-end - every page, the social-proof + case-study architecture, the wedge-offer flow, and the exact build - as its own document, then hand it to <code>landing-page-architect</code> + <code>direct-response-copy</code> to build.
     </div>
   </div>
 </section>
