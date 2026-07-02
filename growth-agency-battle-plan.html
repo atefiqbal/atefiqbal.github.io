@@ -115,6 +115,7 @@
     <button data-t="brand">4 · Brand &amp; LLC</button>
     <button data-t="plan">5 · 90-Day Plan</button>
     <button data-t="setup">6 · Setup &amp; Registration</button>
+    <button data-t="choices">7 · WY vs TX, Registrars &amp; Handles</button>
   </div>
 </nav>
 
@@ -641,6 +642,106 @@ TXT    _dmarc       v=DMARC1; p=quarantine; rua=mailto:dmarc@apticove.com;
     </div>
     <div class="callout">
       <b>Next milestone: the website PRD.</b> Once you say go, I'll spec Apticove's site end-to-end - every page, the social-proof + case-study architecture, the wedge-offer flow, and the exact build - as its own document, then hand it to <code>landing-page-architect</code> + <code>direct-response-copy</code> to build.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 CHOICES: STATE, REGISTRARS, HANDLES ============ -->
+<section class="tab" id="choices">
+  <div class="wrap">
+    <h2>State choice, registrars &amp; social handles</h2>
+    <p class="lead">The decisions to circulate to your brother, team, and friends - each backed by a scorecard, not an opinion. Verified 2026-07-02.</p>
+
+    <!-- A. WY vs TX -->
+    <h3>A · Wyoming vs Texas - the head-to-head</h3>
+    <p>Texas came up as an option. Two agents scored both states on the <b>same 10-point framework</b> for your exact profile (two Pakistan-based founders, remote services agency, zero US physical presence). Result: <b>Wyoming 9/10, Texas 5/10.</b></p>
+    <table>
+      <thead><tr><th>Dimension</th><th>🏔️ Wyoming</th><th>🤠 Texas</th></tr></thead>
+      <tbody>
+        <tr><td>Formation fee</td><td class="money">$100</td><td>$300 (3x higher)</td></tr>
+        <tr><td>Annual state cost</td><td>$60 report</td><td>$0 franchise tax, but mandatory PIR filing</td></tr>
+        <tr><td>State income tax</td><td>None</td><td>None <span style="color:var(--muted)">(tie)</span></td></tr>
+        <tr><td>Franchise / margin tax</td><td><b>None at all</b></td><td>Exists; $0 below $2.65M revenue but you still file yearly</td></tr>
+        <tr class="rec"><td><b>Owner privacy</b></td><td><b>Members NOT on public record</b></td><td><b>Both your names + addresses PUBLIC</b> on the annual report (agent can't shield it)</td></tr>
+        <tr><td>Filing burden</td><td>One simple annual report</td><td>Public Info Report by May 15; <b>miss it → forfeiture → personal liability</b></td></tr>
+        <tr><td>Banking (Wise/Payoneer/Stripe)</td><td>Full support</td><td>Full support <span style="color:var(--muted)">(tie)</span></td></tr>
+        <tr><td>Score for YOUR profile</td><td class="money">9 / 10</td><td>5 / 10</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <b>Verdict: Wyoming wins.</b> Texas is a great state to run a business <i>from</i> - but every advantage (local market, talent, no income tax on operations) requires <i>actually being there</i>. You're not. Registering in Texas would import all of its friction (3x cost, public disclosure of both your names, a forfeiture-to-personal-liability trap that's brutal to unwind from Pakistan) and none of its upside. On the only things Texas does well here - no income tax, full fintech support - Wyoming matches it. <b>Stay with Wyoming.</b>
+    </div>
+
+    <!-- B. REGISTRARS + EMAIL -->
+    <h3>B · Where to buy the domain + email</h3>
+    <p>Your callouts, answered directly. First: <b>the domain and the email do NOT have to come from the same place.</b> You buy the domain at a registrar, then point its MX records to whichever email host you choose. Bundling is a convenience, usually a worse deal.</p>
+
+    <h4 style="margin:16px 0 4px">Domain registrar</h4>
+    <table>
+      <thead><tr><th>Registrar</th><th>.com renewal</th><th>Free privacy</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr class="rec"><td><b>Cloudflare</b> <span class="star">★</span></td><td class="num">~$10.44 flat</td><td>Yes</td><td><span class="tag t-good">winner</span> At-cost forever, best DNS, zero upsells (must use CF DNS - a feature)</td></tr>
+        <tr><td>Spaceship</td><td class="num">~$9.98 flat</td><td>Yes</td><td>Cheapest flat renewal; best alt if you want DNS portability</td></tr>
+        <tr><td>Porkbun</td><td class="num">~$11 flat</td><td>Yes</td><td>Great UX, honest pricing, free SSL</td></tr>
+        <tr><td>Dynadot</td><td class="num">~$10.88 flat</td><td>Yes</td><td>Solid, honest; dated UI</td></tr>
+        <tr><td>Namecheap</td><td class="num">~$15-19</td><td>Yes</td><td>Fine, beginner-friendly, but renewal creeps up</td></tr>
+        <tr><td>GoDaddy</td><td class="num">~$22-25</td><td>Yes</td><td><span class="tag t-bad">avoid</span> Highest renewals, aggressive upsell checkout</td></tr>
+      </tbody>
+    </table>
+    <p style="color:var(--muted);font-size:13.5px">The trap on Namecheap/GoDaddy is the year-1 promo ($1-6) that spikes at renewal. Cloudflare has no promo but never spikes - for a domain you keep, at-cost renewal wins every time.</p>
+
+    <h4 style="margin:16px 0 4px">Professional email</h4>
+    <table>
+      <thead><tr><th>Provider</th><th>~Price/user/mo</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr class="rec"><td><b>Google Workspace</b> <span class="star">★</span></td><td class="num">~$7</td><td><span class="tag t-good">best</span> Strongest sender reputation + buyer trust - critical for a cold-selling agency</td></tr>
+        <tr><td>Microsoft 365</td><td class="num">~$6</td><td>Great if your team lives in Outlook/Teams</td></tr>
+        <tr><td>Zoho Mail</td><td class="num">~$1-3</td><td>Budget option; functional with proper DNS, lower trust</td></tr>
+        <tr><td>Registrar-bundled (e.g. Namecheap Private Email)</td><td class="num">~$1</td><td><span class="tag t-bad">avoid</span> Shared-IP deliverability risk - a dealbreaker for outreach</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <b>The Apticove recommendation:</b> Buy <code>apticove.com</code> at <b>Cloudflare</b>, keep DNS on Cloudflare, host email on <b>Google Workspace</b> ($7/seat/mo). Total year one for one mailbox: <b>~$82</b> ($10 domain + $72 email). Do NOT wait to buy email later from a registrar marketplace - set up Google Workspace on day one so the domain's sender reputation starts warming while you build the site. Reseller email is a worse product at a worse price with less control over deliverability.
+    </div>
+
+    <!-- C. GMAIL + HANDLES -->
+    <h3>C · Brand Gmail + social handle lockdown</h3>
+    <div class="callout" style="border-color:var(--good)">
+      <b>Great news: "apticove" is a wide-open namespace.</b> Confirmed available on GitHub, Substack, Medium, Bluesky - with zero brand footprint anywhere. You can lock <b>@apticove identical on every platform</b>, which is the single biggest driver of brand recall. Do the full sweep in one sitting this week before that changes.
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <span class="tag t-blue">The brand Gmail (do this first)</span>
+        <p style="font-size:14px;margin:6px 0"><b>Create <code>apticovehq@gmail.com</code></b> - the shared registration/recovery hub for every social account.</p>
+        <ul class="clean" style="font-size:14px">
+          <li><b>Not a personal account</b> - it's a company asset both founders control, so the brand's login graph never walks out the door.</li>
+          <li>Password + 2FA (TOTP) stored in a <b>shared vault</b> (1Password/Bitwarden) so you <i>both</i> can generate codes.</li>
+          <li>Download backup codes → shared vault. Recovery phone = a number you both keep long-term.</li>
+          <li>Backups if taken: <code>getapticove@gmail.com</code>, <code>apticove.hq@gmail.com</code></li>
+          <li>Once Google Workspace is live, keep this as the recovery hub for 6-12 months, then migrate deliberately.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag t-good">Handle: @apticove everywhere</span>
+        <p style="font-size:14px;margin:6px 0">One string, every platform. If ever taken on one, use the same fallback only there:</p>
+        <p style="font-size:13.5px;margin:4px 0"><code>@apticovehq</code> → <code>@getapticove</code> → <code>@apticove.co</code> → <code>@weareapticove</code></p>
+        <p style="font-size:13.5px;color:var(--muted);margin:8px 0 0">Check fast at namecheckr.com / namechk.com, but always confirm on the platform itself before claiming. Same handle, same logo, same one-line bio, apticove.com link on every profile.</p>
+      </div>
+    </div>
+
+    <h4 style="margin:18px 0 4px">Handle-securing checklist (one sitting, no content needed)</h4>
+    <ol class="check">
+      <li><b>Tier 1 - grab first (B2B priority):</b> LinkedIn <code>/company/apticove</code> · X <code>@apticove</code> · Instagram <code>@apticove</code> (also reserves Threads)</li>
+      <li><b>Tier 2 - same sitting:</b> Threads (1 tap from IG) · YouTube <code>@apticove</code> (Brand Account) · TikTok · Facebook Page <code>/apticove</code> · Pinterest</li>
+      <li><b>Tier 3 - reserve now, post later:</b> Substack · Medium · Bluesky · Reddit <code>u/apticove</code> · GitHub Org <code>apticove</code></li>
+      <li><b>Security (non-negotiable):</b> enable 2FA on EVERY account tied to the brand Gmail - a social account with email recovery but no 2FA is a soft target</li>
+    </ol>
+    <p style="color:var(--muted);font-size:13.5px">Priority order for a B2B ecommerce-services agency: LinkedIn (where your buyers are) &gt; X (industry credibility) &gt; Instagram (portfolio/social proof). YouTube + Facebook Page soon (FB Page is also your Meta ad-account backbone). Everything else: reserve the name now, publish when you have bandwidth.</p>
+
+    <div class="callout">
+      <b>Next milestone: the website PRD.</b> With the state, registrar, email, and handles all decided, the last big build before launch is the site spec - every page, the social-proof + case-study architecture, and the wedge-offer flow. Say the word and I'll run it.
     </div>
   </div>
 </section>
