@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apticove - Email, Social & Outreach Setup</title>
+<style>
+  :root{
+    --bg:#f4f2e8; --surface:#ffffff; --surface2:#faf8f0;
+    --ink:#0f2320; --ink2:#33433e; --muted:#5c6b66; --faint:#8a958f;
+    --line:#e5e0d1; --line2:#eef0ea;
+    --harbor:#0b3d3a; --cove:#12655c; --emerald:#1f8a70; --emerald-soft:#e2f1ec;
+    --gold:#b98a1f; --gold-bright:#e3b23c; --gold-soft:#f7edd6;
+    --rose:#b0463f; --rose-soft:#f8e7e4;
+    --shadow:0 1px 2px rgba(11,61,58,.05),0 6px 22px rgba(11,61,58,.07);
+    --shadow-lg:0 2px 8px rgba(11,61,58,.06),0 18px 46px rgba(11,61,58,.12);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  h1,h2,h3,h4{letter-spacing:-.02em;line-height:1.16}
+  a{color:var(--cove)}
+
+  header.hero{position:relative;overflow:hidden;color:#eafaf5;padding:58px 0 46px;
+    background:linear-gradient(155deg,#12655c 0%,#0b3d3a 62%,#082e2b 100%)}
+  header.hero:after{content:"";position:absolute;inset:0;opacity:.55;
+    background:radial-gradient(680px 300px at 85% -10%,rgba(227,178,60,.30),transparent 60%),
+               radial-gradient(560px 320px at 5% 118%,rgba(31,138,112,.35),transparent 60%)}
+  header.hero .wrap{position:relative;z-index:1}
+  .brandline{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.03em;font-size:14.5px}
+  .amark{width:30px;height:30px;border-radius:9px;background:#0b3d3a;border:1px solid rgba(227,178,60,.5);
+    display:grid;place-items:center;color:#e3b23c;font-weight:800;font-size:17px}
+  h1{font-size:clamp(28px,5vw,44px);margin:19px 0 8px;color:#fff}
+  h1 .u{color:#ffdca0}
+  .hero p{color:#c7e8df;font-size:18px;max-width:680px;margin:6px 0 0}
+  .pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+  .pill{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:999px;
+    padding:6px 13px;font-size:13px}
+  .pill b{color:#ffdca0}
+
+  nav.jump{position:sticky;top:0;z-index:30;background:rgba(244,242,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  nav.jump .wrap{display:flex;gap:2px;overflow-x:auto;padding:9px 22px}
+  nav.jump a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:13.5px;padding:8px 13px;border-radius:9px;transition:.16s}
+  nav.jump a:hover{background:#fff;color:var(--ink)}
+  nav.jump a.on{background:var(--cove);color:#fff}
+
+  section.blk{padding:40px 0 8px;opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  section.blk.in{opacity:1;transform:none}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--cove);font-weight:800;font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+  .eyebrow .n{width:23px;height:23px;border-radius:7px;background:var(--emerald-soft);color:var(--harbor);display:grid;place-items:center;font-size:12px}
+  h2{font-size:26px;margin:4px 0 6px}
+  .lede{color:var(--muted);font-size:17px;margin:0 0 6px;max-width:730px}
+  h3{font-size:18px;margin:24px 0 8px}
+  h4{font-size:15px;margin:15px 0 4px;color:var(--ink2)}
+  p{margin:10px 0}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:20px 22px;box-shadow:var(--shadow);margin:16px 0}
+  .card.sm{padding:15px 17px}
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:800px){.g2,.g3{grid-template-columns:1fr}}
+
+  .tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border-radius:6px;margin-bottom:9px}
+  .t-cove{background:var(--emerald-soft);color:var(--harbor)}
+  .t-gold{background:var(--gold-soft);color:var(--gold)}
+  .t-rose{background:var(--rose-soft);color:var(--rose)}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  .scroll{overflow-x:auto;border-radius:12px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2);vertical-align:top}
+  th{color:var(--faint);font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;white-space:nowrap}
+  tbody tr:hover td{background:var(--surface2)}
+  .money{color:var(--cove);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .yes{color:var(--emerald);font-weight:700}.later{color:var(--gold);font-weight:700}.no{color:var(--rose);font-weight:700}
+
+  ul.clean{margin:9px 0;padding-left:19px}ul.clean li{margin:6px 0}ul.clean li::marker{color:var(--emerald)}
+  .callout{border-radius:0 13px 13px 0;padding:14px 18px;margin:16px 0;border-left:4px solid var(--emerald);background:var(--surface2)}
+  .callout.gold{border-color:var(--gold-bright);background:var(--gold-soft)}
+  .callout.rose{border-color:var(--rose);background:var(--rose-soft)}
+  .callout b{color:var(--ink)}
+  .lift{transition:transform .18s,box-shadow .18s}.lift:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+
+  ol.check{list-style:none;counter-reset:c;padding:0;margin:12px 0}
+  ol.check>li{position:relative;counter-increment:c;padding:12px 0 12px 46px;border-bottom:1px solid var(--line2)}
+  ol.check>li:before{content:counter(c);position:absolute;left:0;top:11px;width:28px;height:28px;border-radius:9px;background:var(--cove);color:#fff;font-size:13px;font-weight:800;display:grid;place-items:center;box-shadow:var(--shadow)}
+  ol.check .who{font-size:12px;color:var(--faint);margin-top:2px}
+
+  code{background:#eef1ee;border:1px solid var(--line);padding:1.5px 7px;border-radius:6px;font-size:12.5px;color:var(--harbor);word-break:break-word}
+  pre{background:#0b3d3a;color:#d6f0e8;padding:13px 15px;border-radius:11px;overflow-x:auto;font-size:12.5px;line-height:1.6;margin:8px 0;white-space:pre-wrap;word-break:break-word}
+  pre .c{color:#8fc9bb}
+
+  .swatches{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+  .sw{border-radius:11px;overflow:hidden;border:1px solid var(--line);width:132px;box-shadow:var(--shadow)}
+  .sw .chip{height:56px}.sw .meta{padding:8px 10px;background:#fff}
+  .sw .nm{font-size:12.5px;font-weight:700}.sw .hx{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+  .chip-i{display:inline-block;font-size:12px;font-weight:600;color:var(--harbor);background:var(--emerald-soft);border-radius:6px;padding:2px 8px;margin:2px 3px 2px 0}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:18px 0}
+  @media(max-width:800px){.kpis{grid-template-columns:1fr 1fr}}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:15px 16px;box-shadow:var(--shadow)}
+  .kpi b{display:block;font-size:22px;color:var(--cove);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .kpi span{font-size:12.5px;color:var(--muted)}
+  .rec{box-shadow:0 0 0 2px var(--emerald),var(--shadow)}
+  footer{color:var(--muted);font-size:13px;padding:34px 0 60px;margin-top:32px;border-top:1px solid var(--line)}
+  .bcopy{background:var(--surface2);border:1px dashed var(--line);border-radius:10px;padding:11px 14px;font-size:14px;margin:8px 0}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brandline"><span class="amark">A</span> APTICOVE · COMMUNICATIONS &amp; OUTREACH</div>
+    <h1>Email, Social &amp; <span class="u">Outreach</span> Setup</h1>
+    <p>One sitting, in order: the brand Gmail, professional email on apticove.com, every social account with its banner direction, and the cold-email engine mapped do-now vs automate-later. Built for Atif &amp; Basit.</p>
+    <div class="pills">
+      <span class="pill">Start here: <b>apticove@gmail.com</b></span>
+      <span class="pill">Handle: <b>@apticove</b> (everywhere)</span>
+      <span class="pill">Do-now cold-email spend: <b>~$40-90/mo</b></span>
+      <span class="pill">No paid API needed yet</span>
+    </div>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="wrap">
+    <a href="#gmail" class="on">A · Gmail (first)</a>
+    <a href="#email">B · Pro Email</a>
+    <a href="#brand">C · Brand Kit</a>
+    <a href="#social">D · Social Accounts</a>
+    <a href="#cold">E · Cold-Email Engine</a>
+  </div>
+</nav>
+
+<!-- A GMAIL -->
+<section class="blk in" id="gmail">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">A</span> Do this first</div>
+    <h2>The brand Gmail - your master key</h2>
+    <p class="lede">One free Google account becomes the registration + recovery hub for every social login. Create it before anything else, because everything downstream points its recovery here.</p>
+
+    <div class="grid g2">
+      <div class="card rec">
+        <span class="tag t-cove">Target</span>
+        <h4 style="margin-top:0"><code>apticove@gmail.com</code></h4>
+        <p style="margin:6px 0 0;font-size:14.5px">Try this exact one first. "Apticove" is a coined word nobody uses, so it has a real shot at being free (unlike common words). You will only find out at the signup screen - Google has no availability API. Takes 10 seconds.</p>
+        <p style="font-size:13px;color:var(--muted);margin:8px 0 0"><b>Note:</b> Gmail ignores dots, so <code>apti.cove@</code> is the same account - dots will not rescue a taken name.</p>
+      </div>
+      <div class="card">
+        <span class="tag t-gold">If it is taken, in order</span>
+        <ul class="clean" style="font-size:14.5px;margin-top:6px">
+          <li><code>apticovehq@gmail.com</code></li>
+          <li><code>getapticove@gmail.com</code></li>
+          <li><code>apticoveteam@gmail.com</code></li>
+          <li><code>hello.apticove@gmail.com</code></li>
+        </ul>
+        <p style="font-size:13px;color:var(--muted);margin:6px 0 0">It barely matters which - this gmail is never public. Your public address is <code>atif@apticove.com</code> (section B).</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top:0">Set it up right (10 minutes)</h4>
+      <ol class="check">
+        <li>In a fresh browser window (signed out of personal Google), create the account at <code>accounts.google.com/signup</code>. First name "Apticove", last name "HQ".<div class="who">So it is never entangled with a personal login</div></li>
+        <li>Generate a long random password in a <b>shared password manager</b> (1Password / Bitwarden) that both of you can open.<div class="who">Company asset, not one person's - survives a founder split</div></li>
+        <li>Turn on <b>2-Step Verification</b> with an authenticator app, and store the TOTP seed in the same shared vault so you <b>both</b> can generate codes.<div class="who">Solves the "only one phone has the code" problem</div></li>
+        <li>Download the backup codes into the shared vault. Set a recovery phone you both control long-term.<div class="who">Break-glass access</div></li>
+      </ol>
+      <div class="callout"><b>Why a dedicated account, not a personal one:</b> continuity (the brand's whole login graph never walks out with a personal inbox), a tiny attack surface, and shared control. This account is the single master key - protect it hardest.</div>
+    </div>
+  </div>
+</section>
+
+<!-- B EMAIL -->
+<section class="blk" id="email">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">B</span> Professional email</div>
+    <h2>Google Workspace on apticove.com</h2>
+    <p class="lede">This is the address clients see. Buy 2 paid seats, get 6+ working addresses through free aliases and groups.</p>
+
+    <div class="grid g2">
+      <div class="card">
+        <span class="tag t-cove">2 paid seats (~$14/mo total)</span>
+        <table style="margin:6px 0">
+          <tbody>
+            <tr><td><code>atif@apticove.com</code></td><td>seat</td></tr>
+            <tr><td><code>basit@apticove.com</code></td><td>seat</td></tr>
+            <tr><td><code>founders@</code></td><td>free group → both</td></tr>
+            <tr><td><code>hello@ · sales@ · billing@</code></td><td>free aliases</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:13px;color:var(--muted);margin:4px 0 0">Add the aliases as "Send mail as" identities in Gmail so replies go out from the role address.</p>
+      </div>
+      <div class="card">
+        <span class="tag t-gold">DNS records (add at Cloudflare)</span>
+        <pre>MX   @   1   smtp.google.com.
+
+TXT  @   v=spf1 include:_spf.google.com ~all
+
+TXT  google._domainkey   <span class="c">(2048-bit key from
+     Admin - Gmail - Authenticate email,
+     then click Start authentication)</span>
+
+TXT  _dmarc   v=DMARC1; p=quarantine;
+     rua=mailto:dmarc@apticove.com; adkim=s; aspf=s</pre>
+      </div>
+    </div>
+    <div class="callout"><b>Sequence:</b> launch DMARC at <code>p=none</code> for about a week to confirm all real mail passes, then flip to <code>p=quarantine</code>. This domain is your protected reputation asset - it is <b>never</b> used for cold outreach (that runs on separate domains, section E).</div>
+  </div>
+</section>
+
+<!-- C BRAND KIT -->
+<section class="blk" id="brand">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">C</span> Lock it once, paste everywhere</div>
+    <h2>The Apticove brand kit</h2>
+    <p class="lede">Consistency across every profile is the trust signal that closes the offshore-team gap. This document is already built in these colors.</p>
+
+    <h3>Palette - "Cove / Harbor"</h3>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#0b3d3a"></div><div class="meta"><div class="nm">Harbor Deep</div><div class="hx">#0B3D3A</div></div></div>
+      <div class="sw"><div class="chip" style="background:#12655c"></div><div class="meta"><div class="nm">Cove Teal</div><div class="hx">#12655C</div></div></div>
+      <div class="sw"><div class="chip" style="background:#1f8a70"></div><div class="meta"><div class="nm">Emerald Signal</div><div class="hx">#1F8A70</div></div></div>
+      <div class="sw"><div class="chip" style="background:#e3b23c"></div><div class="meta"><div class="nm">Harbor Gold</div><div class="hx">#E3B23C</div></div></div>
+      <div class="sw"><div class="chip" style="background:#f4f1ea"></div><div class="meta"><div class="nm">Sea Mist</div><div class="hx">#F4F1EA</div></div></div>
+      <div class="sw"><div class="chip" style="background:#0a1f1d"></div><div class="meta"><div class="nm">Slate Ink</div><div class="hx">#0A1F1D</div></div></div>
+    </div>
+    <p style="font-size:13.5px;color:var(--muted)">Dark teal is the default surface; gold is a seasoning (5-10% coverage only, never a fill, never on emerald). One typeface everywhere: a geometric sans (Sora / Space Grotesk, free) for the wordmark + headers, Inter for body.</p>
+
+    <div class="grid g2">
+      <div class="card sm">
+        <span class="tag t-cove">Avatar (all platforms)</span>
+        <p style="font-size:14.5px;margin:6px 0">A monogram <b>"A"</b> where the crossbar becomes an upward rising-tide line (the growth-loop hint), in Harbor Gold on a Harbor Deep field. One color, one field, legible at 48px. Same file everywhere - never a founder's photo on the brand account.</p>
+      </div>
+      <div class="card sm">
+        <span class="tag t-gold">Tagline (verbatim, never reworded)</span>
+        <p style="font-size:16px;margin:6px 0;font-weight:600;color:var(--harbor)">"Where growth finds harbor."</p>
+        <p style="font-size:13px;color:var(--muted);margin:0">apt (skilled) + cove (safe harbor). The story a stranger repeats.</p>
+      </div>
+    </div>
+
+    <h3>Bio copy - written, character-budgeted, paste-ready</h3>
+    <div class="card sm">
+      <p style="margin:2px 0 8px"><b>Master line:</b></p>
+      <div class="bcopy">Full-stack growth for $500K-$5M ecommerce brands. Amazon, creative, CRO, email, paid social - run as one system.</div>
+      <p style="margin:10px 0 8px"><b>Per-platform variants:</b></p>
+      <div class="bcopy"><b>X (160):</b> Full-stack growth partner for $500K-$5M ecommerce + Amazon brands. Creative, CRO, email, paid social, PPC - run as one system. Where growth finds harbor.</div>
+      <div class="bcopy"><b>Instagram (150):</b> Full-stack growth for $500K-$5M ecommerce brands. Amazon · Creative · CRO · Email · Paid Social. Where growth finds harbor ↓</div>
+      <div class="bcopy"><b>LinkedIn tagline (120):</b> Full-stack ecommerce growth partner. Amazon, AI-powered creative, CRO, email &amp; paid social for $500K-$5M brands.</div>
+      <div class="bcopy"><b>TikTok (80):</b> Full-stack ecommerce growth. Amazon, creative, CRO, email, paid social.</div>
+    </div>
+
+    <h3>Banner concept - "The Harbor Horizon"</h3>
+    <div class="card">
+      <p style="margin-top:0">One reusable master, exported at 4 ratios so LinkedIn, X, YouTube, Facebook look like one brand: a Harbor-Deep-to-Cove-Teal diagonal gradient, a single thin emerald line rising left-to-right and settling into a calm horizon (growth finding harbor), wordmark + tagline with one short gold underline, generous negative space, no stock photos, no faces.</p>
+      <h4>Ready-to-use banner image prompt (generate the base, add text crisply in Figma/Canva after)</h4>
+      <pre>Ultra-wide premium brand banner, 3:1, minimalist corporate consultancy
+aesthetic. Deep teal-to-emerald diagonal gradient, 135 degrees, dark #0B3D3A
+upper-left to #12655C lower-right, soft emerald #1F8A70 glow lower-right.
+A single thin luminous line rises gently from lower-left and resolves into a
+calm flat horizon on the right, like a growth curve settling into a still
+harbor, subtle gold #E3B23C highlight at the peak. Vast negative space,
+cinematic, soft volumetric light, faint grain, no text, no people, no logos.
+Sophisticated, quiet, expensive, editorial. --ar 3:1 --style raw</pre>
+      <h4>Avatar image prompt</h4>
+      <pre>Minimalist geometric monogram, a single bold letter "A" whose crossbar is a
+subtle upward-rising tide line, a harbor inlet in the negative space beneath.
+Solid warm gold #E3B23C mark centered on a deep teal #0B3D3A square, generous
+padding, flat, high-contrast, scalable, no gradient, no text. --ar 1:1</pre>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:0">Never bake text into the AI image - overlay the wordmark + tagline as live text so it stays crisp and repositionable per platform.</p>
+    </div>
+  </div>
+</section>
+
+<!-- D SOCIAL -->
+<section class="blk" id="social">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">D</span> Claim + optimize</div>
+    <h2>Social accounts - @apticove everywhere</h2>
+    <p class="lede">The handle is confirmed free on all platforms. Build the Tier-1 trio fully first, shell the Tier-2 set, reserve the rest so no one squats them.</p>
+
+    <div class="grid g3">
+      <div class="card sm lift"><span class="tag t-cove">Tier 1 · build fully now</span><p style="margin:6px 0 0;font-size:14.5px"><b>LinkedIn</b> (where a $500K-$5M founder vets you) → <b>X</b> (the operator community) → <b>Instagram</b> (proof of creative taste)</p></div>
+      <div class="card sm lift"><span class="tag t-gold">Tier 2 · shell now, fill over weeks</span><p style="margin:6px 0 0;font-size:14.5px"><b>YouTube</b> (long-form proof) · <b>Facebook Page</b> (Meta ad backbone) · <b>TikTok</b> (short operator clips)</p></div>
+      <div class="card sm lift"><span class="tag t-rose">Tier 3 · reserve the handle</span><p style="margin:6px 0 0;font-size:14.5px"><b>Pinterest · Substack · Threads · Bluesky</b> - claim @apticove, add avatar+bio+link, park it</p></div>
+    </div>
+
+    <h3>Per-platform quick-setup</h3>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Platform</th><th>Account type</th><th>Banner size (2026)</th><th>First move</th></tr></thead>
+      <tbody>
+        <tr><td><b>LinkedIn</b></td><td>Company Page (both as Super Admin)</td><td class="num">1128×191 (supply 4200×700)</td><td>Pinned 5-slide carousel; both list Apticove as employer</td></tr>
+        <tr><td><b>X / Twitter</b></td><td>Professional, "Marketing Agency"</td><td class="num">1500×500 (keep lower-left clear)</td><td>Pin the wedge post; reply under DTC/Amazon operators</td></tr>
+        <tr><td><b>Instagram</b></td><td>Business; link to FB Page</td><td class="num">no banner (design 6 highlights)</td><td>Name field = "Apticove | Ecommerce Growth"; 3 pinned posts</td></tr>
+        <tr><td><b>YouTube</b></td><td>Brand Account channel</td><td class="num">2560×1440 (safe 1546×423)</td><td>90s channel trailer + 1 teardown; 2 playlists</td></tr>
+        <tr><td><b>Facebook</b></td><td>Business Page in Meta Business Suite</td><td class="num">820×360 safe (push right)</td><td>Complete Services + CTA, connect Business Manager, then leave it</td></tr>
+        <tr><td><b>TikTok</b></td><td>Business, "Marketing &amp; Advertising"</td><td class="num">no banner (brand video covers)</td><td>3 founder talking-head clips; clickable link unlocked</td></tr>
+        <tr><td><b>Pinterest</b></td><td>Business (claim domain)</td><td class="num">board-cover mosaic</td><td>1 board + a few branded 1000×1500 pins, park</td></tr>
+        <tr><td><b>Substack</b></td><td>Publication ("The Growth Harbor")</td><td class="num">~1280×320</td><td>One "start here" post; claim early, handles are scarce</td></tr>
+        <tr><td><b>Threads</b></td><td>from Instagram (auto-handle)</td><td class="num">none</td><td>Cross-post X content, near-zero effort</td></tr>
+        <tr><td><b>Bluesky</b></td><td>set handle to apticove.com via DNS</td><td class="num">1500×500 (reuse X file)</td><td>Domain-as-handle = instant "real company" signal</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="card">
+      <span class="tag t-rose">Consistency + security checklist</span>
+      <div class="grid g2" style="gap:8px">
+        <ul class="clean" style="font-size:14px;margin:4px 0">
+          <li>Same <b>@apticove</b> handle + same "A" avatar + same tagline on all 10</li>
+          <li>Same master bio, trimmed only to fit each cap</li>
+          <li>Same <code>apticove.com</code> link everywhere (holding page with a booking CTA if the site is not live)</li>
+          <li>US location listed where a field exists; team-in-Pakistan disclosed honestly in the long About - transparency reads as confidence</li>
+        </ul>
+        <ul class="clean" style="font-size:14px;margin:4px 0">
+          <li>Every account created under <code>apticove@gmail.com</code>, never a personal email</li>
+          <li><b>2FA on every platform</b>, backup codes in the shared vault</li>
+          <li>Both founders as admins/managers where allowed (LinkedIn ×2, YouTube Brand Account, Meta Business Suite)</li>
+          <li>Verify the domain where free (Bluesky handle, Pinterest claim, FB verification)</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:13.5px;color:var(--muted)">Only 2 assets to produce before the sitting: the "A" avatar and the one "Harbor Horizon" banner (exported to 4 ratios). Both have generation prompts in section C. All bio copy and field values above are final.</p>
+  </div>
+</section>
+
+<!-- E COLD EMAIL -->
+<section class="blk" id="cold">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">E</span> The outreach engine</div>
+    <h2>Cold-email: do now vs automate later</h2>
+    <p class="lede">The <code>cold-email-quickstart</code> system is a 10-phase 0-to-launched wizard, but it needs paid tools you are not on yet. The trick: the cheap physical infrastructure (domains, mailboxes, warmup) is separate from the automation layer. Build the foundation today - start the 4-week warmup clock now - and plug in the paid tools only when you have volume.</p>
+
+    <h3>The map: which phases you can do free, which need a tool</h3>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Phase</th><th>What it is</th><th>Now?</th><th>Tool needed later (cost)</th></tr></thead>
+      <tbody>
+        <tr><td>0.5 · Database + AI keys</td><td>Track domains/leads; LLM for AI steps</td><td class="yes">NOW</td><td>Google Sheet now; Turso free tier later</td></tr>
+        <tr><td>1 · Sequencer + API key</td><td>Rotates inboxes, drips sequences</td><td class="later">LATER</td><td>Instantly ~$37/mo (or Bison ~$599/mo, agency-scale)</td></tr>
+        <tr class="rec"><td>2 · Mailboxes + <b>warmup</b></td><td>Cold domains, inboxes, DNS, 4-wk warmup</td><td class="yes">NOW</td><td>Maildoso/Zapmail ~$3/inbox or Google WS $7/seat</td></tr>
+        <tr><td>3 · Strategy (ICP + offer + angles)</td><td>Who / what / why</td><td class="yes">NOW</td><td>Free - write it today</td></tr>
+        <tr><td>4 · Lead tracking DB</td><td>Store domains/mailboxes/leads</td><td class="yes">NOW</td><td>Google Sheet; Turso later</td></tr>
+        <tr><td>5 · Lead scraping</td><td>Source target brands + emails</td><td class="later">PARTIAL</td><td>Consulti $97/mo, or manual Store Leads/Apollo free</td></tr>
+        <tr><td>6 · Verification (bounce gate)</td><td>Scrub list so you do not torch domains</td><td class="later">PARTIAL</td><td>Reoon free 600/mo, then $11.90 lifetime 10k</td></tr>
+        <tr><td>7 · Copywriting (4-email seq)</td><td>The actual emails</td><td class="yes">NOW</td><td>Free - write it today</td></tr>
+        <tr><td>8 · A/B variants (9+)</td><td>Subject/angle variants</td><td class="yes">NOW</td><td>Write now; auto-rotation needs the sequencer</td></tr>
+        <tr><td>9 · Deploy (paused)</td><td>Load into sequencer, launch</td><td class="no">NEEDS TOOL</td><td>Instantly/Bison (the buy trigger)</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>What to build now (no paid API, ~$40-90/mo)</h3>
+    <div class="card">
+      <ol class="check">
+        <li><b>Register the cold domains</b> at Cloudflare/Porkbun (~$10-12/yr each): getapticove.com, tryapticove.com, joinapticove.com, apticovehq.com. Never send cold from apticove.com.<div class="who">One-time infra, not an API</div></li>
+        <li><b>Provision 8-12 mailboxes</b> (2-3 per cold domain). Maildoso/Zapmail (~$3 each, warmup included) or Google Workspace ($7/seat, highest trust).<div class="who">At 15-20 sends/day/mailbox that is 120-240/day once warm</div></li>
+        <li><b>Configure DNS on every cold domain:</b> SPF + DKIM + DMARC (start <code>p=none</code>), a custom tracking subdomain, and a 301 redirect of the bare domain to apticove.com.<div class="who">Free, do it the day you buy</div></li>
+        <li><b>Start warmup TODAY</b> - the 4-week clock. Included free in Maildoso/Zapmail; if on raw Workspace, run manual back-and-forth 5-10/day rising to 20-30, always replying.<div class="who">Warmup and lead-gen run in parallel - waiting eats a dead month</div></li>
+        <li><b>Write strategy.md by hand:</b> ICP ($500K-$5M US ecommerce brands), offer (the $1,500 teardown wedge), 3 angles (diagnostic hook / peer-proof / specific-mechanism).<div class="who">No API</div></li>
+        <li><b>Draft the 4-email sequence + 9 variants by hand:</b> teardown hook → proof → new angle → breakup, ready to paste into the sequencer later.<div class="who">No API</div></li>
+      </ol>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <span class="tag t-cove">The lean manual bridge - first replies with zero sequencer</span>
+        <p style="font-size:14.5px;margin:6px 0">Hand-send a few highly personalized emails/day from warmed mailboxes, opening with a 5-minute <b>AI Creative Teardown</b> of one real conversion leak on their store. This is your wedge delivered as free value. Personalization at this depth beats any blast.</p>
+        <ul class="clean" style="font-size:14px">
+          <li>Source 5-10 brands/day (Store Leads free, Apollo free, ad libraries)</li>
+          <li>Verify each against Reoon's free 600/mo before sending</li>
+          <li>Plain text, no links or images in email 1; log in the Sheet; follow up day 3 &amp; 6</li>
+          <li>Reply fast from the same mailbox - two-way conversation is the top trust signal</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag t-gold">Buy order, when budget appears</span>
+        <ol class="clean" style="font-size:14.5px;margin-top:6px">
+          <li><b>Instantly Growth</b> ($37/mo) - unlocks automated send, warmup, A/B, deploy</li>
+          <li><b>Reoon</b> ($11.90 lifetime 10k) - protects the domains you spent a month warming</li>
+          <li><b>Consulti</b> ($97/mo) - only once you consume leads faster than you can source by hand</li>
+          <li>Anthropic + Perplexity keys (pay-as-you-go ~$5-20/mo) - only if manual personalization becomes the bottleneck</li>
+          <li>Turso / Bison / Store Leads Pro - scale-stage, not now</li>
+        </ol>
+        <p style="font-size:13px;color:var(--muted);margin:8px 0 0"><b>Minimum viable automated stack:</b> Instantly $37 + Reoon $11.90 one-time = under $40/mo on top of mailboxes.</p>
+      </div>
+    </div>
+
+    <div class="callout"><b>Bottom line:</b> start the warmup clock and the manual teardown outreach <b>this week</b>. By the time you buy Instantly and load leads, your inboxes are already trusted and your offer is already validated by real replies - so you are scaling something that works, not gambling on a cold start.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Apticove · email, social &amp; outreach setup · prepared 2026-07-04. Prices are 2026 estimates; confirm Gmail/handle availability at signup and tool pricing at purchase. Part of the Apticove build set alongside the growth battle plan and the Texas LLC + banking plan.
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.06});
+  document.querySelectorAll('section.blk').forEach(s=>io.observe(s));
+  const links=[...document.querySelectorAll('nav.jump a')];
+  const map=new Map(links.map(l=>[l.getAttribute('href').slice(1),l]));
+  const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('on'));map.get(e.target.id)?.classList.add('on');}}),{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('section.blk').forEach(s=>so.observe(s));
+</script>
+</body>
+</html>
