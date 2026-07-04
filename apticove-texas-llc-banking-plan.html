@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apticove LLC — Texas Formation & Banking Plan</title>
+<style>
+  :root{
+    --bg:#f6f5f0; --surface:#ffffff; --surface2:#fbfaf6;
+    --ink:#1b2a30; --ink2:#33454d; --muted:#5f7078; --faint:#8a97a0;
+    --line:#e7e3d8; --line2:#eef1f2;
+    --brand:#0e7c6b; --brand-deep:#0a5b4f; --brand-soft:#e3f2ee;
+    --gold:#b9822a; --gold-soft:#f6ecd8;
+    --sky:#2f6ea3; --sky-soft:#e4eef6;
+    --rose:#b5453f; --rose-soft:#f8e6e4;
+    --shadow:0 1px 2px rgba(27,42,48,.04),0 6px 24px rgba(27,42,48,.06);
+    --shadow-lg:0 2px 6px rgba(27,42,48,.05),0 18px 50px rgba(27,42,48,.10);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  h1,h2,h3,h4{letter-spacing:-.02em;line-height:1.15}
+  a{color:var(--brand-deep)}
+
+  /* HERO */
+  header.hero{position:relative;overflow:hidden;
+    background:linear-gradient(160deg,#0e7c6b 0%,#0a5b4f 60%,#08463d 100%);color:#eafaf5;
+    padding:60px 0 48px}
+  header.hero:after{content:"";position:absolute;inset:0;opacity:.5;
+    background:radial-gradient(700px 300px at 82% -8%,rgba(185,130,42,.28),transparent 60%),
+               radial-gradient(560px 320px at 8% 120%,rgba(47,110,163,.30),transparent 60%)}
+  header.hero .wrap{position:relative;z-index:1}
+  .brandline{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.02em;font-size:15px}
+  .dot{width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.14);
+    display:grid;place-items:center;border:1px solid rgba(255,255,255,.22)}
+  h1{font-size:clamp(29px,5vw,45px);margin:20px 0 8px;color:#fff}
+  h1 .u{color:#ffdca0}
+  .hero p{color:#c8e9e0;font-size:18px;max-width:660px;margin:6px 0 0}
+  .pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+  .pill{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);color:#eafaf5;
+    border-radius:999px;padding:6px 13px;font-size:13px;font-weight:500}
+  .pill b{color:#ffdca0}
+
+  /* STICKY NAV */
+  nav.jump{position:sticky;top:0;z-index:30;background:rgba(246,245,240,.9);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  nav.jump .wrap{display:flex;gap:2px;overflow-x:auto;padding:9px 22px}
+  nav.jump a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:13.5px;
+    padding:8px 13px;border-radius:9px;transition:.16s}
+  nav.jump a:hover{background:#fff;color:var(--ink)}
+  nav.jump a.on{background:var(--brand);color:#fff}
+
+  section.blk{padding:40px 0 8px;opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  section.blk.in{opacity:1;transform:none}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--brand-deep);font-weight:700;
+    font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+  .eyebrow .n{width:22px;height:22px;border-radius:7px;background:var(--brand-soft);color:var(--brand-deep);
+    display:grid;place-items:center;font-size:12px}
+  h2{font-size:26px;margin:4px 0 6px}
+  .lede{color:var(--muted);font-size:17px;margin:0 0 6px;max-width:720px}
+  h3{font-size:18px;margin:24px 0 8px;color:var(--ink)}
+  h4{font-size:15px;margin:16px 0 4px;color:var(--ink2)}
+  p{margin:10px 0}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:20px 22px;
+    box-shadow:var(--shadow);margin:16px 0}
+  .card.pad-sm{padding:15px 17px}
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:780px){.g2,.g3{grid-template-columns:1fr}}
+
+  .tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+    padding:3px 9px;border-radius:6px;margin-bottom:9px}
+  .t-brand{background:var(--brand-soft);color:var(--brand-deep)}
+  .t-gold{background:var(--gold-soft);color:var(--gold)}
+  .t-sky{background:var(--sky-soft);color:var(--sky)}
+  .t-rose{background:var(--rose-soft);color:var(--rose)}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line2);vertical-align:top}
+  th{color:var(--faint);font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+  tbody tr:hover td{background:var(--surface2)}
+  .money{color:var(--brand-deep);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  ul.clean{margin:9px 0;padding-left:19px}
+  ul.clean li{margin:6px 0}
+  ul.clean li::marker{color:var(--brand)}
+
+  .callout{border-radius:0 13px 13px 0;padding:14px 18px;margin:16px 0;border-left:4px solid var(--brand);
+    background:var(--surface2)}
+  .callout.gold{border-color:var(--gold);background:var(--gold-soft)}
+  .callout.rose{border-color:var(--rose);background:var(--rose-soft)}
+  .callout.sky{border-color:var(--sky);background:var(--sky-soft)}
+  .callout b{color:var(--ink)}
+
+  .lift{transition:transform .18s ease,box-shadow .18s ease}
+  .lift:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+
+  /* checklist */
+  ol.check{list-style:none;counter-reset:c;padding:0;margin:12px 0}
+  ol.check>li{position:relative;counter-increment:c;padding:12px 0 12px 46px;border-bottom:1px solid var(--line2)}
+  ol.check>li:before{content:counter(c);position:absolute;left:0;top:11px;width:28px;height:28px;border-radius:9px;
+    background:var(--brand);color:#fff;font-size:13px;font-weight:800;display:grid;place-items:center;box-shadow:var(--shadow)}
+  ol.check .who{font-size:12px;color:var(--faint);margin-top:2px}
+
+  code{background:#eef1ef;border:1px solid var(--line);padding:1.5px 7px;border-radius:6px;font-size:13px;color:#0a5b4f}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:18px 0}
+  @media(max-width:780px){.kpis{grid-template-columns:1fr 1fr}}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:15px 16px;box-shadow:var(--shadow)}
+  .kpi b{display:block;font-size:23px;color:var(--brand-deep);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .kpi span{font-size:12.5px;color:var(--muted)}
+
+  .flowsvg{width:100%;height:auto;display:block}
+  .steplist{counter-reset:s;margin:6px 0}
+  footer{color:var(--muted);font-size:13px;padding:34px 0 60px;margin-top:34px;border-top:1px solid var(--line)}
+  .rec-ring{box-shadow:0 0 0 2px var(--brand),var(--shadow)}
+  .chip{display:inline-block;font-size:12px;font-weight:600;color:var(--brand-deep);background:var(--brand-soft);
+    border-radius:6px;padding:2px 8px;margin:2px 3px 2px 0}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brandline"><span class="dot">◆</span> APTICOVE · COMPANY FORMATION</div>
+    <h1>Apticove <span class="u">LLC</span> — Texas Formation &amp; Banking</h1>
+    <p>The step-by-step plan to register the company, get the EIN, open the money rails, and route payments home to Pakistan. Built for Muhammad Atif &amp; Muhammad Basit. Share it, work it, check the boxes.</p>
+    <div class="pills">
+      <span class="pill">State: <b>Texas</b></span>
+      <span class="pill">Structure: <b>Manager-managed, 50/50</b></span>
+      <span class="pill">First-year cost: <b>~$1,300–$3,450</b></span>
+      <span class="pill">Time to open for business: <b>~2–3 weeks</b></span>
+    </div>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="wrap">
+    <a href="#decision" class="on">The Decision</a>
+    <a href="#form">1 · Form the LLC</a>
+    <a href="#privacy">2 · Privacy</a>
+    <a href="#agreement">3 · Agent &amp; Agreement</a>
+    <a href="#ein">4 · EIN &amp; ITIN</a>
+    <a href="#compliance">5 · Tax &amp; May 15</a>
+    <a href="#banking">6 · Banking</a>
+    <a href="#flow">7 · Money Home</a>
+    <a href="#checklist">8 · Checklist</a>
+  </div>
+</nav>
+
+<!-- DECISION -->
+<section class="blk in" id="decision">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">◆</span> The decision, with eyes open</div>
+    <h2>Texas it is — here are the two guardrails that make it safe</h2>
+    <p class="lede">You chose Texas over Wyoming. Good news: your plan for possible US offices later makes Texas more defensible than a pure-remote setup would be. Two things need to be done right, and this plan bakes both in.</p>
+    <div class="grid g2">
+      <div class="card lift">
+        <span class="tag t-brand">Guardrail 1 · Privacy</span>
+        <h4 style="margin-top:0">Form it manager-managed</h4>
+        <p style="margin:6px 0 0">Texas normally publishes the owners' names. Filing <b>manager-managed</b> (optionally with a holding entity as the manager) keeps both of your names off every public Texas record. Full playbook in section 2.</p>
+      </div>
+      <div class="card lift">
+        <span class="tag t-rose">Guardrail 2 · The May 15 report</span>
+        <h4 style="margin-top:0">Never miss the annual filing</h4>
+        <p style="margin:6px 0 0">Miss the Public Information Report and Texas can strip your liability shield and make you <b>personally liable</b>. Fix: a registered agent (or CPA) files it for you every May 15, automatically. Section 5.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <b>What this document is:</b> everything from "confirm the name" to "money landing in your Pakistani bank account," in order. Two research passes fed it (formation + cross-border banking), all verified against 2026 sources. Nothing here is legal or tax advice; the items marked <span class="chip">CPA / attorney</span> genuinely need a professional signature.
+    </div>
+  </div>
+</section>
+
+<!-- 1 FORM -->
+<section class="blk" id="form">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">1</span> Register the entity</div>
+    <h2>Form "Apticove LLC" in Texas</h2>
+    <p class="lede">One name check, one filing (Form 205), about two business days to approval.</p>
+
+    <h3>Step 1 · Confirm the name is free (about 30 minutes)</h3>
+    <div class="grid g3">
+      <div class="card pad-sm"><span class="tag t-brand">Free screen</span><b>Comptroller search</b><p style="font-size:14px;margin:6px 0 0">Search "Apticove" at <code>mycpa.cpa.state.tx.us/coa</code>. Fast negative check, not authoritative.</p></div>
+      <div class="card pad-sm rec-ring"><span class="tag t-gold">Authoritative</span><b>SOSDirect ($1)</b><p style="font-size:14px;margin:6px 0 0">The search the state examiner actually uses. <code>direct.sos.state.tx.us</code> → Name Availability.</p></div>
+      <div class="card pad-sm"><span class="tag t-sky">Protect the brand</span><b>USPTO trademark</b><p style="font-size:14px;margin:6px 0 0">Screen "Apticove" in class 035 (marketing) at <code>tmsearch.uspto.gov</code> so you never have to rebrand.</p></div>
+    </div>
+    <div class="callout gold">
+      <b>The brand is safe either way.</b> If "Apticove LLC" is taken, file as <b>Apticove Growth / Digital / Media LLC</b> and still trade publicly as "Apticove" via an Assumed Name (DBA, Form 503, $25). The legal name and the brand do not have to match.
+    </div>
+
+    <h3>Step 2 · File the Certificate of Formation (Form 205)</h3>
+    <table>
+      <thead><tr><th>Article</th><th>What to enter</th></tr></thead>
+      <tbody>
+        <tr><td><b>1 · Name</b></td><td>Apticove LLC</td></tr>
+        <tr><td><b>2 · Registered agent</b></td><td>Your commercial agent's name + Texas street address (never the brothers, never a PO box)</td></tr>
+        <tr><td><b>3 · Governing authority</b></td><td><b>Select "has managers"</b> (manager-managed). List the manager only. Members are NOT listed. This is the privacy lever.</td></tr>
+        <tr><td><b>4 · Purpose</b></td><td>The broad standard clause ("any and all lawful business..."). Do not narrow it.</td></tr>
+        <tr><td><b>Organizer</b></td><td>Can be one brother or the agent/formation service. A one-time role, not an owner. Non-residents often let the service sign for extra distance.</td></tr>
+      </tbody>
+    </table>
+    <div class="kpis">
+      <div class="kpi"><b>$308</b><span>State fee (incl. ~$8 online convenience)</span></div>
+      <div class="kpi"><b>~2 days</b><span>SOSDirect approval time</span></div>
+      <div class="kpi"><b>$25</b><span>Optional DBA (Form 503)</span></div>
+      <div class="kpi"><b>$0</b><span>Expedite not needed from abroad</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 PRIVACY -->
+<section class="blk" id="privacy">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">2</span> Keep your names private</div>
+    <h2>The privacy structure</h2>
+    <p class="lede">Texas exposes owners through two documents: the Certificate (public forever) and the yearly Public Information Report. Here is how to show as little as possible.</p>
+
+    <div class="card">
+      <svg class="flowsvg" viewBox="0 0 900 300" role="img" aria-label="Ownership privacy structure diagram">
+        <defs>
+          <marker id="ar" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0e7c6b"/></marker>
+          <style>.bx{fill:#fff;stroke:#e7e3d8;stroke-width:1.5}.lb{font:600 13px -apple-system,Segoe UI,sans-serif;fill:#1b2a30}.sb{font:11px -apple-system,Segoe UI,sans-serif;fill:#5f7078}.hd{font:800 11px -apple-system,Segoe UI,sans-serif;letter-spacing:.06em}</style>
+        </defs>
+        <!-- private zone -->
+        <rect x="14" y="14" width="410" height="272" rx="14" fill="#e3f2ee" opacity=".5"/>
+        <text x="30" y="40" class="hd" fill="#0a5b4f">PRIVATE (agreements + IRS only)</text>
+        <!-- public zone -->
+        <rect x="476" y="14" width="410" height="272" rx="14" fill="#f6ecd8" opacity=".55"/>
+        <text x="640" y="40" class="hd" fill="#b9822a">PUBLIC TEXAS RECORD</text>
+
+        <!-- brothers -->
+        <rect class="bx" x="40" y="66" width="170" height="52" rx="11"/><text class="lb" x="60" y="90">Muhammad Atif</text><text class="sb" x="60" y="107">50% member</text>
+        <rect class="bx" x="40" y="140" width="170" height="52" rx="11"/><text class="lb" x="60" y="164">Muhammad Basit</text><text class="sb" x="60" y="181">50% member</text>
+        <!-- holdco -->
+        <rect class="bx" x="250" y="103" width="150" height="66" rx="11" style="stroke:#0e7c6b"/><text class="lb" x="270" y="130">Holding LLC</text><text class="sb" x="270" y="148">(optional, WY)</text><text class="sb" x="270" y="162">= the manager</text>
+        <!-- TX LLC -->
+        <rect class="bx" x="620" y="103" width="200" height="66" rx="11" style="stroke:#b9822a;stroke-width:2"/><text class="lb" x="642" y="130">Apticove LLC (Texas)</text><text class="sb" x="642" y="148">manager-managed</text><text class="sb" x="642" y="162">only the manager is named</text>
+
+        <!-- arrows -->
+        <line x1="210" y1="92" x2="248" y2="120" stroke="#0e7c6b" stroke-width="2" marker-end="url(#ar)"/>
+        <line x1="210" y1="166" x2="248" y2="150" stroke="#0e7c6b" stroke-width="2" marker-end="url(#ar)"/>
+        <line x1="400" y1="136" x2="616" y2="136" stroke="#0e7c6b" stroke-width="2" marker-end="url(#ar)" stroke-dasharray="6 4"/>
+        <text class="sb" x="440" y="128">manages</text>
+        <text class="sb" x="250" y="196">own 100%</text>
+      </svg>
+      <p style="margin:4px 0 0;text-align:center;color:var(--muted);font-size:13.5px">With a holding entity as the manager, <b>neither brother's name touches any public Texas filing.</b></p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card lift">
+        <span class="tag t-brand">Simple route</span>
+        <h4 style="margin-top:0">One brother as sole manager</h4>
+        <ul class="clean" style="font-size:14.5px">
+          <li>Exactly <b>one name</b> on record, with a business mailing address (never a home address)</li>
+          <li>Zero extra entities or cost</li>
+          <li>Ownership (the 50/50) still stays private</li>
+        </ul>
+      </div>
+      <div class="card lift rec-ring">
+        <span class="tag t-gold">Max-privacy route</span>
+        <h4 style="margin-top:0">A holding entity as manager</h4>
+        <ul class="clean" style="font-size:14.5px">
+          <li><b>Zero brother names</b> on any Texas public record</li>
+          <li>Adds ~$100–$200/yr for the second entity + a slightly more complex tax picture <span class="chip">CPA</span></li>
+          <li>Clean, well-established structure</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout"><b>The registered agent alone does not hide you.</b> It shields the office address and receives legal mail, but the manager line is separate. Agent privacy + manager-managed structure work together, not instead of each other.</div>
+  </div>
+</section>
+
+<!-- 3 AGENT & AGREEMENT -->
+<section class="blk" id="agreement">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">3</span> Agent &amp; the partnership contract</div>
+    <h2>Registered agent + Company Agreement</h2>
+
+    <div class="grid g2">
+      <div class="card">
+        <span class="tag t-brand">Registered agent · required, ~$125/yr</span>
+        <p style="margin-top:6px">A Texas street address that receives legal mail. You cannot self-serve from Pakistan.</p>
+        <ul class="clean" style="font-size:14.5px">
+          <li><b>Northwest Registered Agent</b> is the go-to for non-residents (privacy-forward, can act as organizer)</li>
+          <li><b>Non-negotiable:</b> pick one that also <b>files your annual PIR</b> (or guarantees reminders). This is what defuses the May 15 forfeiture risk.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag t-sky">Company Agreement · private, not filed</span>
+        <p style="margin-top:6px">Texas's name for the operating agreement. It holds the ownership record you keep OFF public filings, and it is what protects two brothers from a 50/50 stalemate.</p>
+        <p style="font-size:13.5px;color:var(--muted);margin:8px 0 0">Draft 80% from a solid manager-managed template, then <span class="chip">attorney</span> review the exit + deadlock clauses before signing.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-top:0">The clauses that matter for 50/50 brothers</h4>
+      <div class="grid g2" style="gap:10px">
+        <ul class="clean" style="font-size:14.5px;margin:0">
+          <li><b>Ownership + capital:</b> 50/50, each capital account</li>
+          <li><b>Distributions:</b> split + timing, consent to draws</li>
+          <li><b>Decision rights:</b> what needs both signatures (debt, hiring, selling, new members) vs day-to-day</li>
+          <li><b>Future funding:</b> what if one cannot fund a call (dilution)</li>
+        </ul>
+        <ul class="clean" style="font-size:14.5px;margin:0">
+          <li><b>Right of first refusal:</b> neither sells to an outsider first</li>
+          <li><b>Buyout:</b> valuation method + payment terms + triggers</li>
+          <li><b>Deadlock (essential):</b> a <b>shotgun clause</b> (one names a price, the other buys or sells at it) or binding arbitration</li>
+          <li><b>Dissolution + governing law:</b> Texas</li>
+        </ul>
+      </div>
+      <div class="callout rose" style="margin-bottom:0"><b>Do not sign a generic single-member template.</b> A 50/50 split with no tiebreaker is the classic way two partners end up in court. The deadlock + buyout sections are the few hundred dollars of attorney review most worth spending.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 EIN -->
+<section class="blk" id="ein">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">4</span> Tax IDs</div>
+    <h2>EIN now, ITIN later</h2>
+    <p class="lede">The EIN unblocks all banking. The ITINs are a next-tax-season item; do not let them hold anything up.</p>
+
+    <div class="card">
+      <span class="tag t-brand">EIN via Form SS-4 · no SSN needed · free</span>
+      <table>
+        <tbody>
+          <tr><td><b>Line 7a</b> responsible party</td><td>Muhammad Atif (must be a person, not the entity)</td></tr>
+          <tr><td><b>Line 7b</b> their SSN/ITIN</td><td>write <code>Foreign</code></td></tr>
+          <tr><td><b>Line 9a</b> entity type</td><td><b>Partnership</b> (default for 2 members) — do NOT check corporation</td></tr>
+          <tr><td><b>Line 8b / 10</b></td><td>2 members · reason = "Started new business"</td></tr>
+          <tr><td><b>Line 16</b> activity</td><td>Advertising / marketing services</td></tr>
+        </tbody>
+      </table>
+      <div class="grid g2" style="gap:12px">
+        <div class="callout sky" style="margin:6px 0"><b>Fastest — phone:</b> call <code>+1 267-941-1099</code> (Mon–Fri, 6am–11pm ET). Atif answers the SS-4 questions live and <b>gets the EIN on the call.</b> Have the form filled in front of you.</div>
+        <div class="callout" style="margin:6px 0"><b>Or fax:</b> send SS-4 to <code>304-707-9471</code> with a return fax number; EIN comes back in <b>~4 business days.</b> The IRS online tool will reject you (needs a US SSN), so do not use it.</div>
+      </div>
+    </div>
+
+    <div class="card pad-sm">
+      <span class="tag t-gold">ITIN (Form W-7) · each brother · later</span>
+      <p style="margin:6px 0 0;font-size:14.5px">Individual tax IDs, needed when your first partnership return issues K-1s. Filed through a <b>Certifying Acceptance Agent</b> (so you never mail your real passport), normally attached to the first tax return. A <b>Q1-next-year item</b> your <span class="chip">CPA</span> handles. Turnaround 7–11 weeks. It does not block formation or banking.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 COMPLIANCE -->
+<section class="blk" id="compliance">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">5</span> The one date that matters</div>
+    <h2>Franchise tax, the May 15 report &amp; federal filing</h2>
+
+    <div class="card" style="border-color:#e7b7b3;background:linear-gradient(180deg,#fdf4f3,#fff)">
+      <span class="tag t-rose">Unmissable</span>
+      <h3 style="margin-top:2px">Public Information Report — due every May 15</h3>
+      <div class="grid g3" style="gap:12px">
+        <div><b class="money" style="font-size:20px">$0</b><p style="font-size:13.5px;color:var(--muted);margin:2px 0">Franchise tax owed below $2.65M revenue (you, easily)</p></div>
+        <div><b class="money" style="font-size:20px">But you STILL file</b><p style="font-size:13.5px;color:var(--muted);margin:2px 0">The PIR (Form 05-102) is required yearly even at $0 tax</p></div>
+        <div><b class="money" style="font-size:20px;color:var(--rose)">Miss it →</b><p style="font-size:13.5px;color:var(--muted);margin:2px 0">$50 penalty, then forfeiture, then personal liability</p></div>
+      </div>
+      <p style="margin:12px 0 0"><b>First report due May 15, 2027</b> (the year after you form). <b>Defuse it structurally:</b> have your registered agent or CPA file the PIR every year, and set shared May 1 + May 15 reminders as backup. The task is tiny; the downside of forgetting is catastrophic.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag t-sky">Federal · route to a cross-border CPA</span>
+      <p style="margin-top:6px">A 2-member LLC is a <b>partnership</b> federally: <b>Form 1065 + a K-1 per brother + Schedules K-2/K-3</b> (mandatory with foreign partners), due <b>March 15</b>.</p>
+      <div class="callout" style="margin:10px 0 0">
+        <b>The favorable position:</b> because all work is performed in Pakistan with no US office, employees, or agent, your income is very likely <b>foreign-sourced and not "effectively connected"</b> — meaning <b>likely no US federal income tax and no withholding.</b> It is a strong position, but get the CPA's written opinion so any future bank/Stripe review or audit has documentation. <span class="chip">CPA in writing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 BANKING -->
+<section class="blk" id="banking">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">6</span> The money rails</div>
+    <h2>Banking &amp; payments that actually work from Pakistan</h2>
+    <p class="lede">The founder-favorite neobanks are closed to Pakistan. This is the stack that works, in the order to open it.</p>
+
+    <div class="grid g2">
+      <div class="card lift rec-ring">
+        <span class="tag t-brand">Open 1st · primary US rail</span>
+        <h4 style="margin-top:0">Wise Business</h4>
+        <p style="font-size:14.5px;margin:6px 0">Real US routing + account number (the account everything else pays into) + multi-currency. ~$31 once, no monthly.</p>
+        <p style="font-size:13px;color:var(--muted);margin:0"><b>Watch:</b> enhanced KYC for Pakistan — have website + a real invoice ready before applying, or it gets declined.</p>
+      </div>
+      <div class="card lift">
+        <span class="tag t-brand">Open 2nd · backup rail</span>
+        <h4 style="margin-top:0">Airwallex</h4>
+        <p style="font-size:14.5px;margin:6px 0">A second set of US details + FX. Your safety net so you are never single-threaded if Wise ever flags a Stripe payout.</p>
+        <p style="font-size:13px;color:var(--muted);margin:0">Eligibility is based on where the entity is registered (US LLC qualifies).</p>
+      </div>
+      <div class="card lift">
+        <span class="tag t-sky">Open 3rd · card acceptance</span>
+        <h4 style="margin-top:0">Stripe</h4>
+        <p style="font-size:14.5px;margin:6px 0">Client cards + invoices. Needs the Wise/Airwallex account to exist first (that is the payout destination). 2.9% + $0.30 per charge.</p>
+        <p style="font-size:13px;color:var(--muted);margin:0"><b>Note:</b> a plain Stripe account works even though Stripe <i>Atlas</i> does not serve Pakistan.</p>
+      </div>
+      <div class="card lift">
+        <span class="tag t-gold">Open 4th · marketplaces</span>
+        <h4 style="margin-top:0">Payoneer</h4>
+        <p style="font-size:14.5px;margin:6px 0">For marketplace inflows (Upwork/Amazon) and clean PKR withdrawals to your local bank (~$3 + ~2% FX).</p>
+        <p style="font-size:13px;color:var(--muted);margin:0"><b>Not</b> a Stripe payout destination — keep it for what it does well.</p>
+      </div>
+    </div>
+
+    <div class="grid g2">
+      <div class="callout gold"><b>PayPal Business — only on demand.</b> Highest freeze risk of the stack. Open it only when a client insists, complete the W-8BEN-E (Certificate of Foreign Status) promptly, and sweep balances out fast rather than parking money there.</div>
+      <div class="callout rose"><b>Do not waste time on these:</b> <b>Mercury, Relay, Brex, Rho.</b> Mercury and Relay ban Pakistan-resident owners at the country level (a permanent decline, not a paperwork issue); Brex/Rho target funded US startups. Skip all four.</div>
+    </div>
+
+    <div class="card pad-sm">
+      <h4 style="margin-top:0">Also get: a US business address (virtual mailbox)</h4>
+      <p style="font-size:14.5px;margin:6px 0 0">Stripe wants one and it makes KYC cleaner across providers. <b>iPostal1</b> (~$10/mo) or <b>Anytime Mailbox</b> (~$10/mo) both onboard non-residents with a passport. Budget ~$120–$360/yr including scans.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 FLOW -->
+<section class="blk" id="flow">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">7</span> Getting paid, at home</div>
+    <h2>How the money reaches Pakistan</h2>
+    <p class="lede">Client pays the US company, you convert and send it home the cheapest way, and you keep the Pakistani tax rate tiny by registering right.</p>
+
+    <div class="card">
+      <svg class="flowsvg" viewBox="0 0 900 210" role="img" aria-label="Money flow from US client to Pakistan">
+        <defs>
+          <marker id="ar2" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2f6ea3"/></marker>
+        </defs>
+        <g>
+          <rect x="20" y="78" width="150" height="58" rx="12" fill="#fff" stroke="#e7e3d8" stroke-width="1.5"/>
+          <text x="40" y="104" style="font:600 13.5px -apple-system,Segoe UI,sans-serif;fill:#1b2a30">US client</text>
+          <text x="40" y="122" style="font:11px -apple-system,Segoe UI,sans-serif;fill:#5f7078">pays invoice / card</text>
+
+          <rect x="240" y="78" width="170" height="58" rx="12" fill="#e4eef6" stroke="#2f6ea3" stroke-width="1.5"/>
+          <text x="260" y="104" style="font:600 13.5px -apple-system,Segoe UI,sans-serif;fill:#1b2a30">Stripe / ACH</text>
+          <text x="260" y="122" style="font:11px -apple-system,Segoe UI,sans-serif;fill:#5f7078">into the US account</text>
+
+          <rect x="480" y="78" width="170" height="58" rx="12" fill="#e3f2ee" stroke="#0e7c6b" stroke-width="1.5"/>
+          <text x="500" y="104" style="font:600 13.5px -apple-system,Segoe UI,sans-serif;fill:#1b2a30">Wise Business</text>
+          <text x="500" y="122" style="font:11px -apple-system,Segoe UI,sans-serif;fill:#5f7078">hold USD, convert to PKR</text>
+
+          <rect x="720" y="78" width="160" height="58" rx="12" fill="#f6ecd8" stroke="#b9822a" stroke-width="1.5"/>
+          <text x="740" y="104" style="font:600 13.5px -apple-system,Segoe UI,sans-serif;fill:#1b2a30">PKR bank a/c</text>
+          <text x="740" y="122" style="font:11px -apple-system,Segoe UI,sans-serif;fill:#5f7078">same day</text>
+
+          <line x1="170" y1="107" x2="236" y2="107" stroke="#2f6ea3" stroke-width="2" marker-end="url(#ar2)"/>
+          <line x1="410" y1="107" x2="476" y2="107" stroke="#2f6ea3" stroke-width="2" marker-end="url(#ar2)"/>
+          <line x1="650" y1="107" x2="716" y2="107" stroke="#2f6ea3" stroke-width="2" marker-end="url(#ar2)"/>
+
+          <text x="250" y="60" style="font:11px -apple-system,Segoe UI,sans-serif;fill:#8a97a0">2.9% + 30c</text>
+          <text x="510" y="60" style="font:11px -apple-system,Segoe UI,sans-serif;fill:#8a97a0">~0.4–2% FX</text>
+          <text x="735" y="60" style="font:11px -apple-system,Segoe UI,sans-serif;fill:#8a97a0">0.25% tax*</text>
+        </g>
+      </svg>
+      <p style="text-align:center;color:var(--muted);font-size:13px;margin:2px 0 0">*with PSEB registration — see below. Push clients toward direct ACH/bank transfer into Wise to pay near-zero processing.</p>
+    </div>
+
+    <div class="callout gold">
+      <b>Keep the Pakistan tax tiny — register with PSEB.</b> Both brothers registering with the Pakistan Software Export Board (<code>pseb.org.pk</code>, ~Rs 1,000) drops the tax on inbound export remittances to <b>0.25%</b> (vs 1% unregistered), and Section 65F offers up to <b>100% income-tax exemption on IT-export income through 2029</b> — but only if you receive through normal banking channels and still file annual returns. Confirm the LLC-profit-vs-personal-income treatment with a cross-border <span class="chip">CPA + local advisor</span>.
+    </div>
+  </div>
+</section>
+
+<!-- 8 CHECKLIST -->
+<section class="blk" id="checklist">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">8</span> Do it in order</div>
+    <h2>The execution checklist</h2>
+    <p class="lede">Your actual hands-on time is only a few hours. The two real waits are SOS approval (~2 days) and Wise KYC.</p>
+
+    <ol class="check">
+      <li><b>Check the name</b> (Comptroller + SOSDirect + a USPTO trademark screen). Confirm "Apticove LLC" or pick a fallback.<div class="who">Either brother · 30 min · ~$1</div></li>
+      <li><b>Decide the privacy route:</b> single-manager (simple) or entity-manager (max privacy). Pick before filing — the Certificate is public forever.<div class="who">Both · 1 hr</div></li>
+      <li><b>Engage the registered agent</b> (Northwest). Confirm it files your annual PIR.<div class="who">Either · 30 min · ~$125/yr</div></li>
+      <li><b>(Max-privacy route only)</b> form the holding LLC first so it can be named manager.<div class="who">1–3 days · ~$100–$200</div></li>
+      <li><b>File the Certificate of Formation</b> (Form 205, manager-managed) via SOSDirect.<div class="who">Either · 1 hr · $308</div></li>
+      <li><b>SOS approves</b> (~2 business days). Download the stamped Certificate + file number.</li>
+      <li><b>(If needed) file the DBA</b> (Form 503) so you trade as "Apticove."<div class="who">30 min · $25</div></li>
+      <li><b>Draft + sign the Company Agreement</b> (50/50, shotgun deadlock clause); attorney-review the exit sections.<div class="who">Both + attorney · 3–7 days · ~$300–$800 review</div></li>
+      <li><b>Get the EIN</b> — call <code>+1 267-941-1099</code> for it on the spot, or fax SS-4.<div class="who">Atif · same call, or ~4 days · free</div></li>
+      <li><b>Open the money rails</b> in order: Wise → Airwallex → Stripe → Payoneer (→ PayPal only if asked). Have website + invoice ready for KYC.<div class="who">Both · 1–3 days</div></li>
+      <li><b>Engage the cross-border CPA;</b> calendar the no-ECI memo, K-2/K-3, ITIN W-7s, and the May 15 PIR.<div class="who">Both + CPA · ongoing · ~$800–$2,000/yr</div></li>
+      <li><b>Register both brothers with PSEB</b> for the 0.25% remittance rate; set May 1 + May 15 reminders.<div class="who">Both · 30 min</div></li>
+    </ol>
+
+    <div class="grid g2">
+      <div class="card">
+        <h4 style="margin-top:0">First-year cost</h4>
+        <table style="margin:4px 0">
+          <tbody>
+            <tr><td>SOS filing</td><td class="num">~$308</td></tr>
+            <tr><td>Registered agent</td><td class="num">~$125</td></tr>
+            <tr><td>Company Agreement review</td><td class="num">$300–$800</td></tr>
+            <tr><td>Optional holding LLC</td><td class="num">$100–$200</td></tr>
+            <tr><td>Virtual mailbox</td><td class="num">$120–$360</td></tr>
+            <tr><td>CPA (first return + setup)</td><td class="num">$800–$2,000</td></tr>
+            <tr><td><b>Total</b></td><td class="money">~$1,300–$3,450</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h4 style="margin-top:0">Recurring each year</h4>
+        <table style="margin:4px 0">
+          <tbody>
+            <tr><td>Registered agent</td><td class="num">~$125</td></tr>
+            <tr><td>Holding LLC (if used)</td><td class="num">$100–$200</td></tr>
+            <tr><td>PIR filing</td><td class="num">$0–$100</td></tr>
+            <tr><td>CPA (1065 + K-1 + K-2/K-3)</td><td class="num">$800–$1,500</td></tr>
+            <tr><td>Texas franchise tax</td><td class="money">$0</td></tr>
+            <tr><td><b>Total</b></td><td class="money">~$1,000–$1,900</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout"><b>Next step, when you are ready:</b> business email on apticove.com + the <code>apticovehq@gmail.com</code> hub, then full social account creation, optimization, and banner directions — one focused pass, then the website PRD. Just say the word.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Apticove LLC · Texas formation &amp; banking plan · prepared 2026-07-04. Figures are 2026 estimates; confirm the name at SOSDirect, and route the items marked CPA/attorney to a licensed cross-border professional before filing. Not legal or tax advice.
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.08});
+  document.querySelectorAll('section.blk').forEach(s=>io.observe(s));
+  // nav active state
+  const links=[...document.querySelectorAll('nav.jump a')];
+  const map=new Map(links.map(l=>[l.getAttribute('href').slice(1),l]));
+  const so=new IntersectionObserver((es)=>es.forEach(e=>{
+    if(e.isIntersecting){links.forEach(l=>l.classList.remove('on'));map.get(e.target.id)?.classList.add('on');}
+  }),{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('section.blk').forEach(s=>so.observe(s));
+</script>
+</body>
+</html>
