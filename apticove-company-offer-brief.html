@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apticove - Company & Offer Brief</title>
+<style>
+  :root{
+    --bg:#f4f2e8;--surface:#fff;--surface2:#faf8f0;
+    --ink:#0f2320;--ink2:#33433e;--muted:#5c6b66;--faint:#8a958f;
+    --line:#e5e0d1;--line2:#eef0ea;
+    --harbor:#0b3d3a;--cove:#12655c;--emerald:#1f8a70;--emerald-soft:#e2f1ec;
+    --gold:#b9822a;--gold-bright:#e3b23c;--gold-soft:#f7edd6;
+    --rose:#b0463f;--rose-soft:#f8e7e4;
+    --shadow:0 1px 2px rgba(11,61,58,.05),0 6px 22px rgba(11,61,58,.07);
+    --shadow-lg:0 2px 8px rgba(11,61,58,.06),0 18px 46px rgba(11,61,58,.12);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1010px;margin:0 auto;padding:0 22px}
+  h1,h2,h3,h4{letter-spacing:-.02em;line-height:1.16}
+  a{color:var(--cove)}
+  header.hero{position:relative;overflow:hidden;color:#eafaf5;padding:58px 0 46px;background:linear-gradient(155deg,#12655c 0,#0b3d3a 62%,#082e2b 100%)}
+  header.hero:after{content:"";position:absolute;inset:0;opacity:.55;background:radial-gradient(680px 300px at 85% -10%,rgba(227,178,60,.30),transparent 60%),radial-gradient(560px 320px at 5% 118%,rgba(31,138,112,.35),transparent 60%)}
+  header.hero .wrap{position:relative;z-index:1}
+  .brandline{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.03em;font-size:14.5px}
+  .amark{width:30px;height:30px;border-radius:9px;background:#0b3d3a;border:1px solid rgba(227,178,60,.5);display:grid;place-items:center;color:#e3b23c;font-weight:800;font-size:17px}
+  h1{font-size:clamp(28px,5vw,44px);margin:19px 0 6px;color:#fff}
+  .hero .tag{color:#ffdca0;font-size:18px;font-style:italic;margin:0}
+  .hero p.sub{color:#c7e8df;font-size:17px;max-width:680px;margin:12px 0 0}
+  .pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+  .pill{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:999px;padding:6px 13px;font-size:13px}
+  .pill b{color:#ffdca0}
+  nav.jump{position:sticky;top:0;z-index:30;background:rgba(244,242,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  nav.jump .wrap{display:flex;gap:2px;overflow-x:auto;padding:9px 22px}
+  nav.jump a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:13.5px;padding:8px 13px;border-radius:9px;transition:.16s}
+  nav.jump a:hover{background:#fff;color:var(--ink)}
+  nav.jump a.on{background:var(--cove);color:#fff}
+  section.blk{padding:40px 0 8px;opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
+  section.blk.in{opacity:1;transform:none}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--cove);font-weight:800;font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+  .eyebrow .n{width:23px;height:23px;border-radius:7px;background:var(--emerald-soft);color:var(--harbor);display:grid;place-items:center;font-size:12px}
+  h2{font-size:26px;margin:4px 0 6px}
+  .lede{color:var(--muted);font-size:17px;margin:0 0 6px;max-width:740px}
+  h3{font-size:18px;margin:24px 0 8px}
+  h4{font-size:15px;margin:15px 0 4px;color:var(--ink2)}
+  p{margin:10px 0}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:20px 22px;box-shadow:var(--shadow);margin:16px 0}
+  .card.sm{padding:15px 17px}
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:820px){.g2,.g3{grid-template-columns:1fr}}
+  .tag2{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border-radius:6px;margin-bottom:9px}
+  .t-cove{background:var(--emerald-soft);color:var(--harbor)}
+  .t-gold{background:var(--gold-soft);color:var(--gold)}
+  .t-rose{background:var(--rose-soft);color:var(--rose)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  .scroll{overflow-x:auto;border-radius:12px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2);vertical-align:top}
+  th{color:var(--faint);font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+  tbody tr:hover td{background:var(--surface2)}
+  .money{color:var(--cove);font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+  ul.clean{margin:9px 0;padding-left:19px}ul.clean li{margin:6px 0}ul.clean li::marker{color:var(--emerald)}
+  .callout{border-radius:0 13px 13px 0;padding:14px 18px;margin:16px 0;border-left:4px solid var(--emerald);background:var(--surface2)}
+  .callout.gold{border-color:var(--gold-bright);background:var(--gold-soft)}
+  .callout.rose{border-color:var(--rose);background:var(--rose-soft)}
+  .callout b{color:var(--ink)}
+  .lift{transition:transform .18s,box-shadow .18s}.lift:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .quote{font-size:15px;font-style:italic;color:var(--ink2);border-left:3px solid var(--gold-bright);padding:4px 0 4px 15px;margin:10px 0}
+  .bcopy{background:var(--surface2);border:1px dashed var(--line);border-radius:10px;padding:11px 14px;font-size:14.5px;margin:8px 0}
+  .flowsvg{width:100%;height:auto;display:block}
+  .price{font-size:26px;font-weight:800;color:var(--harbor);letter-spacing:-.02em}
+  .price small{font-size:13px;font-weight:600;color:var(--muted)}
+  .tier{border:1px solid var(--line);border-radius:15px;padding:18px 20px;background:var(--surface);box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .tier.flag{box-shadow:0 0 0 2px var(--emerald),var(--shadow-lg);position:relative}
+  .tier.flag:before{content:"FLAGSHIP";position:absolute;top:-10px;left:20px;background:var(--emerald);color:#fff;font-size:10px;font-weight:800;letter-spacing:.08em;padding:3px 10px;border-radius:6px}
+  .vtag{display:inline-block;font-size:11px;font-weight:700;color:var(--harbor);background:var(--emerald-soft);border-radius:6px;padding:2px 8px;margin:2px 4px 2px 0}
+  footer{color:var(--muted);font-size:13px;padding:34px 0 60px;margin-top:32px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brandline"><span class="amark">A</span> APTICOVE LLC · COMPANY &amp; OFFER BRIEF</div>
+    <h1>Apticove</h1>
+    <p class="tag">Where growth finds harbor.</p>
+    <p class="sub">The full-stack growth partner for $500K-$5M ecommerce brands. This is the saved source of truth: business description, positioning, voice, the complete service catalog, and the productized offer. Lift it into the LLC filing, the website, your profiles, and the sales deck.</p>
+    <div class="pills">
+      <span class="pill">Buyer: <b>$500K-$5M DTC + Amazon</b></span>
+      <span class="pill">Wedge: <b>$1,500 Growth Teardown</b></span>
+      <span class="pill">Mechanism: <b>The Agentic Growth Loop</b></span>
+      <span class="pill">NAICS <b>541810</b></span>
+    </div>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="wrap">
+    <a href="#overview" class="on">Overview</a>
+    <a href="#voice">Voice &amp; ICP</a>
+    <a href="#services">Services</a>
+    <a href="#offer">Offer &amp; Pricing</a>
+    <a href="#messaging">Messaging</a>
+  </div>
+</nav>
+
+<!-- OVERVIEW -->
+<section class="blk in" id="overview">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">1</span> Who we are</div>
+    <h2>Business description</h2>
+    <p class="lede">Three lengths, final copy. Use the one that fits the field.</p>
+
+    <div class="card sm"><span class="tag2 t-cove">One-line (LLC / bank forms)</span>
+      <p style="margin:4px 0 0">Apticove LLC is a full-stack ecommerce growth agency providing Amazon and marketplace management, paid media, search optimization, conversion, creative production, and email marketing for US direct-to-consumer brands.</p>
+    </div>
+    <div class="card sm"><span class="tag2 t-cove">Short boilerplate (~60 words)</span>
+      <p style="margin:4px 0 0">Apticove is a full-stack growth partner for ecommerce brands doing $500K to $5M who have outgrown freelancers but cannot yet stomach an enterprise agency. We run the entire revenue engine, Amazon and marketplaces, paid media, the modern search stack, conversion, creative, and retention, as one connected system. Seven years of operating experience, one accountable team. Where growth finds harbor.</p>
+    </div>
+    <div class="card sm"><span class="tag2 t-cove">Full boilerplate (~150 words, website / LinkedIn)</span>
+      <p style="margin:4px 0 6px">Apticove is a full-stack ecommerce growth partner built for the awkward middle: brands doing $500K to $5M that have outgrown one-off freelancers but get quoted enterprise retainers by agencies who then hand them a junior. That gap is where we live.</p>
+      <p style="margin:0 0 6px">We run the whole machine as one organism, Amazon and marketplace management, paid media, the four-layer search stack (SEO, SXO, AEO, GEO), conversion optimization, AI-directed creative, and lifecycle retention, so nothing is optimized in a vacuum. Seven years in, we are two founders and a team of six who have managed catalogs, defended account health, and shipped creative for Western DTC and Amazon brands the entire time.</p>
+      <p style="margin:0">Most agencies sell you channels. We sell you a system: diagnose the true bottleneck first, then move the one lever that compounds. No dark patterns, no vanity metrics, no channel panic. Just growth that holds. Where growth finds harbor.</p>
+    </div>
+
+    <h3>Positioning</h3>
+    <div class="callout">
+      For <b>$500K-$5M DTC and Amazon founders</b> who are <b>stretched thin stitching together five freelancers who never compound</b>, <b>Apticove</b> is the <b>full-stack growth partner</b> that <b>owns your entire growth number as one closed loop across Amazon, search, CRO, creative, and lifecycle</b>, because <b>our Agentic Growth Loop lets a senior six-person team ship like a twenty-five-person agency, and we prove it on your real account before you ever sign.</b>
+    </div>
+    <p style="color:var(--muted);font-size:14.5px">Repeatable one-liners: <i>"The growth team for brands too big for freelancers and too small for the big agencies."</i> · <i>"They tear down your account for $1,500 before you hire them, then run your whole growth engine as one loop."</i></p>
+
+    <h3>The common enemy</h3>
+    <div class="callout rose"><b>The Frankenstack.</b> A $500K-$5M brand ends up running five disconnected vendors, the Amazon guy, the Meta girl, an SEO retainer, an email freelancer, a creative shop, who never share data. Each optimizes their silo and reports their own inflated win. The founder becomes the unpaid integration layer, stitching five dashboards on a Sunday night while blended profit flatlines. The only teams that run these as one system are enterprise agencies that will not answer under $15K/mo. <b>The enemy has two heads: the Frankenstack that fragments growth, and the enterprise agencies that gatekeep the fix.</b></div>
+
+    <h3>The mechanism: The Agentic Growth Loop</h3>
+    <div class="card">
+      <svg class="flowsvg" viewBox="0 0 900 250" role="img" aria-label="The Agentic Growth Loop">
+        <defs><marker id="ar" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1f8a70"/></marker>
+        <style>.bx{fill:#fff;stroke:#e5e0d1;stroke-width:1.5}.lb{font:600 12.5px -apple-system,Segoe UI,sans-serif;fill:#0f2320}.sb{font:10.5px -apple-system,Segoe UI,sans-serif;fill:#5c6b66}</style></defs>
+        <rect class="bx" x="360" y="10" width="180" height="48" rx="11"/><text class="lb" x="380" y="32">Search demand</text><text class="sb" x="380" y="48">SQP, AEO/GEO, n-grams</text>
+        <rect class="bx" x="650" y="70" width="170" height="48" rx="11"/><text class="lb" x="670" y="92">Creative</text><text class="sb" x="670" y="108">built on live winners</text>
+        <rect class="bx" x="600" y="160" width="180" height="48" rx="11"/><text class="lb" x="620" y="182">Listing / PDP / CRO</text><text class="sb" x="620" y="198">page speaks the words</text>
+        <rect class="bx" x="120" y="160" width="180" height="48" rx="11"/><text class="lb" x="140" y="182">Lifecycle email</text><text class="sb" x="140" y="198">LTV feeds bidding</text>
+        <rect class="bx" x="80" y="70" width="170" height="48" rx="11"/><text class="lb" x="100" y="92">Paid + organic</text><text class="sb" x="100" y="108">buy who is worth it</text>
+        <circle cx="450" cy="130" r="40" fill="#e2f1ec" stroke="#1f8a70"/><text x="450" y="126" style="font:700 12px -apple-system,Segoe UI,sans-serif;fill:#0b3d3a" text-anchor="middle">Agents</text><text x="450" y="142" style="font:10px -apple-system,Segoe UI,sans-serif;fill:#5c6b66" text-anchor="middle">daily loop</text>
+        <g fill="none" stroke="#1f8a70" stroke-width="2" marker-end="url(#ar)" opacity=".85">
+          <path d="M540,40 C620,50 650,62 700,68"/>
+          <path d="M735,118 C740,140 720,152 700,160"/>
+          <path d="M600,190 C520,205 400,205 302,190"/>
+          <path d="M160,158 C120,135 130,105 165,92"/>
+          <path d="M250,80 C310,58 330,50 358,42"/>
+        </g>
+      </svg>
+      <p style="margin:2px 0 0;text-align:center;color:var(--muted);font-size:13.5px">Search feeds creative feeds the page feeds email feeds bidding, then closes and restarts. Every day.</p>
+    </div>
+    <p><b>Why a six-person team ships like twenty-five:</b> agentic AI orchestration (Claude skills, MCP pipelines, automated harvesting and reporting) does the grunt work that eats a normal agency's headcount, so the humans spend their hours on judgment and taste. That is the honest reason Apticove can charge a fraction of enterprise pricing without cutting corners. <b>The AI is in the mechanism, never the headline</b>, because in 2026 "AI-powered" reads as slop. We just ship like it.</p>
+  </div>
+</section>
+
+<!-- VOICE & ICP -->
+<section class="blk" id="voice">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">2</span> How we sound, who we sell to</div>
+    <h2>Brand voice &amp; ICP</h2>
+
+    <h3>Voice attributes</h3>
+    <div class="grid g3">
+      <div class="card sm lift"><b>Tidal, not loud</b><p style="font-size:14px;margin:5px 0 0;color:var(--muted)">Weight from precision, not volume.</p></div>
+      <div class="card sm lift"><b>Diagnostic first</b><p style="font-size:14px;margin:5px 0 0;color:var(--muted)">Name the constraint before the fix.</p></div>
+      <div class="card sm lift"><b>Operator-specific</b><p style="font-size:14px;margin:5px 0 0;color:var(--muted)">Cite the number, name the lever.</p></div>
+      <div class="card sm lift"><b>Calm under ambiguity</b><p style="font-size:14px;margin:5px 0 0;color:var(--muted)">Get quieter and clearer, not busier.</p></div>
+      <div class="card sm lift"><b>Taste over tricks</b><p style="font-size:14px;margin:5px 0 0;color:var(--muted)">No dark patterns. Restraint reads as confidence.</p></div>
+      <div class="card sm lift"><b>Wry, with a blade</b><p style="font-size:14px;margin:5px 0 0;color:var(--muted)">One dry line beats a paragraph of hype.</p></div>
+    </div>
+
+    <div class="scroll"><table>
+      <thead><tr><th>We sound like</th><th>We never sound like</th></tr></thead>
+      <tbody>
+        <tr><td>A senior operator who has run the account</td><td>A junior freelancer quoting a blog post</td></tr>
+        <tr><td>"Here is the bottleneck, the move, and what it is worth"</td><td>"Let's hop on a call to discuss synergies"</td></tr>
+        <tr><td>Precise numbers, named mechanisms</td><td>"Unlock, unleash, revolutionize, 10x, game-changing"</td></tr>
+        <tr><td>Confident about offshore delivery, zero apology</td><td>Over-explaining or apologizing for being a Pakistan team</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>Voice in action</h4>
+    <div class="quote">"Five freelancers, five dashboards, five people to chase. Or one growth system that closes the loop before you wake up. Where growth finds harbor."</div>
+    <div class="quote">Objection ("you're offshore"): "So we do not ask you to trust us. We ship a $1,500 teardown first, credited back when you sign, with real numbers on your real account. You judge the work before you judge the zip code."</div>
+
+    <h3>The ICP: "The Stretched Operator-Founder"</h3>
+    <div class="grid g2">
+      <div class="card sm">
+        <span class="tag2 t-cove">Who they are</span>
+        <ul class="clean" style="font-size:14px">
+          <li>Founder / CEO / Head of Ecommerce, wears four hats, reads the ad account at 11pm</li>
+          <li><b>$500K-$5M</b> revenue; past scrappy, priced out of $8-20K/mo enterprise agencies</li>
+          <li>Amazon anchor + Shopify DTC, Meta/Google under-optimized, email neglected, no search-visibility play</li>
+        </ul>
+      </div>
+      <div class="card sm">
+        <span class="tag2 t-rose">Their objections (answer these)</span>
+        <ul class="clean" style="font-size:14px">
+          <li>"You're offshore, can I trust delivery/timezone?"</li>
+          <li>"Full-stack sounds like generalist, are you actually good at all of it?"</li>
+          <li>"I've been burned by an agency before"</li>
+          <li>"Can a six-person team really cover this much?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="scroll"><table>
+      <thead><tr><th>Four Forces</th><th>Their actual language</th></tr></thead>
+      <tbody>
+        <tr><td><b>Push (pain)</b></td><td>"I'm the glue holding five contractors together, forwarding Slack messages between my PPC guy and my creative gal."</td></tr>
+        <tr><td><b>Pull (gain)</b></td><td>"I want one team that owns the whole growth number so I can go back to running my company."</td></tr>
+        <tr><td><b>Anxiety (new)</b></td><td>"They're overseas. What if communication breaks or 'full-stack' means master of none?"</td></tr>
+        <tr><td><b>Habit (old)</b></td><td>"My freelancers are cheap and I know how they work. Switching is exhausting."</td></tr>
+      </tbody>
+    </table></div>
+    <p style="color:var(--muted);font-size:14px"><b>Secondary segments:</b> the Amazon-heavy brand going omnichannel · the fractional-CMO / small holdco running 2-4 portfolio brands.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="blk" id="services">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">3</span> The complete catalog</div>
+    <h2>Seven service families</h2>
+    <p class="lede">The front door is deliberately narrow. The back room does all of this.</p>
+
+    <div class="callout gold">
+      <b>The search stack, defined in four layers (the piece almost no competitor audits in 2026):</b>
+      <ul class="clean" style="margin:8px 0 0">
+        <li><b>SEO</b> - Search Engine Optimization. Crawlability, Core Web Vitals, keyword-family targeting. Your pages get found, indexed, ranked. Table stakes.</li>
+        <li><b>SXO</b> - Search Experience Optimization. Merges ranking with on-page experience so a page ranks <i>and</i> converts. The click is the starting line, not the finish.</li>
+        <li><b>AEO</b> - Answer Engine Optimization. Become <i>the cited answer</i> in AI answer surfaces, snippets, and voice, via schema, LLMs.txt, and a third-party citation base.</li>
+        <li><b>GEO</b> - Generative Engine Optimization. Get cited and recommended <i>inside</i> ChatGPT, Perplexity, Google AI Overviews, Gemini, and Amazon Rufus.</li>
+      </ul>
+      <p style="margin:10px 0 0"><b>Say this to every prospect:</b> ~60% of US consumers already use AI tools for some search, and only ~7.8% of Google's top-3 results get cited by ChatGPT. <b>SEO earns the click; AEO and GEO decide whether a click is ever offered.</b></p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card sm"><span class="tag2 t-cove">I · Amazon &amp; Marketplaces</span><p style="font-size:14px;margin:5px 0 0">Amazon SEO, PPC (SP/SB/SD/SBV), DSP, A+/Storefront, catalog/variation, account health &amp; compliance, private label, wholesale/FBA, online arbitrage, plus Walmart, eBay, Etsy. Full P&amp;L ownership of the channel.</p></div>
+      <div class="card sm"><span class="tag2 t-cove">II · The Search Stack</span><p style="font-size:14px;margin:5px 0 0">SEO + SXO + AEO + GEO run as one program (see above). The first two win the human; the last two win the machine.</p></div>
+      <div class="card sm"><span class="tag2 t-cove">III · Conversion (CRO)</span><p style="font-size:14px;margin:5px 0 0">CRO, PDP optimization, landing pages, funnel/checkout de-friction, hypothesis-first A/B testing. The cheapest growth is the traffic you already paid for.</p></div>
+      <div class="card sm"><span class="tag2 t-cove">IV · Creative</span><p style="font-size:14px;margin:5px 0 0">AI creative direction, static ads, video/UGC, product photography, A+/listing imagery, structured creative testing. AI is the engine; taste is the product.</p></div>
+      <div class="card sm"><span class="tag2 t-cove">V · Paid Media</span><p style="font-size:14px;margin:5px 0 0">Meta, TikTok, Google/PMax, Pinterest, retargeting, omnichannel orchestration measured on blended MER, not siloed platform ROAS.</p></div>
+      <div class="card sm"><span class="tag2 t-cove">VI · Lifecycle &amp; Retention</span><p style="font-size:14px;margin:5px 0 0">Email campaigns, Klaviyo flows, SMS, RFM segmentation, newsletters. Acquisition is rented; retention is owned.</p></div>
+    </div>
+    <div class="card sm"><span class="tag2 t-gold">VII · Strategy &amp; Diagnostics</span><p style="font-size:14px;margin:5px 0 0">Growth audits, full-funnel strategy, and the flagship <b>$1,500 Growth Teardown</b>. Diagnostic before prescriptive: find the true constraint before anyone touches a campaign.</p></div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="blk" id="offer">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">4</span> The productized offer</div>
+    <h2>Wedge, tiers &amp; guarantees</h2>
+    <p class="lede">Base + percentage of ad spend, never hourly. The wedge lands narrow; the tiers expand as the brand grows.</p>
+
+    <div class="card" style="box-shadow:0 0 0 2px var(--gold-bright),var(--shadow)">
+      <span class="tag2 t-gold">The wedge (on-ramp into every tier)</span>
+      <h3 style="margin:4px 0">The 14-Day Growth Teardown - <span class="money">$1,500</span>, credited in full on signing</h3>
+      <p style="margin:6px 0">A paid, two-week diagnostic that runs your brand through the full loop <i>before</i> you commit. Not a worthless free audit, a decision-grade plan you own outright.</p>
+      <ul class="clean" style="font-size:14px">
+        <li><b>Amazon + listing audit</b> - wasted-spend/n-gram analysis + ranked keyword-gap map</li>
+        <li><b>AI-search visibility audit (AEO/GEO)</b> - where you are invisible in ChatGPT, Perplexity, AI Overviews, Rufus (nobody else audits this)</li>
+        <li><b>CRO/PDP teardown</b> - the five highest-leverage conversion fixes, ranked</li>
+        <li><b>3 AI creative concepts</b> - built against your live winning terms, ready to run</li>
+        <li><b>90-day growth model</b> - one blended contribution-profit forecast with assumptions shown</li>
+      </ul>
+      <p style="font-size:13.5px;color:var(--muted);margin:6px 0 0"><b>Why it converts:</b> the $1,500 price filters tire-kickers; the credit removes the reason to say no; it demonstrates the mechanism instead of describing it; and a paid, on-time, high-craft deliverable from a visible US-hours founder is the fastest trust accelerant an offshore team has.</p>
+    </div>
+
+    <h3>The three tiers</h3>
+    <div class="grid g3">
+      <div class="tier">
+        <span class="tag2 t-cove">Ignite · the on-ramp</span>
+        <div class="price">$3,500<small>/mo + 12% ad spend</small></div>
+        <p style="font-size:13px;color:var(--muted);margin:6px 0">$500K-$1.2M brands · one dominant channel + an emerging second</p>
+        <div style="margin-top:auto">
+          <span class="vtag">One channel (Amazon or Shopify)</span><span class="vtag">SEO + AEO/GEO setup</span><span class="vtag">1 CRO test track</span><span class="vtag">3-4 assets/mo</span><span class="vtag">3 core email flows</span>
+        </div>
+      </div>
+      <div class="tier flag">
+        <span class="tag2 t-cove">Compound · flagship</span>
+        <div class="price">$6,000<small>/mo + 10% ad spend</small></div>
+        <p style="font-size:13px;color:var(--muted);margin:6px 0">$1.2M-$3M brands · the whole loop, the only sub-$10K full-stack tier that exists</p>
+        <div style="margin-top:auto">
+          <span class="vtag">Full Amazon mgmt</span><span class="vtag">Complete SEO+SXO+AEO+GEO</span><span class="vtag">Meta/TikTok/Google/Pinterest</span><span class="vtag">Continuous CRO</span><span class="vtag">8-12 assets/mo</span><span class="vtag">Full lifecycle email</span>
+        </div>
+      </div>
+      <div class="tier">
+        <span class="tag2 t-cove">Dominate · the ceiling</span>
+        <div class="price">$8,500<small>/mo + 8% ad spend</small></div>
+        <p style="font-size:13px;color:var(--muted);margin:6px 0">$3M-$5M brands · category leadership + advanced channels</p>
+        <div style="margin-top:auto">
+          <span class="vtag">Everything in Compound</span><span class="vtag">Amazon DSP</span><span class="vtag">Category-dominance search</span><span class="vtag">15+ assets/mo</span><span class="vtag">CAPI + incrementality</span><span class="vtag">Named strategist</span>
+        </div>
+      </div>
+    </div>
+    <p style="color:var(--muted);font-size:13.5px">Every base fee sits <b>under $10K by design</b> - that is the white space nobody credibly serves. The spend percentage steps down as spend grows to keep large accounts fair. <b>Numbers are 2026-benchmark-anchored; pressure-test the exact base/percentage against your real 6-person delivery capacity and target margin before publishing.</b></p>
+
+    <h3>Risk reversal - the 3-layer guarantee</h3>
+    <div class="grid g3">
+      <div class="card sm"><span class="tag2 t-cove">1 · 30-Day Satisfaction Floor</span><p style="font-size:14px;margin:5px 0 0">Not happy with quality, cadence, or communication in the first 30 days? Full refund of month-one base. Kills the "what if they go dark" fear.</p></div>
+      <div class="card sm"><span class="tag2 t-cove">2 · 90-Day Execution Guarantee</span><p style="font-size:14px;margin:5px 0 0">We ship your tier's full deliverable scope + move your agreed leading indicator, or we work the next month base-waived. Valid on clear client conditions (budget floor, 48h approvals, access, no stockouts). FTC-safe: guarantees execution, not an unlawful revenue promise.</p></div>
+      <div class="card sm"><span class="tag2 t-cove">3 · Transparency SLA</span><p style="font-size:14px;margin:5px 0 0">Live shared dashboard, US-hours named founder on camera, 1-business-day response, weekly Loom, month-to-month after 90 days, you own all accounts and data.</p></div>
+    </div>
+
+    <h3>Proof stack - build these 5 first</h3>
+    <ol class="clean">
+      <li><b>2-3 verified case studies</b> with real numbers (struggle → loop → quantified outcome). The single most powerful asset in every channel.</li>
+      <li><b>The Agentic Growth Loop live walkthrough</b> (recorded screen-share of the system running) - makes the mechanism believable, doubles as the sales centerpiece.</li>
+      <li><b>The visible US-hours founder</b> - one brother on camera, LinkedIn posting teardowns. Fastest fix for the offshore trust gap.</li>
+      <li><b>Ported third-party reviews</b> - the 7-year Upwork track record + a Clutch/Trustpilot profile. Non-incentivized, FTC-clean.</li>
+      <li><b>A redacted sample Teardown</b> - published as proof-of-work and reused as the top-of-funnel lead magnet.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- MESSAGING -->
+<section class="blk" id="messaging">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">5</span> Say it in market</div>
+    <h2>Messaging angles &amp; boilerplate</h2>
+    <p class="lede">Five angles to rotate across cold email, ads, and content. Each with its hook.</p>
+
+    <div class="grid g2">
+      <div class="card sm"><span class="tag2 t-cove">1 · One System vs Five Freelancers</span><p class="quote" style="margin:6px 0 0">"You do not have a PPC problem or a creative problem. You have a five-people-who-never-talk problem. And it is quietly costing you a rank, a margin point, and a launch every quarter."</p></div>
+      <div class="card sm"><span class="tag2 t-cove">2 · The Teardown Before the Handshake</span><p class="quote" style="margin:6px 0 0">"Judge the work before you judge the zip code. A 14-day teardown of your account, real numbers, one Loom, $1,500 back in your pocket the day you sign."</p></div>
+      <div class="card sm"><span class="tag2 t-cove">3 · Invisible to the Machines (AEO/GEO)</span><p class="quote" style="margin:6px 0 0">"Ask ChatGPT which brand to buy in your category. If it does not say your name, that is not a ranking problem. That is a revenue leak you cannot see in any dashboard yet."</p></div>
+      <div class="card sm"><span class="tag2 t-cove">4 · Ships Like Twenty-Five</span><p class="quote" style="margin:6px 0 0">"Six operators. Twenty-five operators' output. The difference is not headcount, it is a growth loop that runs while you sleep and hands you the wins by morning."</p></div>
+      <div class="card sm"><span class="tag2 t-cove">5 · Amazon and DTC Are the Same Customer</span><p class="quote" style="margin:6px 0 0">"Your Amazon team and your DTC team have never met. Your customer shops both in the same afternoon. Guess who is paying for that gap."</p></div>
+      <div class="card sm" style="background:var(--surface2)"><span class="tag2 t-gold">Boilerplate</span>
+        <div class="bcopy"><b>Elevator:</b> Apticove is the full-stack growth partner for $500K-$5M DTC and Amazon brands. One system across Amazon, search, CRO, creative, and lifecycle, instead of five freelancers who never compound.</div>
+        <div class="bcopy"><b>25-word bio:</b> Apticove runs full-stack ecommerce growth for $500K-$5M DTC and Amazon brands, closed into one daily growth loop. Where growth finds harbor.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Apticove LLC · company &amp; offer brief · prepared 2026-07-05. Built on the Sky Marlin Offer &amp; Positioning Engine + the leadgen and vibe-marketing skill methodologies. Pricing figures are 2026 benchmark-anchored recommendations; pressure-test the exact numbers against delivery capacity before publishing. Proof points are framed as capability/process claims, swap in real case-study figures once documented.
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.05});
+  document.querySelectorAll('section.blk').forEach(s=>io.observe(s));
+  const links=[...document.querySelectorAll('nav.jump a')];
+  const map=new Map(links.map(l=>[l.getAttribute('href').slice(1),l]));
+  const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('on'));map.get(e.target.id)?.classList.add('on');}}),{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('section.blk').forEach(s=>so.observe(s));
+</script>
+</body>
+</html>
