@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apticove - Marketing Execution Kit</title>
+<style>
+  :root{
+    --bg:#f4f2e8;--surface:#fff;--surface2:#faf8f0;
+    --ink:#0f2320;--ink2:#33433e;--muted:#5c6b66;--faint:#8a958f;
+    --line:#e5e0d1;--line2:#eef0ea;
+    --harbor:#0b3d3a;--cove:#12655c;--emerald:#1f8a70;--emerald-soft:#e2f1ec;
+    --gold:#b9822a;--gold-bright:#e3b23c;--gold-soft:#f7edd6;
+    --rose:#b0463f;--rose-soft:#f8e7e4;
+    --shadow:0 1px 2px rgba(11,61,58,.05),0 6px 22px rgba(11,61,58,.07);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  h1,h2,h3,h4{letter-spacing:-.02em;line-height:1.18}
+  a{color:var(--cove)}
+  header.hero{position:relative;overflow:hidden;color:#eafaf5;padding:52px 0 40px;background:linear-gradient(155deg,#12655c 0,#0b3d3a 62%,#082e2b 100%)}
+  header.hero:after{content:"";position:absolute;inset:0;opacity:.5;background:radial-gradient(660px 280px at 85% -10%,rgba(227,178,60,.30),transparent 60%),radial-gradient(540px 300px at 5% 118%,rgba(31,138,112,.35),transparent 60%)}
+  header.hero .wrap{position:relative;z-index:1}
+  .brandline{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.03em;font-size:14px}
+  .amark{width:29px;height:29px;border-radius:8px;background:#0b3d3a;border:1px solid rgba(227,178,60,.5);display:grid;place-items:center;color:#e3b23c;font-weight:800;font-size:16px}
+  h1{font-size:clamp(27px,5vw,42px);margin:17px 0 6px;color:#fff}
+  .hero p{color:#c7e8df;font-size:16.5px;max-width:680px;margin:8px 0 0}
+  nav.tabs{position:sticky;top:0;z-index:30;background:rgba(244,242,232,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  nav.tabs .wrap{display:flex;gap:3px;overflow-x:auto;padding:9px 22px}
+  nav.tabs button{white-space:nowrap;background:transparent;border:0;color:var(--muted);padding:9px 14px;border-radius:9px;font-size:13.5px;font-weight:700;cursor:pointer;transition:.15s;font-family:inherit}
+  nav.tabs button:hover{background:#fff;color:var(--ink)}
+  nav.tabs button.on{background:var(--cove);color:#fff}
+  section.tab{display:none;padding:34px 0 20px;animation:fade .3s ease}
+  section.tab.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .eyebrow{display:inline-block;color:var(--cove);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+  h2{font-size:24px;margin:2px 0 4px}
+  .lede{color:var(--muted);font-size:16px;margin:0 0 8px;max-width:730px}
+  h3{font-size:17px;margin:22px 0 6px;padding-top:8px;border-top:1px solid var(--line2)}
+  h4{font-size:14.5px;margin:14px 0 3px;color:var(--ink2)}
+  p{margin:8px 0}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:16px 18px;box-shadow:var(--shadow);margin:12px 0}
+  .card.sm{padding:13px 15px}
+  .grid{display:grid;gap:12px}
+  .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:820px){.g2,.g3{grid-template-columns:1fr}}
+  .tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:6px;margin-bottom:7px}
+  .t-cove{background:var(--emerald-soft);color:var(--harbor)}
+  .t-gold{background:var(--gold-soft);color:var(--gold)}
+  .t-rose{background:var(--rose-soft);color:var(--rose)}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+  .scroll{overflow-x:auto;border-radius:11px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line2);vertical-align:top}
+  th{color:var(--faint);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+  tbody tr:hover td{background:var(--surface2)}
+  .money{color:var(--cove);font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+  ul.clean{margin:7px 0;padding-left:18px}ul.clean li{margin:5px 0}ul.clean li::marker{color:var(--emerald)}
+  .callout{border-radius:0 11px 11px 0;padding:12px 15px;margin:12px 0;border-left:4px solid var(--emerald);background:var(--surface2)}
+  .callout.gold{border-color:var(--gold-bright);background:var(--gold-soft)}
+  .callout.rose{border-color:var(--rose);background:var(--rose-soft)}
+  .callout b{color:var(--ink)}
+  .copyblock{background:var(--surface2);border:1px solid var(--line);border-left:3px solid var(--cove);border-radius:8px;padding:12px 14px;margin:9px 0;font-size:14px;white-space:pre-wrap}
+  .q{font-weight:700;color:var(--harbor)}
+  pre{background:#0b3d3a;color:#d6f0e8;padding:11px 13px;border-radius:9px;overflow-x:auto;font-size:11.5px;line-height:1.5;margin:7px 0;white-space:pre-wrap;word-break:break-word}
+  .chip{display:inline-block;font-size:11.5px;font-weight:600;color:var(--harbor);background:var(--emerald-soft);border-radius:6px;padding:2px 8px;margin:2px 3px 2px 0}
+  .star{color:var(--gold-bright)}
+  footer{color:var(--muted);font-size:12.5px;padding:30px 0 55px;margin-top:26px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="brandline"><span class="amark">A</span> APTICOVE · MARKETING EXECUTION KIT</div>
+    <h1>Ready-to-ship marketing assets</h1>
+    <p>Website copy, the cold-email sequence, the SEO/AEO content engine, the four-layer search-visibility architecture, six ad concepts, and a month of social. Built by 5 specialist skills (direct-response, seo-content, sxo-geo-architect, ai-creative-strategist, content-atomizer) in Apticove's voice. Full files saved under <code>campaigns/</code> and <code>brand/</code>.</p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="wrap">
+    <button class="on" data-t="copy">1 · Copy &amp; Email</button>
+    <button data-t="seo">2 · SEO Content</button>
+    <button data-t="search">3 · Search Architecture</button>
+    <button data-t="creative">4 · Creative</button>
+    <button data-t="social">5 · Social</button>
+  </div>
+</nav>
+
+<!-- ===== 1 COPY ===== -->
+<section class="tab on" id="copy">
+  <div class="wrap">
+    <div class="eyebrow">/direct-response-copy</div>
+    <h2>Website copy + cold-email sequence</h2>
+    <p class="lede">The conversion layer. Every claim carries a number or a mechanism. Full 1,650-word homepage saved to <code>campaigns/apticove-launch/landing-page.md</code>.</p>
+
+    <h3>Homepage - hero</h3>
+    <div class="card sm">
+      <span class="tag t-cove">Headline A <span class="star">★ recommended</span></span>
+      <p style="font-size:17px;font-weight:600;margin:2px 0">"Five freelancers. Five dashboards. Five people to chase. Or one growth system that closes the loop before you wake up."</p>
+      <p style="font-size:13.5px;color:var(--muted);margin:6px 0 0"><b>B (push):</b> "You didn't scale to $2M to become the integration layer between your PPC guy and your email freelancer." · <b>C (mechanism):</b> "One team owns your entire growth number. Proven on your real account before you sign a thing."</p>
+      <p style="margin:8px 0 0"><b>Subhead:</b> Full-stack growth for $500K to $5M DTC and Amazon brands. Six senior operators, one closed loop, output that reads like a twenty-five-person shop. Base pricing under $10K a month, never hourly.</p>
+      <p style="margin:6px 0 0"><b>CTA:</b> Book the 14-Day Growth Teardown → $1,500, credited back when you sign.</p>
+    </div>
+
+    <h3>Homepage - the Frankenstack (common enemy)</h3>
+    <div class="copyblock">You don't have a growth problem. You have a Frankenstack problem.
+
+The Amazon guy. The Meta girl. An SEO retainer that reports traffic nobody can tie to revenue. An email freelancer who exports a CSV once a month. A creative shop that ships assets no one briefed against the data. Five vendors. Five logins. Five invoices. And exactly one person connecting them: you.
+
+Do the math on the leak, not the retainers. A disconnected channel mix at $2M quietly burns 15 to 30 percent of paid efficiency to duplication, missed handoffs, and stale-data decisions. Call it $4,000 to $9,000 a month walking out the door while everyone hits their individual KPI.
+
+That's not a team. That's a stack of contractors stapled together, and you're the staple. The only teams that run all of this as one system are the enterprise agencies, and they gatekeep the fix behind $15,000 a month. Until now.</div>
+
+    <h3>Homepage - the mechanism, offer &amp; FAQ (condensed)</h3>
+    <div class="grid g2">
+      <div class="card sm"><span class="tag t-cove">Mechanism</span><p style="font-size:13.5px;margin:4px 0 0">The Agentic Growth Loop: search demand → creative → the page → lifecycle → bidding → back to search, closing every night. Agentic AI runs the grunt work (harvesting, pruning, bid adjustments, QA) so six operators ship like twenty-five. "The AI is in the mechanism where it belongs, not on a banner promising to 10x anything."</p></div>
+      <div class="card sm"><span class="tag t-gold">Offer</span>
+        <table style="margin:2px 0"><tbody>
+        <tr><td>IGNITE</td><td class="money">$3,500 +12%</td></tr>
+        <tr><td>COMPOUND ★</td><td class="money">$6,000 +10%</td></tr>
+        <tr><td>DOMINATE</td><td class="money">$8,500 +8%</td></tr>
+        </tbody></table>
+        <p style="font-size:12.5px;color:var(--muted);margin:4px 0 0">Wedge: $1,500 teardown, credited on signing. Never hourly.</p>
+      </div>
+    </div>
+    <div class="card sm">
+      <span class="tag t-rose">Objection FAQ (answer these on the page)</span>
+      <p style="font-size:13.5px;margin:4px 0"><span class="q">"You're offshore, can I trust delivery?"</span> The team is in Pakistan, 7 years in, and offshore is why a $2M brand can afford enterprise execution instead of enterprise invoices. Named senior operator, shared dashboard, US-morning overlap. We don't ask for trust, we ship a $1,500 teardown first. Judge the work before you judge the geography.</p>
+      <p style="font-size:13.5px;margin:4px 0"><span class="q">"Full-stack = master of none?"</span> Six specialists (Amazon, paid, creative, CRO, lifecycle) plus the loop that makes them share data. Master of the loop, specialist in the channel.</p>
+      <p style="font-size:13.5px;margin:4px 0"><span class="q">"I got burned before?"</span> The tell is they sold the retainer before showing the work. We invert it. You can't get burned by a diagnosis you own outright.</p>
+    </div>
+
+    <h3>The cold-email sequence (4 emails)</h3>
+    <div class="card sm">
+      <span class="tag t-cove">Email 1 · Day 0 · Teardown hook</span>
+      <p style="font-size:12.5px;color:var(--muted);margin:2px 0"><b>Subjects:</b> "{{brand}}'s Amazon and DTC teams have never met" / "found ~$6K/mo leaking in {{brand}}'s ad account" / "a teardown of {{brand}}, before you ever pay us"</p>
+      <div class="copyblock" style="margin:6px 0 0">{{firstName}} - I ran {{brand}} through a quick pre-read this week. Your paid, Amazon, email, and search all live in separate hands, so nobody sees the whole picture and the handoffs leak. At your revenue that's usually 15 to 30 percent of paid efficiency, quietly gone.
+
+I can prove exactly how much, on your real account, in 14 days. It's called a Growth Teardown. $1,500. You keep the plan whether or not we ever work together, and the $1,500 credits back in full the day you sign. You don't have to trust an agency you just met. You have to judge the work. Worth 14 days to see the number?</div>
+    </div>
+    <div class="grid g3">
+      <div class="card sm"><span class="tag t-cove">Email 2 · Day 3</span><p style="font-size:12.5px;margin:3px 0 0"><b>Frankenstack reframe.</b> "The thing costing you most isn't a channel. It's you, the staple holding five contractors together." → send the 2-page scope.</p></div>
+      <div class="card sm"><span class="tag t-cove">Email 3 · Day 6</span><p style="font-size:12.5px;margin:3px 0 0"><b>The ChatGPT test.</b> "Open ChatGPT, ask which brand to buy. If it doesn't say {{brand}}, that's a leak on zero dashboards." → book link.</p></div>
+      <div class="card sm"><span class="tag t-cove">Email 4 · Day 10</span><p style="font-size:12.5px;margin:3px 0 0"><b>The breakup.</b> "I'll take the hint and stop." 3 no-ask notes, door left open. The offer stands whenever timing is.</p></div>
+    </div>
+
+    <h3>Headline bank (rotate across ads, LinkedIn, email)</h3>
+    <div class="card sm"><ul class="clean" style="font-size:13.5px;columns:1">
+      <li>"Judge the work before you judge the zip code. A $1,500 teardown of your real account, credited back when you sign."</li>
+      <li>"Ask ChatGPT which brand to buy in your category. If it doesn't say your name, that's a leak no dashboard shows you."</li>
+      <li>"Six operators. Twenty-five operators' worth of output. One base fee under $10K."</li>
+      <li>"Your Amazon team and your DTC team have never met. That's the leak."</li>
+      <li>"Most agencies sell you channels. We sell you the loop that connects them."</li>
+      <li>"Stop being the staple holding five contractors together."</li>
+    </ul>
+    <p style="font-size:12px;color:var(--faint);margin:4px 0 0">Placement rule: never pair "AI-powered" with any of them.</p></div>
+  </div>
+</section>
+
+<!-- ===== 2 SEO ===== -->
+<section class="tab" id="seo">
+  <div class="wrap">
+    <div class="eyebrow">/seo-content</div>
+    <h2>The content engine</h2>
+    <p class="lede">Five pillar territories, a 24-article map, one fully-drafted pillar. Article saved to <code>campaigns/content/invisible-in-chatgpt-ecommerce.md</code>.</p>
+
+    <h3>The 5 pillar territories (priority order)</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>#</th><th>Territory</th><th>Why it leads</th><th>Priority</th></tr></thead>
+      <tbody>
+        <tr><td>P1</td><td><b>AI Search Visibility (AEO/GEO)</b></td><td>Sharpest 2026 edge + thinnest SERP; doubles as proof of expertise; matches an ICP trigger event</td><td><span class="chip">CRITICAL</span></td></tr>
+        <tr><td>P2</td><td>Full-Stack vs Freelancer Stack</td><td>Maps to the Push force + core objection; closest to the sale</td><td>HIGH</td></tr>
+        <tr><td>P3</td><td>Amazon + DTC Omnichannel</td><td>Deepest operator proof; serves the strongest secondary segment</td><td>HIGH</td></tr>
+        <tr><td>P4</td><td>CRO &amp; Profitability</td><td>Broad TOFU volume; every post ends at the teardown</td><td>MEDIUM</td></tr>
+        <tr><td>P5</td><td>Lifecycle Email &amp; Retention</td><td>Cheap to produce, evergreen, atomization fuel</td><td>MEDIUM</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>The AEO cluster (the differentiated territory, over-built on purpose)</h3>
+    <div class="card sm"><ul class="clean" style="font-size:13.5px">
+      <li>Why Your Ecommerce Brand Is Invisible in ChatGPT (And How to Fix It) <span class="chip">drafted ↓</span></li>
+      <li>Amazon Rufus, Explained: How to Get Your Product Recommended by Amazon's AI</li>
+      <li>AEO vs SEO vs GEO: What Actually Changed for Ecommerce in 2026</li>
+      <li>How to Track Whether AI Search Sends You Buyers (GA4 + Prompt Testing)</li>
+      <li>The AEO Audit: 12 Checks That Decide If ChatGPT Recommends You</li>
+      <li>Schema Markup for AI Search: The Product &amp; FAQ Setup That Gets You Cited</li>
+    </ul></div>
+
+    <h3>The flagship pillar (drafted, ~1,160 words, publish-ready)</h3>
+    <div class="card">
+      <h4 style="margin-top:0">Why Your Ecommerce Brand Is Invisible in ChatGPT (And How to Fix It)</h4>
+      <div class="copyblock">Ask ChatGPT "best magnesium supplement for sleep" or "which standing desk is worth it under $500," and it will name five brands. If yours is not one of them, you are not losing a ranking. You are losing the recommendation, before a human ever sees a search results page.
+
+<b>Why AI answer engines skip your brand:</b> ChatGPT assembles answers from what others have written about your category. You fail on three counts: you're absent from the corroborating sources; your pages state no liftable claim ("premium quality" gives a model nothing to quote, "third-party tested, 400mg, ships from Ohio in 2 days" gives it a sentence); and you're optimized for a click, not a citation.
+
+<b>How to get cited:</b> (1) Seed the sources the model already trusts, get into the roundups, review platforms, and forum threads it retrieves from. This is digital PR reframed for machines. (2) Publish answer-shaped content, lead with the direct answer, question-shaped H2s, plain specifics, say who it's NOT for (reads as trustworthy). (3) Make specifics machine-legible with Product/FAQ/Organization schema and a clean entity footprint. (4) Measure the answer, run your 10 buying prompts monthly across ChatGPT/Perplexity/AI Mode, log who gets named and cited.
+
+Why it's a 2026 problem, not 2027: the brands compounding citations now, while the category is cheap to enter, get written into the answer their buyers already trust. That's the first thing we pull apart in a teardown. Where growth finds harbor.</div>
+      <p style="font-size:12.5px;color:var(--muted);margin:6px 0 0"><b>Carries FAQ schema for 7 questions</b> (How do I get recommended by ChatGPT / Why doesn't ChatGPT mention my product / What is AEO / etc.) + Article + BreadcrumbList schema. The real citation lever is off-page corroboration, so seed third-party roundups in parallel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3 SEARCH ARCHITECTURE ===== -->
+<section class="tab" id="search">
+  <div class="wrap">
+    <div class="eyebrow">/sxo-geo-search-architect</div>
+    <h2>The four-layer search-visibility architecture</h2>
+    <p class="lede">Your sharpest edge, built out. Full runbook saved to <code>brand/search-visibility-architecture.md</code>. Two layers: the first two win the human, the last two win the machine.</p>
+
+    <div class="scroll"><table>
+      <thead><tr><th>Layer</th><th>Audit</th><th>Build</th><th>Metric</th></tr></thead>
+      <tbody>
+        <tr><td><b>SEO</b><br><span style="color:var(--faint);font-size:11px">human</span></td><td>Crawl, index, Core Web Vitals, keyword-family coverage</td><td>Technical foundation, on-page structure, internal links</td><td>Organic rank + indexed coverage</td></tr>
+        <tr><td><b>SXO</b><br><span style="color:var(--faint);font-size:11px">human</span></td><td>Information scent, page speed, conversion path</td><td>Merge ranking with on-page experience so a page ranks AND converts</td><td>Dwell + conversion, not just position</td></tr>
+        <tr><td><b>AEO</b><br><span style="color:var(--faint);font-size:11px">machine</span></td><td>Snippet/featured/voice presence; schema gaps</td><td>Answer-shaped content, schema, quotable claims</td><td>Answer-surface presence</td></tr>
+        <tr><td><b>GEO</b><br><span style="color:var(--faint);font-size:11px">machine</span></td><td>Citation presence in ChatGPT/Perplexity/AI Overviews/Gemini/<b>Rufus</b></td><td>Quotable facts, third-party citation base, entity building</td><td>AI Citation Share of Voice</td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:12.5px;color:var(--muted)">Schema is the plumbing across all four. <b>Amazon Rufus is its own GEO sub-surface</b> - it reads bullets, A+, Q&amp;A, and reviews, not JSON-LD, so it's optimized differently from web GEO.</p>
+
+    <div class="grid g2">
+      <div class="card sm">
+        <span class="tag t-cove">The apticove.com play (7 steps)</span>
+        <p style="font-size:12.5px;margin:4px 0">Answer Surface Simulation for "best ecommerce growth agency" shows <b>6 citation slots</b>; apticove.com fills <b>0/6 today</b> (new domain). Build order:</p>
+        <ol class="clean" style="font-size:12.5px">
+          <li>Nail the entity (consistent name/description everywhere)</li>
+          <li>Quotable pages (liftable, dated claims)</li>
+          <li>Schema (ProfessionalService + FAQ + Org)</li>
+          <li>LLMs.txt (tiered Low-Moderate, not a guaranteed channel)</li>
+          <li><b>Third-party citation base</b> (Clutch/G2/roundups) - the real GEO mover competitors skip</li>
+          <li>AEO/FAQ surface</li>
+          <li>Re-simulate every 4 weeks</li>
+        </ol>
+      </div>
+      <div class="card sm">
+        <span class="tag t-gold">As a client service (productized)</span>
+        <p style="font-size:12.5px;margin:4px 0"><b>"AI Search Visibility"</b> across Audit → Build → Measure. The AEO/GEO Visibility Audit is the differentiating slide inside the $1,500 teardown, with the sales line:</p>
+        <p class="q" style="font-size:13px;margin:4px 0">"We asked ChatGPT which brand to buy. It was not you."</p>
+        <p style="font-size:12px;color:var(--muted);margin:4px 0 0"><b>Tracking:</b> a frozen 15-25 prompt panel run per engine monthly (never blended) + GA4 generative-referral regex. <b>Lag:</b> substrate live wks 1-8, first citation movement wks 6-12, stable trend month 4-6.</p>
+      </div>
+    </div>
+    <div class="callout gold"><b>Quotable Facts format (the GEO asset that matters most):</b> Entity + Metric + Timebox + Source-Type. Apticove's 7 years of dated client outcomes are the single highest-value GEO asset - instrument them first (they're currently tagged "need real number" in the file's Evidence Gap Log).</div>
+  </div>
+</section>
+
+<!-- ===== 4 CREATIVE ===== -->
+<section class="tab" id="creative">
+  <div class="wrap">
+    <div class="eyebrow">/ai-creative-strategist</div>
+    <h2>Creative strategy + 6 ad concepts</h2>
+    <p class="lede">Buyer read: Problem Aware leaking into Solution Aware. The under-served emotion: exhaustion + self-inflicted shame ("I am the bottleneck, and I built it myself"). TOF job: name the constraint sharper than they can, then reveal the system fix. Offer belongs in retargeting, not cold.</p>
+    <div class="callout"><b>Three non-negotiables:</b> proof by craft not claim of craft (the ad is the sample); diagnostic before prescriptive in the visual too; AI in the mechanism, never the headline. North star: cost per booked teardown, not reach. <b>All prompts use the official Harbor palette</b> (Harbor Deep #0B3D3A, Harbor Gold #E3B23C, Cove Teal #12655C).</p>
+
+    <h3>The 6 concepts (3 static, 3 short-form)</h3>
+    <div class="grid g2">
+      <div class="card sm"><span class="tag t-cove">1 · "Five Dashboards" (static)</span><p style="font-size:13px;margin:3px 0"><b>Hook:</b> "Five freelancers. Five dashboards. Five people to chase. One number nobody owns."<br><b>Visual:</b> 5 clashing dashboard windows in chaos up top, clean calm space + one brass mark below. The contrast IS the ad.<br><b>Angle:</b> One System vs Five Freelancers · exhaustion.</p></div>
+      <div class="card sm"><span class="tag t-cove">2 · "11:47 PM" (UGC video)</span><p style="font-size:13px;margin:3px 0"><b>Hook:</b> laptop glow, tired face, timestamp 11:47PM: "It's almost midnight and I'm the only one who knows why our ROAS dropped."<br><b>Angle:</b> One System · exhaustion, loss of control. Handheld realism, no music first 3s then a low tidal swell.</p></div>
+      <div class="card sm"><span class="tag t-cove">3 · "Watch Me Regenerate Your Ad" (screen-rec)</span><p style="font-size:13px;margin:3px 0"><b>Hook:</b> "This is a stranger's best ad. Watch me rebuild it three ways in 90 seconds."<br><b>Angle:</b> Teardown Before the Handshake · awe at competence. Shows the work before asking for anything.</p></div>
+      <div class="card sm"><span class="tag t-cove">4 · "Ask ChatGPT Who To Buy" (static)</span><p style="font-size:13px;margin:3px 0"><b>Hook:</b> "Ask ChatGPT which brand to buy. If it doesn't say your name, that's revenue leaking where you can't see it."<br><b>Visual:</b> AI chat naming 3 competitors, your gap circled in brass.<br><b>Angle:</b> Invisible to the Machines · invisible-leak fear.</p></div>
+      <div class="card sm"><span class="tag t-cove">5 · "Six. Not Twenty-Five." (static)</span><p style="font-size:13px;margin:3px 0"><b>Hook:</b> "Six operators. Twenty-five operators' output. The difference is the loop."<br><b>Visual:</b> the Agentic Growth Loop as one continuous brass line on Harbor Deep, Swiss/architectural.<br><b>Angle:</b> Ships Like Twenty-Five · status.</p></div>
+      <div class="card sm"><span class="tag t-cove">6 · "They've Never Met" (split-screen)</span><p style="font-size:13px;margin:3px 0"><b>Hook:</b> "Your Amazon team and your DTC team have never met. Your customer has met both."<br><b>Visual:</b> hard vertical split, same customer walks between two oblivious teams, wall dissolves into the loop.<br><b>Angle:</b> Same Customer · hidden inefficiency.</p></div>
+    </div>
+
+    <pre>// Sample generation prompt (Concept 1, Harbor palette)
+Editorial flat-lay, five overlapping mismatched software dashboard windows
+fanned across the top two-thirds in clashing cold UI colors, cluttered,
+deep teal background #0B3D3A, sharp directional light upper-left, bottom
+third clean warm negative space, subtle film grain, high-end SaaS editorial,
+no centered symmetry, medium format --ar 4:5
+// Anti-slop: no centered symmetry, no tech-blue gradient, no plastic skin,
+// no stock smiles, real interface artifacts. Gold #E3B23C used sparingly.</pre>
+
+    <div class="grid g2">
+      <div class="card sm"><span class="tag t-gold">The AI Creative Teardown (lead magnet)</span><p style="font-size:12.5px;margin:3px 0">Free micro-teardown, ~45-60 min/prospect: pull their best live ad → block-level diagnosis → 3 regenerations (problem-led / mechanism-led / proof-led) → 3-5 min face-cam Loom → one next step (the paid teardown). It samples one channel to sell the whole loop. Ties to the $1,500 teardown: "sample the brain before you switch the machine."</p></div>
+      <div class="card sm"><span class="tag t-cove">First-month testing roadmap</span><p style="font-size:12.5px;margin:3px 0"><b>Wk1</b> angle discovery (all 5). <b>Wk2</b> hook multiplication (4-5 hooks/winning angle). <b>Wk3</b> format test (static vs UGC vs talking-head). <b>Wk4</b> scale winner + fresh variants + start retargeting (where the offer finally enters). Gate: hook rate ≥25% before judging CPL; the only number that ends an argument is cost per booked teardown.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5 SOCIAL ===== -->
+<section class="tab" id="social">
+  <div class="wrap">
+    <div class="eyebrow">/content-atomizer</div>
+    <h2>A month of social, ready to publish</h2>
+    <p class="lede">LinkedIn (founder-led B2B anchor), X (daily presence + thread), Instagram (carousels). Every post opens on a hook that survives the "see more" cut.</p>
+
+    <h3>LinkedIn - the 5 posts</h3>
+    <div class="grid g2">
+      <div class="card sm"><span class="tag t-cove">LI-1 · Frankenstack</span><p style="font-size:12.5px;margin:3px 0">"Your growth team is five people who have never been in the same room... You did not hire a growth team. You hired five contractors and quietly gave yourself a sixth job: the integration layer."</p></div>
+      <div class="card sm"><span class="tag t-cove">LI-2 · Invisible to the machines</span><p style="font-size:12.5px;margin:3px 0">"A customer asked ChatGPT which brand to buy. It did not say your name. You will never see that in your analytics... you lost before the click existed."</p></div>
+      <div class="card sm"><span class="tag t-cove">LI-3 · Ships like 25</span><p style="font-size:12.5px;margin:3px 0">"Six people should not out-produce a twenty-five-person agency. Ours do. Here is the mechanism, not the marketing... we gave the stitching to agentic AI and kept the taste."</p></div>
+      <div class="card sm"><span class="tag t-cove">LI-4 · Teardown proof</span><p style="font-size:12.5px;margin:3px 0">"We charge $1,500 to tell a brand what's wrong before they sign. Here's what the last one found in 14 days" → 4 specific leaks on a $1.8M skincare brand. <span style="color:var(--faint)">(swap in a real teardown)</span></p></div>
+    </div>
+    <div class="card sm"><span class="tag t-gold">Pinned post (LinkedIn)</span><p style="font-size:12.5px;margin:3px 0">"Most $2M ecommerce brands do not have a growth problem. They have a five-vendors-who-never-talk problem. That is the whole reason Apticove exists..." (full version in the saved batch)</p></div>
+
+    <h3>X / Twitter - the thread (strongest angle)</h3>
+    <div class="copyblock" style="font-size:13px">1/ You do not have an ad cost problem. You have a five-people-who-never-talk problem. Here is the leak draining $500K to $5M brands, and it's on nobody's dashboard. 🧵
+
+2/ You hired five specialists. Each optimizes their own metric. ACoS. ROAS. Rank. Open rate. Nobody optimizes the growth number, because it's on nobody's contract but yours.
+
+3/ So you became the integration layer. That is a full-time job you did not mean to take.
+
+4/ Enterprise brands run growth as one closed loop. They just gatekeep it behind $15K a month.
+
+5/ The grunt work between the steps is where a 25-person agency spends most of its headcount. Hand that to agentic AI and 6 seniors ship like 25.
+
+6/ Full-stack is not a discount play. It's the only structure where one team owns the whole number instead of five vendors owning five slivers.
+
+7/ Want to see your seams? A $1,500 Growth Teardown of your real account before you sign. Judge the work before you judge the team. Where growth finds harbor.</div>
+    <p style="font-size:12.5px;color:var(--muted)">Plus 6 standalone X posts (Frankenstack, AEO/GEO, ships-like-25, teardown, contrarian, hourly-billing).</p>
+
+    <h3>Instagram - 3 carousels + the schedule</h3>
+    <div class="grid g3">
+      <div class="card sm"><span class="tag t-cove">IG-1 Frankenstack</span><p style="font-size:12px;margin:3px 0">7 slides: "5 freelancers, 5 dashboards, 1 number nobody owns" → the anatomy → "you became the 6th hire" → the loop.</p></div>
+      <div class="card sm"><span class="tag t-cove">IG-2 AEO/GEO</span><p style="font-size:12px;margin:3px 0">"Ask ChatGPT which brand to buy. Did it say your name?" → the leak with no dashboard → CTA "comment ASK".</p></div>
+      <div class="card sm"><span class="tag t-cove">IG-3 Ships like 25</span><p style="font-size:12px;margin:3px 0">"'AI-powered' is what an agency says when it doesn't have a mechanism" → the real loop → CTA.</p></div>
+    </div>
+    <div class="scroll"><table>
+      <thead><tr><th>Day</th><th>LinkedIn (8:30a)</th><th>X (12:30p)</th><th>Instagram (11a)</th></tr></thead>
+      <tbody>
+        <tr><td>Mon</td><td>LI-1 Frankenstack</td><td>The 7-tweet thread</td><td>-</td></tr>
+        <tr><td>Tue</td><td>-</td><td>X-4 Teardown (9a)</td><td>IG-1 carousel</td></tr>
+        <tr><td>Wed</td><td>LI-2 AEO/GEO</td><td>X-2 AEO/GEO</td><td>-</td></tr>
+        <tr><td>Thu</td><td>-</td><td>X-3 Ships like 25 (9a)</td><td>IG-2 carousel</td></tr>
+        <tr><td>Fri</td><td>LI-5 Contrarian</td><td>X-5 Contrarian</td><td>-</td></tr>
+        <tr><td>Sat</td><td>-</td><td>X-6 Hourly billing</td><td>IG-3 carousel</td></tr>
+        <tr><td>Sun</td><td colspan="3">Reply day - work the comment sections (reply depth is the ranking signal on both LI and X)</td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:12.5px;color:var(--muted)">LinkedIn held to 3x/week (the platform punishes over-posting); LI-3 + LI-4 anchor week two. Pin the flagship LI and X posts first.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Apticove · Marketing Execution Kit · prepared 2026-07-05. Built by 5 vibe-marketing + creative skills (direct-response-copy, seo-content, sxo-geo-search-architect, ai-creative-strategist, content-atomizer) on the Sky Marlin voice + brand memory in <code>brand/</code>. Full assets saved under <code>campaigns/apticove-launch/</code>, <code>campaigns/content/</code>, and <code>brand/</code>. Illustrative figures + testimonials are tagged in-file - swap in real numbers before publishing.
+  </div>
+</footer>
+<script>
+  const btns=[...document.querySelectorAll('nav.tabs button')],tabs=[...document.querySelectorAll('section.tab')];
+  btns.forEach(b=>b.addEventListener('click',()=>{
+    btns.forEach(x=>x.classList.remove('on'));tabs.forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');document.getElementById(b.dataset.t).classList.add('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }));
+</script>
+</body>
+</html>
