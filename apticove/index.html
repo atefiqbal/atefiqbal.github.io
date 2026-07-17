@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apticove — Social Copy (paste ready)</title>
+<style>
+  :root{
+    --bg:#07090D; --panel:#10141C; --panel2:#151B25; --text:#F7F8FB; --muted:#A7AFBD;
+    --line:rgba(255,255,255,.10); --lime:#CAFF39; --violet:#7F5CFF; --cyan:#00D9FF; --ink:#090B0E;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:
+      radial-gradient(circle at 84% -6%, rgba(127,92,255,.14), transparent 32%),
+      radial-gradient(circle at 6% 4%, rgba(0,217,255,.09), transparent 26%),
+      var(--bg);
+    color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 90px}
+  header{padding:64px 0 26px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--line);
+    border-radius:999px;padding:7px 14px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 16px rgba(202,255,57,.8)}
+  h1{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:900;letter-spacing:-.04em;line-height:1.02;margin:20px 0 8px}
+  h1 .l{color:var(--lime)}
+  .lead{color:var(--muted);font-size:clamp(1rem,1.5vw,1.2rem);max-width:640px}
+  .angle{margin-top:20px;padding:16px 18px;border:1px solid var(--line);border-left:3px solid var(--lime);
+    border-radius:12px;background:rgba(255,255,255,.02);color:#DCE1E8;font-size:.98rem}
+  nav.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  nav.jump a{font-size:12.5px;font-weight:700;color:var(--muted);text-decoration:none;background:rgba(255,255,255,.03);
+    border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+  nav.jump a:hover{color:var(--lime);border-color:rgba(202,255,57,.3)}
+  section.platform{margin-top:34px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.012));overflow:hidden}
+  .phead{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+  .phead h2{margin:0;font-size:1.2rem;font-weight:900;letter-spacing:-.02em}
+  .phead .spec{margin-left:auto;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .field{padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.055)}
+  .field:last-child{border-bottom:none}
+  .flabel{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .frow{display:flex;gap:12px;align-items:flex-start}
+  .ftext{flex:1;white-space:pre-wrap;word-wrap:break-word;background:var(--ink);border:1px solid var(--line);
+    border-radius:10px;padding:12px 13px;font-size:.94rem;color:#EAECEF}
+  .count{font-size:11px;color:var(--muted);margin-top:6px}
+  .count.warn{color:#FF7A8A}
+  button.copy{flex:0 0 auto;cursor:pointer;border:1px solid rgba(202,255,57,.35);background:rgba(202,255,57,.08);
+    color:var(--lime);font-weight:800;font-size:12.5px;letter-spacing:.02em;border-radius:9px;padding:10px 14px;
+    min-width:84px;transition:all .15s ease;font-family:inherit}
+  button.copy:hover{background:var(--lime);color:var(--ink)}
+  button.copy.done{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-size:13px;color:#EAECEF;background:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 11px}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);opacity:0;
+    background:var(--lime);color:var(--ink);font-weight:800;padding:11px 18px;border-radius:999px;
+    box-shadow:0 16px 40px rgba(202,255,57,.25);transition:all .2s ease;pointer-events:none;font-size:13.5px}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  footer{color:var(--muted);font-size:.82rem;border-top:1px solid var(--line);margin-top:44px;padding-top:22px}
+  .note{color:#8E96A5;font-size:.82rem;margin-top:6px}
+  @media (max-width:560px){ .frow{flex-direction:column} button.copy{width:100%} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow"><span class="dot"></span>Apticove · Social copy · paste ready · no em dashes</span>
+    <h1>Every test makes<br>the next one <span class="l">smarter.</span></h1>
+    <p class="lead">One unified line and one voice across every platform. Tap Copy on any block and paste it straight in.</p>
+    <div class="angle"><b>The angle:</b> You already run both channels well. What you do not have is a shared memory between them. Apticove gives your Amazon and Shopify one shared customer memory, so what one channel learns shows up in your next move on the other. The payoff is compounding.</div>
+    <nav class="jump">
+      <a href="#universal">Core</a><a href="#linkedin-personal">LinkedIn personal</a><a href="#linkedin-company">LinkedIn company</a>
+      <a href="#x">X</a><a href="#instagram">Instagram</a><a href="#tiktok">TikTok</a><a href="#pinterest">Pinterest</a>
+      <a href="#substack">Substack</a><a href="#skool">Skool</a><a href="#facebook">Facebook</a>
+    </nav>
+  </header>
+
+  <section class="platform" id="universal">
+    <div class="phead"><h2>Core (use anywhere)</h2></div>
+    <div class="field"><div class="flabel">Unified line</div><div class="frow"><div class="ftext">Every test makes the next one smarter.</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">One liner</div><div class="frow"><div class="ftext">Apticove gives your Amazon and Shopify one shared customer memory, so what one channel learns shows up in your next move on the other.</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Alternate lines</div><div class="chips">
+      <span class="chip">Make your channels teach each other.</span>
+      <span class="chip">One buyer, one shared memory.</span>
+      <span class="chip">Where learning finally travels.</span>
+      <span class="chip">Two channels, one customer memory.</span>
+    </div></div>
+  </section>
+
+  <section class="platform" id="linkedin-personal">
+    <div class="phead"><h2>LinkedIn (personal)</h2><span class="spec">headline ≤ 220</span></div>
+    <div class="field"><div class="flabel">Headline</div><div class="frow"><div class="ftext">Helping founder-led Amazon + Shopify brands ($1M to $3M) make both channels learn from one buyer, so every test compounds | Apticove</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">About</div><div class="frow"><div class="ftext">Your Amazon buyers and your Shopify buyers are the same people. Most brands your size run both channels well, but the two never compare notes, so a lesson learned on Amazon dies before it reaches Shopify.
+
+That is the pattern I fix. I run Apticove, where the work is simple to say and hard to do: give your two channels one shared customer memory, so what Amazon learns about a buyer shows up in your next Shopify move, and what Shopify learns feeds your next Amazon test.
+
+Most agencies optimize channels. Apticove makes the channels teach one another. The mechanism is the Commerce Signal Relay: capture the signal, interpret it, locate where it should land, relay it into the next decision, validate it moved the number, remember it for next time.
+
+The promise is compounding. Every test you run makes the next one smarter, because your learning finally travels instead of living in your head or dying inside one channel.
+
+If you are the founder who is still the integration layer between your specialists, start with a Channel Amnesia Teardown. It is a short annotated Loom walking your own Amazon and Shopify surfaces, showing exactly where signal is leaking. hello@apticove.com</div><button class="copy">Copy</button></div></div>
+  </section>
+
+  <section class="platform" id="linkedin-company">
+    <div class="phead"><h2>LinkedIn (company page)</h2></div>
+    <div class="field"><div class="flabel">Tagline</div><div class="frow"><div class="ftext">We make your Amazon and Shopify teach each other, so every test compounds.</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">About</div><div class="frow"><div class="ftext">Apticove is a cross-channel commerce growth partner for founder-led consumer brands doing roughly $1M to $3M across Amazon and Shopify.
+
+Here is the problem we solve. Your Amazon buyers and your Shopify buyers are the same people, but your channels never act like it. Amazon, Shopify, paid, creative, search, PDPs, and lifecycle each learn something useful about that buyer, and those signals never travel into the next decision. So the system keeps starting from zero, and the founder becomes the only place the learning is stored.
+
+Most agencies optimize channels. Apticove makes the channels teach one another.
+
+We do it with the Commerce Signal Relay: Capture, Interpret, Locate, Relay, Validate, Remember. We are not a full replacement for your specialists and we are not an AI showcase. We are the layer that makes what you already run compound.
+
+The promise is direct. Every test you run makes the next one smarter, because learning finally travels between your channels instead of dying inside one.
+
+Start with a Channel Amnesia Teardown, an annotated Loom on your own Amazon and Shopify surfaces. hello@apticove.com</div><button class="copy">Copy</button></div></div>
+  </section>
+
+  <section class="platform" id="x">
+    <div class="phead"><h2>X (Twitter)</h2><span class="spec">bio ≤ 160</span></div>
+    <div class="field"><div class="flabel">Bio</div><div class="frow"><div class="ftext">We give your Amazon + Shopify one shared customer memory, so every test makes the next smarter. For founder-led brands running both channels. @apticove</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Header line</div><div class="frow"><div class="ftext">Every test makes the next one smarter.</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Pinned post</div><div class="frow"><div class="ftext">Your Amazon buyers and your Shopify buyers are the same people.
+
+But your channels never compare notes. So a lesson learned on Amazon dies before it reaches Shopify, and you pay to re-learn the same buyer twice.
+
+Apticove gives both channels one shared memory. Every test makes the next smarter. Here is how it works.</div><button class="copy">Copy</button></div></div>
+  </section>
+
+  <section class="platform" id="instagram">
+    <div class="phead"><h2>Instagram</h2><span class="spec">bio ≤ 150</span></div>
+    <div class="field"><div class="flabel">Name field</div><div class="frow"><div class="ftext">Apticove | Amazon + Shopify growth</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Bio</div><div class="frow"><div class="ftext">One shared customer memory for your Amazon and Shopify. What one channel learns, the other uses next. Every test makes the next one smarter. 🧠</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Pinned intro line</div><div class="frow"><div class="ftext">Most agencies optimize channels. We make your channels teach each other.</div><button class="copy">Copy</button></div></div>
+  </section>
+
+  <section class="platform" id="tiktok">
+    <div class="phead"><h2>TikTok</h2><span class="spec">bio ≤ 80</span></div>
+    <div class="field"><div class="flabel">Nickname</div><div class="frow"><div class="ftext">Apticove</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Bio</div><div class="frow"><div class="ftext">🧠 One shared memory for Amazon + Shopify. Every test makes the next smarter.</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Pinned video overlay</div><div class="frow"><div class="ftext">What Amazon learns, Shopify should already know.</div><button class="copy">Copy</button></div></div>
+  </section>
+
+  <section class="platform" id="pinterest">
+    <div class="phead"><h2>Pinterest</h2><span class="spec">bio ≤ 160</span></div>
+    <div class="field"><div class="flabel">Business name</div><div class="frow"><div class="ftext">Apticove</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Display name</div><div class="frow"><div class="ftext">Apticove | Amazon + Shopify Growth</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Bio</div><div class="frow"><div class="ftext">Amazon and Shopify, one shared customer memory. What one channel learns shapes your next move on the other. Every test makes the next one smarter.</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Board ideas</div><div class="chips">
+      <span class="chip">One Shared Customer Memory</span>
+      <span class="chip">Amazon and Shopify, Working Together</span>
+      <span class="chip">Tests That Compound</span>
+      <span class="chip">Ending Channel Amnesia</span>
+      <span class="chip">Cross-Channel Playbooks</span>
+      <span class="chip">Listing and Store Notes</span>
+    </div></div>
+  </section>
+
+  <section class="platform" id="substack">
+    <div class="phead"><h2>Substack</h2></div>
+    <div class="field"><div class="flabel">Publication name</div><div class="frow"><div class="ftext">The Commerce Signal</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Subtitle</div><div class="frow"><div class="ftext">Making your Amazon and Shopify learn from the same buyer</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Tagline</div><div class="frow"><div class="ftext">Field notes on making two channels teach each other, so every test compounds.</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Welcome headline</div><div class="frow"><div class="ftext">Where your channels finally compare notes</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Bio</div><div class="frow"><div class="ftext">Written by the team at Apticove. Your Amazon buyers and your Shopify buyers are the same people, yet the two channels never compare notes. Here we work through how to give them one shared customer memory, so what one channel learns shows up in your next move on the other. Observation, implication, action. For founder-led brands running both channels who are tired of starting from zero.</div><button class="copy">Copy</button></div></div>
+  </section>
+
+  <section class="platform" id="skool">
+    <div class="phead"><h2>Skool</h2></div>
+    <div class="field"><div class="flabel">Community name</div><div class="frow"><div class="ftext">The Commerce Signal Relay</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Tagline</div><div class="frow"><div class="ftext">For founder-led Amazon + Shopify brands who want their channels to teach each other.</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">About</div><div class="frow"><div class="ftext">You run both Amazon and Shopify. You have specialists for paid, creative, search, and lifecycle. And you are still the person holding all the learning in your head, because your channels never compare notes.
+
+This is the room where that stops. Inside, we work through one idea from every angle: give your two channels one shared customer memory, so what Amazon learns about a buyer shows up in your next Shopify move, and the other way around.
+
+Most agencies optimize channels. Here we practice making the channels teach one another, using the Commerce Signal Relay: Capture, Interpret, Locate, Relay, Validate, Remember.
+
+The promise is simple. Every test you run makes the next one smarter, because your learning finally travels. Join founder-led brands doing $1M to $3M who are done paying to re-learn the same buyer twice.</div><button class="copy">Copy</button></div></div>
+  </section>
+
+  <section class="platform" id="facebook">
+    <div class="phead"><h2>Facebook (page)</h2></div>
+    <div class="field"><div class="flabel">Banner line</div><div class="frow"><div class="ftext">Every test makes the next one smarter.</div><button class="copy">Copy</button></div></div>
+    <div class="field"><div class="flabel">Bio</div><div class="frow"><div class="ftext">Apticove makes your Amazon and Shopify learn from the same buyer. What one channel learns shows up in your next move on the other, so every test compounds instead of starting from zero. For founder-led brands running both channels. hello@apticove.com</div><button class="copy">Copy</button></div></div>
+  </section>
+
+  <footer>
+    Apticove · apticove.com · hello@apticove.com · One line, one voice, every platform. No em dashes.
+  </footer>
+</div>
+
+<div class="toast" id="toast">Copied</div>
+
+<script>
+  var toast = document.getElementById('toast');
+  function showToast(msg){ toast.textContent = msg; toast.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(function(){ toast.classList.remove('show'); }, 1100); }
+  function copyText(text, btn){
+    function ok(){ btn.classList.add('done'); var o = btn.textContent; btn.textContent='Copied'; showToast('Copied'); setTimeout(function(){ btn.classList.remove('done'); btn.textContent=o; }, 1100); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(ok).catch(function(){ fallback(text, ok); });
+    } else { fallback(text, ok); }
+  }
+  function fallback(text, ok){
+    var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); ok(); }catch(e){ showToast('Press Cmd/Ctrl C'); }
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('button.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var t = btn.parentNode.querySelector('.ftext');
+      copyText(t ? t.innerText : '', btn);
+    });
+  });
+  // character counters for length-limited fields
+  document.querySelectorAll('section.platform').forEach(function(sec){
+    var spec = sec.querySelector('.spec'); if(!spec) return;
+    var m = spec.textContent.match(/(\d+)/); if(!m) return; var lim = parseInt(m[1],10);
+    sec.querySelectorAll('.field').forEach(function(f){
+      var label = f.querySelector('.flabel'); var txt = f.querySelector('.ftext');
+      if(!label || !txt) return;
+      if(/bio|headline/i.test(label.textContent)){
+        var n = txt.innerText.length;
+        var c = document.createElement('div'); c.className='count'+(n>lim?' warn':'');
+        c.textContent = n + ' / ' + lim + ' chars';
+        f.appendChild(c);
+      }
+    });
+  });
+</script>
+</body>
+</html>
